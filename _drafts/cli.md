@@ -65,3 +65,25 @@ Wifi
 ====
 
 The next hurdle is dealing with wireless networks from the command line.
+This can all be done with the command-line interface to network-manager, `nmcli`.
+
+If you've already connected to a wireless network through graphical tools, the name and password are likely stored somewhere on your system.
+You can see all the networks that you've already discovered with the command
+
+`nmcli con list`.
+
+You can then either connect or disconnect from one of these with
+
+`nmcli con <up/down> id <NetworkName>`.
+
+What about if you want to connect to a new wireless network from the terminal?
+The commands
+
+`nmcli dev wifi`
+
+`nmcli dev wifi connect <NetworkName> password <NetworkPassword>`
+
+will, respectively, scan and list all available wifi networks, and connect to a given network.
+
+This is a big improvement over the old way of doing things with `wpa_supplicant`.
+You had to know something about your network card drivers, you had to write to system files with `sudo`, you had to convert the ASCII password into the equivalent hexadecimal code; it was a mess.
