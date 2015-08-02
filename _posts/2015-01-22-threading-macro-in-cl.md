@@ -9,7 +9,7 @@ categories: lisp macros
 Macros: make your own syntax
 ============================
 
-A few months back I drank the Lisp kool-aid; I've had a lot of fun learning the ins and outs of functional programming.
+A few months back I drank the Lisp kool-aid, and I've had a lot of fun learning the ins and outs of functional programming.
 One of the great things about Lisp is that it's *homoiconic*: code and data are represented in the same fashion.
 We can then analyze and transform Lisp source code in the same way that we would data of any other kind.
 
@@ -22,7 +22,7 @@ For example, this is a bit of code I wrote to generate a ring graph on `n` verti
      (j 1 (mod (1+ j) n))
      (g (make-instance 'graph)
         (add-edge g i j)))
-    ((= i 16) g)))
+    ((= i n) g)))
 {% endhighlight %}
 
 If we quote the code above and pass it to the Common Lisp function `macroexpand`, we get to see what it really is under the hood:
@@ -38,7 +38,7 @@ If we quote the code above and pass it to the Common Lisp function `macroexpand`
              J (MOD (1+ J) N)
              G (ADD-EDGE G I J))
      #:G1385
-      (UNLESS (= I 16) (GO #:G1384))
+      (UNLESS (= I N) (GO #:G1384))
       (RETURN-FROM NIL (PROGN G)))))
 {% endhighlight %}
 
