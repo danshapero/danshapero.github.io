@@ -2,7 +2,7 @@
 layout: post
 title: "Clojure's threading macro in Common Lisp"
 date: 2015-01-22 22:12:00
-categories: lisp macros
+categories: lisp
 ---
 
 
