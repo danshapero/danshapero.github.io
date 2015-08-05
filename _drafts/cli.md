@@ -114,3 +114,19 @@ Many were developed by users who want to render Chinese, Japanese and Korean (CJ
 Additionally, user-space virtual terminals can write to other devices besides `/dev/fb0`, such as a [Braille terminal](http://mielke.cc/brltty/).
 
 Of the existing FB terminal emulators, I tried three of them: [fbterm](https://code.google.com/p/fbterm/), [terminology](https://www.enlightenment.org/about-terminology) and [kmscon](http://www.freedesktop.org/wiki/Software/kmscon/), in that order.
+
+
+#### `kmscon`
+
+I ultimately settled on `kmscon`, after initially being deterred by having to always run it with super-user privileges.
+However, its compatibility with the color scheme in `xterm` makes it preferable to `fbterm`, and its light weight puts it ahead of `terminology`.
+
+A number of tweaks were necessary to ensure that `kmscon` worked properly.
+
+First, if your OS is using `systemd`, you can tell it to start `kmscon` on `tty2` - `tty7` by default, leaving the usual Linux kernel console on `tty1`.
+You could even have it start on every `tty`, but the thought of recovering from some device driver bug with no tried-and-true kernel console to fall back on is a frightening one indeed.
+
+I found that on Arch Linux, rendering unicode glyphs failed without properly setting the `locale`.
+This can be fixed with
+
+`export LANG=en_US.UTF8`.
