@@ -30,3 +30,6 @@ Consequently, if you do install software from source you'll need to explicitly s
 * Installing and using `nox` as root can create files (usually a cache of the output of `nix-env -qa`) in `/tmp/` which a future installation by a non-admin user will attempt to read and write to.
 Since `root` owns these files, the user will lack the appropriate privileges and thus be unable to use `nox` at all.
 Either delete these temporary files or don't use `nox` as root.
+* Libraries that the user installs go in `/home/<user>/.nix-profile/lib`, and yet this directory isn't included in `LD_LIBRARY_PATH`.
+When building other libraries from source, the linker won't find libraries installed by nix without adding the appropriate `-L` flag at link-time.
+In my case, I was using CMake, so I had to set `CMAKE_SHARED_LINKER_FLAGS`.
