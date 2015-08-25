@@ -33,3 +33,7 @@ Either delete these temporary files or don't use `nox` as root.
 * Libraries that the user installs go in `/home/<user>/.nix-profile/lib`, and yet this directory isn't included in `LD_LIBRARY_PATH`.
 When building other libraries from source, the linker won't find libraries installed by nix without adding the appropriate `-L` flag at link-time.
 In my case, I was using CMake, so I had to set `CMAKE_SHARED_LINKER_FLAGS`.
+* A better way of doing that is creating a nix-expression which tracks the dependencies needed to build the source in question.
+You can then invoke `nix-shell`.
+This command fetches any missing dependencies and sets environment variables so that those dependencies can be found easily.
+Within this environment, building the package should be straightforward.
