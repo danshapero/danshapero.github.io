@@ -6,12 +6,12 @@ categories: linux
 
 [NixOS](http://nixos.org) is an operating system built around the rather unusual `nix` package manager.
 Many package managers, such as `aptitude`, are built off of `dpkg`, and thus inherit its quirks and limitations.
-For example, often only users with root access can install packages, whereas the rest of us are left compiling from source and manually specifying library and header locations to dependencies.
+For example, only users with root access can install packages, whereas the rest of us are left compiling from source and manually specifying library and header locations to dependencies.
 Moreover, only one version of a package can be installed at a given time.
-This sounds like it shouldn't be an issue, until you try to use two different libraries that depend on different implementations of MPI -- a cardinal sin, but not without precedent.
+This is especially frustrating when different packages depend on different versions of the same dependency.
 
-Meanwhile, `nix` aims at a "purely functional" and declarative approach to package management.
-With this new approach, users without administrative privileges can install and use libraries in their home directory, and multiple versions of the same package can safely coexist.
+On the other hand, `nix` aims at a "purely functional", declarative approach to package management.
+With this approach, users without administrative privileges can install and use libraries in their home directory, and multiple versions of the same package can safely coexist.
 Additionally, packages in `nix` and how to build them are specified in its own domain-specific language.
 The [repository](http://github.com/NixOS/nixpkgs) of all `nix` packages is publicly hosted.
 If a package you need isn't already included, it's a matter of writing one file with a fairly simple syntax and opening a pull request to add it.
@@ -37,3 +37,7 @@ In my case, I was using CMake, so I had to set `CMAKE_SHARED_LINKER_FLAGS`.
 You can then invoke `nix-shell`.
 This command fetches any missing dependencies and sets environment variables so that those dependencies can be found easily.
 Within this environment, building the package should be straightforward.
+* When using the foreign function interface in Common Lisp, the usual directories that get searched (`/usr/lib`, `/usr/local/lib`) aren't in use at all.
+Instead, you have to set the special variable `cffi:*foreign-library-directories*` to include your `/home/<user>/.nix-profile/lib/`.
+Note that the final `/` matters.
+Guess how long it took me to figure out that little tidbit.
