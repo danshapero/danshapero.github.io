@@ -37,6 +37,8 @@ In my case, I was using CMake, so I had to set `CMAKE_SHARED_LINKER_FLAGS`.
 You can then invoke `nix-shell`.
 This command fetches any missing dependencies and sets environment variables so that those dependencies can be found easily.
 Within this environment, building the package should be straightforward.
+* If the root account and the user account subscribe to different nix channels, invoking `nix-shell` will usually employ the root's channels.
+Circumvent this by altering the `NIX_PATH` environment variable to e.g. `/home/<you>/.nix-defexpr/channels/`.
 * When using the foreign function interface in Common Lisp, the usual directories that get searched (`/usr/lib`, `/usr/local/lib`) aren't in use at all.
 Instead, you have to set the special variable `cffi:*foreign-library-directories*` to include your `/home/<user>/.nix-profile/lib/`.
 Note that the final `/` matters.
