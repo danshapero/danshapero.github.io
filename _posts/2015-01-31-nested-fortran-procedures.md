@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Nesting and passing Fortran procedures for fun and profit"
+title: "Closures in Fortran for fun and profit"
 date: 2015-01-31 12:38:00
 categories: fortran
 ---
