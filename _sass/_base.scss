@@ -103,8 +103,8 @@
     pre,
     code {
         font-size: 13px;
-        border: 1px solid $grey-color-light;
-        font-family: Menlo, Monaco, "Andale Mono", serif;
+        /*border: 1px solid $grey-color-light;*/
+        font-family: Source Code Pro, Monaco, "Andale Mono", serif;
     }
 
     code {
@@ -116,7 +116,7 @@
     pre {
         border-radius: 3px;
         padding: 8px 12px;
-        overflow-x: scroll;
+        /*overflow-x: scroll;*/
         background-color: #F5F5F5;
 
         > code {
