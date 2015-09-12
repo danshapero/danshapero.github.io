@@ -108,23 +108,23 @@ In the example main program from the last section, the function `f` that we inte
 We can use nested functions and the integrate method defined above to give a general procedure for evaluating elliptic integrals.
 
 {% highlight fortran %}
-  function elliptic_integral(phi, z) result(F)
-    real(dp), intent(in) :: phi, z
-    real(dp) :: F
+function elliptic_integral(phi, z) result(F)
+  real(dp), intent(in) :: phi, z
+  real(dp) :: F
 
-    F = integrate(g, 0, phi, 10000)
+  F = integrate(g, 0, phi, 10000)
 
-  contains
+contains
 
-    function g(x) result(y)
-      real(dp), intent(in) :: x
-      real(dp) :: y
+  function g(x) result(y)
+    real(dp), intent(in) :: x
+    real(dp) :: y
 
-        y = 1 / dsqrt(1 - z**2 * sin(x)**2)
+      y = 1 / dsqrt(1 - z**2 * sin(x)**2)
 
-    end function g
+  end function g
 
-  end function elliptic_integral
+end function elliptic_integral
 {% endhighlight %}
 
 The interesting thing here is the use of the variable `z` inside the nested function `g`; it is never explicitly passed to `g`, and yet it is still visible inside the scope of g, through the environment of `elliptic_integral`.
@@ -138,20 +138,21 @@ Now that I've illustrated some of the basic concepts, I can talk about how this 
 The graph API is extended with a method `build` which takes in procedures providing the functionality of an edge stream.
 
 {% highlight fortran %}
-  type :: edge_cursor
-    integer :: first, last, current
-  end type edge_cursor
 
-  abstract interface
-    function make_cursor() result(cursor)
-      type(edge_cursor) :: cursor
-    end function make_cursor
+type :: edge_cursor
+  integer :: first, last, current
+end type edge_cursor
 
-    function edge_stream(cursor) result(edge)
-      type(edge_cursor), intent(inout) :: cursor
-      integer :: edge(2)
-    end function edge_stream
-  end interface
+abstract interface
+  function make_cursor() result(cursor)
+    type(edge_cursor) :: cursor
+  end function make_cursor
+
+  function edge_stream(cursor) result(edge)
+    type(edge_cursor), intent(inout) :: cursor
+    integer :: edge(2)
+  end function edge_stream
+end interface
 {% endhighlight %}
 
 The `edge_cursor` object is used to store our current location within the stream, and the `make_cursor` function is used to create a cursor object for the given source.
@@ -160,24 +161,24 @@ The `edge_stream` interface describes functions that return a new edge when they
 Some stub code for building a graph would look something like this:
 
 {% highlight fortran %}
-  subroutine build_mygraph(g, start_stream, next_edge)
-    class(mygraph), intent(inout) :: g
-    procedure(make_cursor)      :: start_stream
-    procedure(edge_stream)      :: next_edge
+subroutine build_mygraph(g, start_stream, next_edge)
+  class(mygraph), intent(inout) :: g
+  procedure(make_cursor)      :: start_stream
+  procedure(edge_stream)      :: next_edge
 
-    cursor = start_stream()
+  cursor = start_stream()
 
-    do while( cursor%current /= cursor%last )
-      edge = next_edge(cursor)
+  do while( cursor%current /= cursor%last )
+    edge = next_edge(cursor)
 
-      i = edge(1)
-      j = edge(2)
+    i = edge(1)
+    j = edge(2)
 
-      <do something to g, i, j>
+    <do something to g, i, j>
 
-    enddo
+  enddo
 
-  end subroutine build_mygraph
+end subroutine build_mygraph
 {% endhighlight %}
 
 The exact details of how to build the graph depend on the precise storage format: for a list-of-lists graph, one pass through the edge stream will suffice, while a compressed graph requires 2 passes, one to ascertain the degree of all nodes and a second to actually store the edges.
@@ -185,37 +186,37 @@ Finally, the following functions illustrate how to make an edge stream that read
 On the first line, the file stores the total number of edges, and on all following lines stores the starting and ending vertices of each edge.
 
 {% highlight fortran %}
-  subroutine build_graph_from_file(g, filename)
-    class(graph), intent(inout) :: g
-    character(len=*), intent(in) :: filename
+subroutine build_graph_from_file(g, filename)
+  class(graph), intent(inout) :: g
+  character(len=*), intent(in) :: filename
 
-    call g%build(make_cursor_file, edge_stream_file)
+  call g%build(make_cursor_file, edge_stream_file)
 
-  contains
+contains
 
-    function make_cursor_file() result(cursor)
-      type(edge_cursor) :: cursor
+  function make_cursor_file() result(cursor)
+    type(edge_cursor) :: cursor
 
-      close(1001)
-      open(file = filename, unit = 1001)
+    close(1001)
+    open(file = filename, unit = 1001)
 
-      cursor%start = 1
-      cursor%current = 0
-      read(1001, *) cursor%last
+    cursor%start = 1
+    cursor%current = 0
+    read(1001, *) cursor%last
 
-    end function make_cursor_file
+  end function make_cursor_file
 
 
-    function edge_stream(cursor) result(edge)
-      type(edge_cursor), intent(inout) :: cursor
-      integer :: edge(2)
+  function edge_stream(cursor) result(edge)
+    type(edge_cursor), intent(inout) :: cursor
+    integer :: edge(2)
 
-      cursor%current = cursor%current + 1
-      read(1001, *) edge(1), edge(2)
+    cursor%current = cursor%current + 1
+    read(1001, *) edge(1), edge(2)
 
-    end function edge_stream
+  end function edge_stream
 
-  end subroutine build_graph_from_file
+end subroutine build_graph_from_file
 {% endhighlight %}
 
 The state that the nested functions close over is the unit number of the open file, which I lazily set to 1001 in the hopes that nothing else is using that at the time.
