@@ -44,6 +44,6 @@ The fix is to write one of the numbers as a floating-point literal:
 
 `mu(i) = 0.5 * B * strain(i)**(-2.0/3)`.
 
-This mistake is especiall insidious because it's easy to miss.
+This mistake is especially insidious because it's easy to miss.
 Instead of simulating a shear-thinning fluid, I wound up with an ordinary Newtonian fluid.
 It certainly wasn't correct, but it wasn't so obviously wrong that I would notice until I checked my results against an analytical solution.
