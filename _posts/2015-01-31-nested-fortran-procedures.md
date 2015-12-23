@@ -2,7 +2,7 @@
 layout: post
 title: "Closures in Fortran for fun and profit"
 date: 2015-01-31 12:38:00
-categories: fortran
+categories: programming
 ---
 
 In writing the library [SiGMA](http://github.com/danshapero/sigma), I found in a few places where I was repeating code that I thought could be abstracted out.

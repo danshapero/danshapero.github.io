@@ -2,7 +2,7 @@
 layout: post
 title: "Inaugural post: how I almost destroyed a new laptop"
 date: 2013-05-09 02:59:00
-categories: stupidity tty
+categories: linux
 ---
 
 I write and use open-source software under Linux in pursuit of my PhD in applied math.
