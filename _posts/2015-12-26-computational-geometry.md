@@ -37,7 +37,7 @@ and compute the orientation of \\(x' = x + (m\epsilon, n\epsilon), y, z\\) for \
 
 ![orientation3]({{ site.url }}/assets/orientation3.png)
 
-In this iamge, red blocks represent counterclockwise orientation, blue blocks represent clockwise orientation and black blocks represent colinear points.
+In this image, red blocks represent counterclockwise orientation, blue blocks represent clockwise orientation and black blocks represent colinear points.
 The large black blocks along the diagonal show that many non-colinear points are erroneously regarded as colinear.
 
 The pathologies get even more drastic.
