@@ -5,4 +5,4 @@ permalink: /about/
 ---
 
 Ph.D. student in Applied Mathematics, University of Washington.
-Expected graduation date: someday.
+Expected graduation date: September 2016.

@@ -28,7 +28,7 @@ In order to evaluate the robustness of geometric algorithms, we need to test any
 Perturbing the floating-point inputs can be done easily using the C standard library routine [`nextafter`](http://en.cppreference.com/w/c/numeric/math/nextafter) from the `math.h` header, which returns the next representable floating-point number after an input number.
 
 It's easy to imagine that three points which are close to colinear can be erroneously considered as exactly colinear due to roundoff, and this is indeed the case.
-We can probe the robustness of the orientation predicate in floating-point arithmetic by picking three colinear points and seeing how the orientation varies as we perturb one of them.
+We can probe the robustness of a naive implementation of the orientation predicate by picking three colinear points and seeing how the orientation varies as we perturb one of them.
 We'll use the three points
 
 $$x = (0.5, 0.5), \qquad y = (12.0, 12.0), \qquad z = (24.0, 24.0)$$
@@ -39,8 +39,7 @@ and compute the orientation of \\(x' = x + (m\epsilon, n\epsilon), y, z\\) for \
 
 In this image, red blocks represent counterclockwise orientation, blue blocks represent clockwise orientation and black blocks represent colinear points.
 The large black blocks along the diagonal show that many non-colinear points are erroneously regarded as colinear.
-
-The pathologies get even more drastic.
+However, the pathologies do not end there.
 In exact arithmetic, the orientation predicate is invariant to cyclic permutations:
 
 $$\textrm{orientation}(x, y, z) = \textrm{orientation}(y, z, x) = \textrm{orientation}(z, x, y).$$
@@ -56,6 +55,7 @@ However, if we do another cyclic permutation on the inputs, we get this monstros
 ![orientation1]({{ site.url }}/assets/orientation1.png)
 
 The regions of the plane classified as clockwise, counterclockwise or colinear are no longer connected, and there are isolated points which have their orientation completely flipped.
+These kinds of failures usually manifest themselves when the numbers involved are of very different orders of magnitude; in this case, the coordinates of the point \\((0.5, 0.5)\\) are so much smaller than those of the remaining two points that cancellation errors accumulate enough to throw off the final result.
 
 
 ## Can't stop here, this is bat country
@@ -64,6 +64,7 @@ Using incorrect geometric predicates is clearly unacceptable, so we have to do s
 One approach is to use libraries for exact floating-point arithmetic, but this is costly.
 Exact floats must be allocated on the program heap rather than the stack, since each one requires an indeterminate amount of memory.
 The size of the exact floats used tends to balloon upwards as the algorithm continues and the numbers involved take on longer and longer tails, whether or not these tails are necessary to deliver an accurate result.
+Using exact floats is also wasteful when all we want is the sign of the determinant rather than its exact value.
 
 Rather than use all the inputs and geometric predicates as given, one can instead evaluate all predicates in terms of distance to colinearity or distance to the incircle, allowing some amount of wiggle room.
 In practice, this proves scarcely more reliable than naive implementations.
