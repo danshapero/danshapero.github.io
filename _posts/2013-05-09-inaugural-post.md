@@ -49,8 +49,9 @@ The towering, endless cliffs of stupidity, stretching up as far as the eye can s
 As per normal, the solution to my problem was totally mundane and relates to which `tty` is being used.
 In the olden days, you interacted with a computer through a teletype machine.
 
-![tty](http://startup.nmnaturalhistory.org/content/images/artifacts/36_l.jpg)
+![tty](http://retrotechnology.com/pdp11/exhibit/video_ttysession.jpg)
 
+As you can see by the ring on the man's hand in the photo, this was back when programmers were allowed to marry.
 You put in your commands at the keyboard and got some [punched tape](https://en.wikipedia.org/wiki/Punched_tape) from the strip at the left, feed that tape into the computer, and the machine outputs the results back to the printer.
 You won't find one of these outside of a museum now, but internally your computer is still emulating a teletype machine.
 
