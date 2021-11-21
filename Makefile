@@ -1,9 +1,9 @@
 
 .PHONY: clean
 
-all: executed-posts theme
+all: executed-posts themes/maupassant/maupassant.theme
 
-theme: themes/maupassant
+themes/maupassant/maupassant.theme:
 	nikola theme -i maupassant
 
 POSTS=$(shell find posts-sources -not -path '*/\.*' -type f -name '*\.ipynb')
