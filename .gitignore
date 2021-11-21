@@ -1,0 +1,16 @@
+# Rendered posts
+posts/*
+
+# Plugins and themes
+plugins/*
+themes/*
+
+# Python
+*.py[cod]
+__pycache__
+.ipynb_checkpoints/
+cache
+output
+.doit.*
+.venv
+nikolaserve.pid
