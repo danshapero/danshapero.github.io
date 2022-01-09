@@ -1,0 +1,19 @@
+# Meshes
+*.geo
+*.msh
+
+# Rendered posts
+posts/*
+
+# Plugins
+plugins/*
+
+# Python
+*.py[cod]
+__pycache__
+.ipynb_checkpoints/
+cache
+output
+.doit.*
+.venv
+nikolaserve.pid
