@@ -8,6 +8,8 @@ RUN sudo apt-get update && \
     graphviz \
     libgraphviz-dev
 
+ARG token
+
 RUN mkdir actions-runner && \
     cd actions-runner && \
     curl -o actions-runner-linux-x64-2.285.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.285.1/actions-runner-linux-x64-2.285.1.tar.gz && \
