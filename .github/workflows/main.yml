@@ -1,0 +1,29 @@
+
+on: [push]
+
+jobs:
+  nikola_build:
+    runs-on: self-hosted
+    name: "Deploy Nikola to GitHub Pages"
+    steps:
+    - name: Checkout website source
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install numpy scipy jupyter nbconvert matplotlib tqdm "Nikola[extras]"
+    - name: Preparing
+      run: |
+        src_branch=$(python -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')
+        dest_branch=$(python -c 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')
+        git remote add ghpages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" || true
+        git fetch ghpages $dest_branch || true
+        git checkout -b $dest_branch --track ghpages/$dest_branch || true
+        git pull ghpages $dest_branch || true
+        git checkout $src_branch
+        printf '\n\nGITHUB_REMOTE_NAME = "ghpages"\nGITHUB_COMMIT_SOURCE = False\n' >> conf.py
+    - name: Execute notebooks
+      run: make all --jobs $(nproc --all)
+    - name: Publish
+      run: |
+        nikola github_deploy
