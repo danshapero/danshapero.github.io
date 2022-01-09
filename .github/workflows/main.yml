@@ -11,7 +11,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip3 install numpy scipy jupyter nbconvert matplotlib tqdm "Nikola[extras]"
+        pip3 install numpy scipy jupyter nbconvert matplotlib tqdm pygmsh==6.1.1 "Nikola[extras]"
     - name: Preparing
       run: |
         src_branch=$(python -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')
