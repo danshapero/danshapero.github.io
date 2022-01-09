@@ -1,4 +1,0 @@
-Sitemap: https://danshapero.github.io/sitemapindex.xml
-
-User-Agent: *
-Host: danshapero.github.io
