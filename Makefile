@@ -15,7 +15,7 @@ posts/%.ipynb: posts-sources/%.ipynb
 	    --output-dir=./posts \
 	    --output=`basename $@` $<
 
-plugins/graphviz/:
+plugins/graphviz/graphviz.plugin:
 	nikola plugin --install graphviz
 
 clean:
