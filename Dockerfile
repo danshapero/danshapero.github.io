@@ -1,4 +1,4 @@
-FROM icepack/firedrake-python3.8:0.5.5
+FROM icepack/firedrake-python3.8:0.5.6
 
 MAINTAINER shapero.daniel@gmail.com
 
