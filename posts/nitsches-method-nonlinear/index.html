@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nitsche's method for nonlinear problems | shapero.xyz</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://www.shapero.xyz/posts/nitsches-method-nonlinear/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Daniel Shapero">
+<link rel="prev" href="../nitsches-method-stokes/" title="Nitsche's method for the Stokes equations" type="text/html">
+<link rel="next" href="../yau-conjecture/" title="Yau's Conjecture" type="text/html">
+<meta property="og:site_name" content="shapero.xyz">
+<meta property="og:title" content="Nitsche's method for nonlinear problems">
+<meta property="og:url" content="https://www.shapero.xyz/posts/nitsches-method-nonlinear/">
+<meta property="og:description" content="In the past two posts, we showed how to use Nitsche's method for the Poisson equation and for the Stokes equations.
+In the latter case Nitsche's method makes it possible to implement a boundary condit">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-10-23T09:35:34-07:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Header and menu bar -->
+<div class="container">
+      <header class="blog-header py-3"><div class="row nbb-header align-items-center">
+          <div class="col-md-3 col-xs-2 col-sm-2" style="width: auto;">
+            <button class="navbar-toggler navbar-light bg-light nbb-navbar-toggler" type="button" data-toggle="collapse" data-target=".bs-nav-collapsible" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse bs-nav-collapsible bootblog4-search-form-holder">
+                
+            </div>
+        </div>
+          <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
+            <a class="navbar-brand blog-header-logo text-dark" href="../../">
+
+            <span id="blog-title">shapero.xyz</span>
+        </a>
+          </div>
+            <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
+<li class="nav-item">
+    <a href="index.ipynb" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                    
+            </ul></nav>
+</div>
+    </div>
+</header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
+            <ul class="navbar-nav nav-fill d-flex w-100">
+<li class="nav-item">
+<a href="../../index.html" class="nav-link">Home</a>
+                </li>
+<li class="nav-item">
+<a href="../../archive.html" class="nav-link">Archive</a>
+
+                
+            </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
+</div>
+
+<div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Nitsche's method for nonlinear problems</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Daniel Shapero
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2019-10-23T09:35:34-07:00" itemprop="datePublished" title="2019-10-23 09:35">2019-10-23 09:35</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.ipynb" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the past two posts, we showed how to use Nitsche's method for the Poisson equation and for the Stokes equations.
+In the latter case Nitsche's method makes it possible to implement a boundary condition that cannot be enforced in the conventional way.
+I got interested in all of this as a way to attack a particular problem in glacer flow.
+Stokes flow is a sound physical model for predicting the velocity of glaciers, but for ice the stress tensor is a <em>power law</em> function of the strain rate tensor:</p>
+$$\tau = B|\dot\varepsilon|^{\frac{1}{n} - 1}\dot\varepsilon$$<p>This begs the question of how to extend Nitsche's method for nonlinear PDE.
+I don't know how to do this and I couldn't find any published papers that had, so here are my attempts.</p>
+<p>Rather than go straight to the Stokes equations, I thought it might be best to try things out on the Laplace equation with a power-law nonlinearity.
+For this problem we're only looking for a scalar field and not a vector field, and there's no incompressibility constraint to deal with.
+The power-law Laplace problem is to minimize the functional</p>
+$$J(u) = \int_\Omega\left(\frac{1}{p}k|\nabla u|^p - fu\right)dx$$<p>subject to the boundary condition $u|_{\partial\Omega} = g$.
+For $p = 2$, this is a quadratic minimization problem and so the Euler-Lagrange equation is linear.
+For other values of $p$ the Euler-Lagrange equations are nonlinear.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-Lagrange-multiplier">The Lagrange multiplier<a class="anchor-link" href="#The-Lagrange-multiplier">¶</a>
+</h4>
+<p>The first step that we took with Nitsche's method was to compute what the Lagrange multiplier would be if we were to use a constrained optimization-type approach to enforce the boundary conditions.
+The Lagrangian is</p>
+$$L(u, \lambda) = J(u) + \int_{\partial\Omega}\lambda(u - g)ds.$$<p>Using the same tricks as before, we find that</p>
+$$\lambda = -k|\nabla u|^{p - 2}\frac{\partial u}{\partial n},$$<p>or in other words the Lagrange multiplier is the flux out of the boundary.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-Nitsche-functional">The Nitsche functional<a class="anchor-link" href="#The-Nitsche-functional">¶</a>
+</h4>
+<p>When we derived Nitsche's method for linear problems, we were able to start with some guess for the boundary penalty term.
+The coefficients in the problem provide some physical scales that we were able to use to determine how the penalty would scale.
+We could then work out the dimensionless part based on some finite element inverse inequalities.
+Underlying this part of the procedure is the understanding that:</p>
+<ol>
+<li>a function $u$ that solves the Poisson equation will live in the Sobolev space $H^1(\Omega)$, and</li>
+<li>the boundary values of a function $u$ in $H^1(\Omega)$ live in the space $H^{1/2}(\partial\Omega)$.</li>
+</ol>
+<p>The choice of boundary penalty is much less obvious for the p-Laplace equation.
+The solution $u$ lives in the Sobolev space $W_1^p(\Omega)$, so the 2-norm of the boundary value discrepancy might be either too restrictive or not restrictive enough depending on whether $p$ is less than or greater than 2.
+We'll start out with the fact that, if $u \in W_1^p(\Omega)$, then $u|_{\partial\Omega}$ is in $L^p(\partial\Omega)$.
+From this we can see what happens if we try a penalty that looks like:</p>
+$$J_{\text{boundary}} = \text{constant} \cdot \int_{\partial\Omega}\text{coefficients}\cdot|u - g|^p ds.$$<p>But we also need to make the units match up with those of the rest of the Lagrangian, the dimensions of which are</p>
+$$[J] = \left[\int_\Omega k|\nabla u|^p dx\right] = [k] \cdot [u]^p \cdot [x]^{d - p}.$$<p>The factor of $[x]^d$ comes from the measure $dx$, while the factor of $[x]^{-p}$ comes from the gradient of $u$.
+Since the surface measure $ds$ has units of $[x]^{d - 1}$, we can take the boundary penalty to be</p>
+$$J_{\text{boundary}} = \text{constant}\cdot\int_{\partial\Omega}\frac{k}{ph^{p - 1}}|u - g|^p ds.$$<p>All together now, a sensible-looking Nitsche functional for the power-law Laplace equation is</p>
+$$J_\gamma(u) = J(u) - \int_{\partial\Omega}k|\nabla u|^{p - 2}\frac{\partial u}{\partial n}(u - g)ds + \int_{\partial\Omega}\frac{\gamma k}{ph^{p - 1}}|u - g|^pds.$$<p>As a sanity check, observe that if $p = 2$ this is exactly equal to the Nitsche functional we derived for linear problems.
+You can also view this penalty as an approximation to the <a href="https://en.wikipedia.org/wiki/Sobolev_space#Sobolev%E2%80%93Slobodeckij_spaces">Slobodeckij semi-norm</a> for functions that live in finite element spaces on meshes.</p>
+<p>All we have to do now is (1) prove that it's convex for sufficiently large values of $\gamma$ and (2) determine what "sufficiently large" is.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-inverse-inequality">The inverse inequality<a class="anchor-link" href="#The-inverse-inequality">¶</a>
+</h4>
+<p>To find a value of $\gamma$ that made the Nitsche functional convex for linear problems, we used sharp bounds for the constant in the inverse inequality from a <a href="https://www.sciencedirect.com/science/article/pii/S0045782503002949">paper</a> by Warburton and Hesthaven.
+As a reminder, the inverse inequality states that, if $u$ of degree $m$ on a simplex $E$ in dimension $d$ and $Tu$ is the trace of $u$ on the boundary $\partial\Omega$,</p>
+$$\|Tu\|_{L^2(\partial\Omega)} \le \left(\frac{(m + 1)(m + d)}{d}\cdot\frac{|\partial E|}{|E|}\right)^{\frac{1}{2}}\|u\|_{L^2(\Omega)}.$$<p>Warburton and Hesthaven focused on estimates in the 2-norm in their paper.
+In this setting, the analytical expression for orthogonal polynomials on the simplex is especially handy.</p>
+<p>To prove that the Nitsche functional for the power-law Laplace equation is convex, we'll need a sharp bound on the constant in the inverse inequality for general $p$-norms.
+Without the luxury of orthogonal polynomials as in the $p = 2$ case it might seem like we haven't go anywhere to go, but let's just focus on $p = \infty$ for now.
+If $u$ is bounded on $\Omega$, then so is its restriction to the boundary, and</p>
+$$\|Tu\|_{L^\infty(\partial\Omega)} \le \|u\|_{L^\infty(\Omega)}.$$<p>Consequently, the operation of taking traces, at least when restricted to degree-$m$ polynomials, is a bounded operator both from $L^2(\Omega) \to L^2(\partial\Omega)$ and from $L^\infty(\Omega) \to L^\infty(\partial\Omega)$.
+So we can apply the <a href="https://en.wikipedia.org/wiki/Riesz%E2%80%93Thorin_theorem">Riesz-Thorin theorem</a>.
+For any $p$ between 2 and $\infty$, $T$ is well-defined and bounded from $L^p(\Omega)$ to $L^p(\partial\Omega)$, and moreover</p>
+$$\|T\|_p \le \|T\|_2^{2/p}\|T\|_\infty^{1 - 2/p} = \left(\frac{(m + 1)(m + d)}{d}\cdot\frac{|\partial E|}{|E|}\right)^{1/p}.$$<p>Invoking the Riesz-Thorin theorem is a little extreme, but I couldn't find a better way to arrive at the same result.
+There's another hitch here in that we've only worked things out for $p$ between 2 and $\infty$ but not between 1 and 2.
+There might be some elegant way to work out the sub-critical case too.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Convexity">Convexity<a class="anchor-link" href="#Convexity">¶</a>
+</h4>
+<p>Here's where things start to fall apart.
+I think the most convenient equivalent definition of convexity for this problem is that</p>
+$$\langle dJ_\gamma(u) - dJ_\gamma(v), u - v\rangle \ge 0$$<p>for all $u$ and $v$.
+To verify whether this condition holds or not, we'll need to calculate the derivative of $J_\gamma$:</p>
+$$\begin{align}
+\langle dJ_\gamma(u), v\rangle &amp; = \int_\Omega\left(k|\nabla u|^{p - 2}\nabla u\cdot\nabla v - fv\right)dx \\
+&amp;\quad  - \int_{\partial\Omega}k|\nabla u|^{p - 2}\left\{\left(I + (p - 2)\frac{\nabla u\otimes\nabla u}{|\nabla u|^2}\right)\nabla v\right\}\cdot n\cdot (u - g)\,ds \\
+&amp;\qquad - \int_{\partial\Omega}k|\nabla u|^{p - 2}\frac{\partial u}{\partial n}v\, ds + \int_{\partial\Omega}\frac{\gamma k}{h^{p - 1}}|u - g|^{p - 2}(u - g)\cdot v\, ds
+\end{align}$$<p>The boundary integral in the second line makes this much more complex than in the linear case.
+So far I haven't succeeded.
+If we wanted to instead calculate the second derivative and show that it's positive-definite, we'll have many more terms that need to be majorized and that doesn't look simple.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Experiment">Experiment<a class="anchor-link" href="#Experiment">¶</a>
+</h4>
+<p>I can't prove anything yet, but we can conduct an experiment to see whether my guess for a good penalty parameter will work.
+First, we'll take $u$, $g$, and $f$ to be random trigonometric polynomials.
+We can then calculate the second derivative of the Nitsche functional around $u$ symbolically.
+To show that the second derivative is positive-definite, we can calculate its smallest eigenvalue by pulling out the assembled PETSc matrix and calling an eigensolver from the package <a href="http://slepc.upv.es/">SLEPc</a>.
+If this eigenvalue is negative then I've messed up somewhere.
+On the other hand, if we try this repeatedly and find that the second derivative is positive-definite for many different choices of $u$ and $g$, then we might just be onto something.</p>
+<p>First, we'll create the boundary values and right-hand side as random trigonometric polynomials.
+I've chosen the number of modes and coefficient decay rate to give interesting-looking but reasonable input data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">firedrake</span>
+
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">UnitSquareMesh</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">'CG'</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">random_fourier_series</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">,</span> <span class="n">num_modes</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">mesh</span><span class="p">()</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">SpatialCoordinate</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+    
+    <span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span> <span class="k">as</span> <span class="n">π</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">std_dev</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_modes</span><span class="p">,</span> <span class="n">num_modes</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">std_dev</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_modes</span><span class="p">,</span> <span class="n">num_modes</span><span class="p">)</span>
+    <span class="n">expr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([(</span><span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">]</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">π</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">l</span> <span class="o">*</span> <span class="n">y</span><span class="p">))</span> <span class="o">+</span>
+                 <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">]</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">π</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">l</span> <span class="o">*</span> <span class="n">y</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">l</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">exponent</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_modes</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">num_modes</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">)))])</span>
+    <span class="k">return</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">random_fourier_series</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">std_dev</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">num_modes</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">random_fourier_series</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">std_dev</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span> <span class="n">num_modes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">contours</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">tricontourf</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">contours</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The history saving thread hit an unexpected error (OperationalError('database is locked')).History will not be written to the database.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWsAAAD8CAYAAACxUoU3AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAjJklEQVR4nO2df9AdVZnnP98EAzgJGIkLGAhkMKTMMi4676JiObpLpIA/EmedcWEXhSqUdVymZoudqWKLLWoKa2pRa5wpZ9hdX3WKH1uKSM3Iu0tcfmSw2FLCkioRCVQkAReCEQaI0YxA+PHsH7dvuO/l/ujbfbr7nO7nU3Xr7b73vN2nb3d/+rlPn3NaZobjOI4TN0uaroDjOI4zHZe14zhOArisHcdxEsBl7TiOkwAua8dxnARwWTuO4yTAVFlL+htJz0h6aMznkvRlSbskPSjpPeGr6TiOEw+SzpG0M/PeFRPKfUySSZoru848kfV1wDkTPj8XWJe9LgX+W9lKOY7jxIqkpcC19Ny3AbhA0oYR5VYAfwTcF2K9U2VtZvcAz08oshm4wXpsA94i6fgQlXMcx4mQM4BdZvaYmR0EbqLnwWE+B3weeDHESg8LsIzVwJMD83uy9/YOF5R0Kb3oGx3xpt8+4oRVExd81LIg2xicXx48opLlvvrS0kqWC7D0pcoWXTuvHt50DdIj9f3/wjN7njWzt5VZxgc+fIT94vnXcpV9+Mcv72CxZOfNbD6bHuW89w7+f5YOPtHMbpP0J8Vr/TohZJ2bbGPnAd687u32ji99amzZs9fsrKtahbnjifXBl3ng8aODL7PPit1p30/+1Sn5TjRnPKkeAw9++fL/V3YZv3j+Nb7xv47NVfb0k/a8aGaF8sySlgBfAi4u8v/jCLHnngJOHJg/IXuv9Zy9Zmfwi8rytfuDLm+QVGX3q1NeS7buseHfZRCmOW8FcBrwPUk/Bd4HLJS9yRhC1gvAJ7NWIe8D9pvZG1IgbcaFXQ0ulurw77YU9wPrJK2VtAw4n54HATCz/Wa2ysxONrOTgW3AJjPbXmaleZrufRO4F1gvaY+kSyR9RtJnsiJbgMeAXcBXgc+WqRCkkQIZxoUdlhTq2Ab8e54dM3sFuAy4HXgEuNnMdki6WtKmqtY7NWdtZhdM+dyAfx+sRgnTF3aoXPbytfsry2H/6pTXosxfujzqp/+dx3g8xIqZbaEXqA6+d9WYsh8OsU7fOxUQMsquOsKOSY4x1aWL+PcfNy7rikhF2ND8SRrbRaPL+L6Il1qb7nWNs9fsTCIlAs2lRVIUQ5mLZ5X7MCSxpsm6jMu6YlzYk9cXM1X8ohm3zBgl7sKOC5d1DYQUdtXUdYLGKuqqU0551xuLvP3mYzz4HqiJUDnsOmRStUhjE/XytfsPvWIhtjrFts+6iMu6RlzYcZ30MclwErGIO6Z910Vc1jXTZWHHcrLHIL6iNC3uWPZhF4lS1qnkd4uSUg/NUCdnLCd5qpIeRVPSjmVfdo0oZe3ko64TtezJGcvJ3SZRD9KEtGPZp13CZd0QKUXXUPzkjOGkTjntMQsu7Hbjsm6QEMKu8wRN8eTsgqQHqfvClOIxkSou6xYQ68npJ3Jz1Clt38/1EK2s236TsU9q6RDId3LGcAJ3LaoehQu7PUQr6y6RWjoEJp+cMZy4LurXqSvKjmG/txmXtdM6XNSjcWGnTdSy7koqBNqTDvGTNW5c2OkStayd2Wiqg0T/5PSTNA1c2GkS/ah7dzyxPsmoswgpjc43TCwnZ1MpkKLHaFP7u/89tWnI3bYTvaydNFixe0k0wq6LEEHE8DLqlnfbxkhvM0l8i6lGm0UoK4Amb6515aQ8e83Oyn7t9Zdd56/Jtj82ri14ZO20hjouVHVKdHBdVQcsHmHHj397jpODuqPdJtbvEXZ+JJ0jaaekXZKuGPH55ZIelvSgpK2STiq7zmRk7amQ/NSdChmMmNoYPcV0gzt1YbcBSUuBa4FzgQ3ABZI2DBX7ITBnZu8CbgG+UHa9SZ1ZXRJ2KoySc5uEHZOo+1QdZVcp7JZE12cAu8zsMTM7CNwEbB4sYGZ3m9mvs9ltwAllV+o5a6cwk6TcxdYhddMXdhVBTJU57Kby18+9upwb952Zs/TNqyRtH3hj3szms+nVwJMDn+0B3jthYZcA381f09EkFwJ5dJ0OqUfYMUbVo6iqnh2PsJ81s7mB1/z0f3kjki4E5oAvlq1Q2meT0xh5RZyqsFMRdZ+qUiMdF/Y4ngJOHJg/IXtvEZI2AlcCm8zspbIrTfJM6kJ0nZosnDhI7bhJVNj3A+skrZW0DDgfWBgsIOndwFfoifqZECttTNavvrS01P93QdixMmu0vGL3kmQj7BQJLWxv0rcYM3sFuAy4HXgEuNnMdki6WtKmrNgXgeXAtyU9IGlhzOJy0+gNxgOPH+1NhZzoSC06HUXocWa808xizGwLsGXovasGpjeGXmfj306ZA8Cj6/FUdREsc0KldDK2AY+w20XyZ48LOy1c2PXiwm4PUZw5Vf68csIRSrRVCduPo9G4sNtBFLIGT4d0jVgj7Dbkq0eR2nYNPtTC6ZHrjMkxaMkaSXdL+mE2cMl54as6GRf2YkJHmVXINVZht5WQwvanptfP1LMl56Al/5le85V302tz+F+LVKasYFzYjjMZF3a65Altpg5aAhhwVDZ9NPCzohXyvGN8VBkBe3RdPykK28kn61GDlqweKvOnwIWS9tBre/iHoxYk6VJJ2yVtf/XAP45doeevu0VIYfvFPh+p5bCdcDcYLwCuM7MTgPOAGyW9YdlmNt8fGGXp8t+YuEAXdhzUFfl6hF0/oYTt0XU95DlD8gxacglwM4CZ3QscAawKUcGiuLDTw4VdPy7sdMjT3fzQoCX0JH0+8G+GyjwBnAVcJ+md9GT9D2UrV7Y7+h1PrPefeyVIVZ6xD2PwiZU/mFom/7jL8VB1l/SuM/VszDloyX8EPi3pR8A3gYvNzEJU0Hd+t2j6AlH1L7I8ou6X67+qxgOaNMh1ZpjZFjM71cxOMbM/y967yswWsumHzewDZvbPzOx0M7sjZCW7mL9Otd4haFrYVVFUvHVI29Mh8ZPMWdFFYTdJ6sKM7RdZCNlWLW0XdtykfUbOQJeEHZuoipD6xWKQ0IKtIzXixEdSZ4T3cKyHWERZth5tuGiNoyphe3QdL3GclTPQBWGnUMe6aOLCEfL7rzIKdmF3i+RkDd0QtuPkoa4WI0VxYYcjSVmDC7sqYkmBDFKmTm1OhQwSWtjenC8+Gjszl5Z+MHt5YhR22Tq1VU4xXkRiI1Zhe3QdhkbPgBhuIMUo7KaIXYhF61fkOEn1uIg1JeLCLk/jZ6cL23HixYdTjYfGZQ0u7JjqEDt1RtepEms6BNoj7BxPzzpc0reyz++TdHLZdUYha3BhN03sKZBBUqprU8SaDmkDOZ+edQmwz8zeAfwF8Pmy6/WjfoimhB1ivV2KHusg9Yt3SGF7dL2IPE/P2gxcn03fApwlSWVWmmeI1NpYsXtJqeethRoa04dWjZ8ix0rsQ6dWwSdW/iDYcKtnr9kZ7ALWxHCqvzx4xCz1XyVp+8D8vJnNZ9Ojnp713qH/P1TGzF6RtB84Bnh25opnRBdZx5AOgXqjqqYjuFTTCqnW2+kR+YXz2f5TrbLX/PR/qZYoj/aYhF21SJsWddeY9dhow/6JNR0C0Qt7HHmennWojKTD6D1I/LkyK41S1hCPsKG6Ezbkcruar/boOh8x33BMUNiHnp4laRm9p2ctDJVZAC7Kpn8P+PuyD2SJ+kiP6URsQ4Q1ipi+46LMug1dvbCFoor7OSkJO+fTs74OHCNpF3A58IbmfbOS/pk6gdAnZci0SFvlP8jKnQdHvlKjzL6K6VmKMadDIDlhT3t61otm9vtm9g4zO8PMHiu7zuhlHVM6pE8ZaVeRB48pUswj5SrE7dF1PmJOh0Bawq6b6GUNcQobZhdvbNF06BRIEfk2KexZiG3fxUBVzVtd2KOJqp31JGJpgz0KP5HLSbf/v/vWLwtVnVx0sd01hG17XRVNtMOOnSQiayduQkXHIZbThhumdRAqHVJl57Hla/d38mI6jqSO7FjTIU3S9DaFvmFY9w3IWb6/or+gYo9iy1J1b18Xdo+kZA0u7FCEiECrEmvZm48eXecj9puNzmI6eVS7sMtTRwRcl7DriK7bjo+lUz1Jytojp+6QYrvsUcSaCvHoOh2StZ6nQ5rbhroFWnR9VUXXzmg8uq6WZGUdgq6eoCn+Mokpwm5bKiT2no1Oj/TO2gFSlE7qNCnNIuuOKbqONRXipEHnbdfV6LpLVHFR9+h6PB5dV0Pysg5xIqYo7BTrHIKqI/uufq9O/CQva6c+YskbV50OqZKYUyEeXcdNHEdwSboaXRchFmmVJYYLR9tSIaFxYYelHWduILoi7LYwq7DzXqi6fBx4u+t4yXX0SjpH0k5JuySNfOKBpI9LeljSDknfCFvN6bQlYoyVGCLZGCkSXcecCgmNR9fhmGo4SUuBa4FzgQ3ABZI2DJVZB/wn4ANm9k+B/xC+qvWQQlSVQh3rwqPr8ISOrl3YYchz5J4B7DKzx8zsIHATsHmozKeBa81sH4CZPRO2mvnw6LqbeNTvdIE8dlsNPDkwvyd7b5BTgVMlfV/SNknnjFqQpEslbZe0/ZUX/rFYjWugy1FVFwgdXbcxFeLRdXyECkUPA9YBHwYuAL4q6S3Dhcxs3szmzGzusCN/I9Cqq8GF/TopRK4p1LHruLDLkUfWTwEnDsyfkL03yB5gwcxeNrPHgZ/Qk3fteCqku8wi7Bii69jxliFxkeeIvR9YJ2mtpGXA+cDCUJnv0IuqkbSKXlqk9KPXHadKmr6wx54KqYIuRNeS3irpTkmPZn9XjihzuqR7s9ZzD0r619OWO/VoNbNXgMuA24FHgJvNbIekqyVtyordDjwn6WHgbuBPzOy5WTYwRjwVkh5VpEM8ug5LB4R9BbDVzNYBW7P5YX4NfDJrPXcO8JejUseD5AotzGyLmZ1qZqeY2Z9l711lZgvZtJnZ5Wa2wcx+y8xuyr9dziz4BWQ6VaRDqqKL0XUH2Axcn01fD3x0uICZ/cTMHs2mfwY8A7xt0kJbmeANeQK6HB3w4yA0LY+ujzWzvdn0z4FjJxWWdAawDNg9qdxhYermOHGxcudB9q1flqvsit1L+NUprwVZ7x1PrG+diD6x8geV/AI4e83OWlNHr760dJaL7ipJ2wfm581svj8j6S7guBH/d+XgjJmZJBu3EknHAzcCF5nZxIPQZZ2DA48fzfK1+5uuRus48qHXGxW9cNpw0/3ucOO+Mzvb8qJuYc/As2Y2N+5DM9s47jNJT0s63sz2ZjIe2UlQ0lHAbcCVZrZtWoVamQZx4ubIh55aJOrB94bfL0Pom41+o9HJyQJwUTZ9EXDrcIGsZd3fATeY2S15Fuqydmolj4ybELbfaGyOtqWNgGuAj0h6FNiYzSNpTtLXsjIfB34HuFjSA9nr9EkLdVk7URI6yg5Fl6PrKmmTsM3sOTM7y8zWmdlGM3s+e3+7mX0qm/4fZvYmMzt94PXApOW6rHMSS2uAlHPnReQbQtgeXYeh6lRIm4RdBS5rJ3pii7BjuXC3ERf2eFzWTi2UFW7Z/28ium7jaHx14MIeTStlHarNrBMXMUXYXY2u62oV4sJ+I62UtTOeLl/IPLpOCxf2YlzWTlLEFF071ePCfp3WyboLkWPdLULydtuuizLCDhldd7UZX90dZFzYPVona6cbtD3C9lSIM0yrZN2FqNopj0fXToq0RtYu6vy05bvy6NrpEo3J+tXDe9IIIY62yGcWUu7JGJKiwg45yFOVzfhc2E6fKCLrotIOJfs8uBy7SdPN+GLFR+Grnyhk3acv30kSnva5Uw2xtQgZxNMhTheIStbDDMvbBb2YMtG+f5d+o9FJi6hlHQueAokfj66dtuOyTpw6LyQxp0KK4tG1kwou6w5TZyqkjmcsenTttBmX9RRSSIGkUMeYaaIZX9Ho2oXdXVzWTquoMrpu+kkyTrfxo28CXYhYZ02FtDFvHRqPrp0qcFmPITVRp1DfOvLWRUnlOY19XNjdI44jz3ECktKNRm8Z4uTFZT2CFKLUURStt6dCejTRjK8MHl3HiaS3SrpT0qPZ35UTyh4laY+kv562XJf1EKmKOhXqSoV0Jbp2YUfJFcBWM1sHbM3mx/E54J48C3VZD9AGUXt0XY5URuMbpAlh+0ViIpuB67Pp64GPjiok6beBY4E78iy0MVkvPfzVplbtNEwbouvQNxrL5q5dnlFxrJntzaZ/Tk/Ii5C0BPhz4I/zLvSwMHUrRj8KrCsCmVaPtrB87f7Gv1Onx4HHj27d8ZUqS1+a6SK7StL2gfl5M5vvz0i6CzhuxP9dOThjZibJRpT7LLDFzPZIylWhRmXdp0lp+4n0Or865bWZIsZ965cFTRvEwsqdB3OleVbsXhK0y/4dT6wv9XDYfnRd9VjTHYninzWzuXEfmtnGcZ9JelrS8Wa2V9LxwDMjir0f+KCkzwLLgWWSDpjZ2Px2VDnr5Wv31yrPNos69m1rQyokL3UHIR2RacwsABdl0xcBtw4XMLN/a2ZrzOxkeqmQGyaJGnLKWtI5knZK2iVp7AIlfUySSRp7RcpD1dKu+6LQFEW20W809miqk0yodtdVCdsvBLm4BviIpEeBjdk8kuYkfa3oQqceaZKWAtcC5wIbgAskbRhRbgXwR8B9RSszTF+qIcXaBUmnQsw9GkMzS3Qdq7Bd1Pkws+fM7CwzW2dmG83s+ez97Wb2qRHlrzOzy6YtN09YcAawy8weM7ODwE30mqYM8zng88CLOZY5M2XEXYX0U6GO6Dp2qk6FxNIFfRQ37jsziGRd1M2T5yhbDTw5ML8ne+8Qkt4DnGhmt01akKRLJW2XtP2V/b+eubJ9BuWb5+VUS5lUSMzRdeibp01E133KyNZFHQelW4Nk7QW/BFw8rWzW9GUe4M3r3j6qOYtTAUWa8s3aMsSJn0Hp5mkx4pKOizyyfgo4cWD+hOy9PiuA04DvZe0FjwMWJG0ys8F2ik6LKdOM74XTVleeqjjyoacKRfGhm/HN0u66bFO+SbiI0yNP6HQ/sE7SWknLgPPpNU0BwMz2m9kqMzs5a4ayDXBRR4ang9LER+Vz+kyVtZm9AlwG3A48AtxsZjskXS1pU9UVdJqjzmZ8Meeu85I3beS9S50i5MpZm9kWYMvQe1eNKfvh8tVyqsC7oRcjbyqkKqpMhzjp4HeQnIm0KbquozdjVdG1p0OcxsYGOWrZi5y9ZmenDsK80VGV34lH1+niEXa3aTyybvvBd/aanYdes/5PLLQpui7KLC1dPHftVEHjsob2CrvsdlUl7dhbhlQp7BgGdhrE0yFOXqKQNcQXTZYh9LbE8L34AE/VRNdFcGF3k2hk3SdlaVdZ99DL7XJ0HRtF0iEu7O4Rnaz7pCbsOurbtLDrjq67JOwiuLC7RbSyhjSi7LrrGPv30XaqSoUUvdnYBWF3YRvzELWs+8Qq7abqFHK9XYyu67zJ6MIuzh1PrG/tthUhCVn3iUXaMdSj6fXXSWzpkBifO9kmqbmkR5OUrPs0JcsYJD1IqLrEHl2nTh3RNaQvbJf0ZJKUdZ+65BmbpAeJtV6hiS26rpKuCdslnY+kZd2nSC/BWZbbBVKIrmMS9qypkDof5JCK+FzSs9EKWQ9SVtxVib9KUqprWWISdpWU7YoeuwRjr1+MNDaQUx10SWIhBsWadZCnWR/9VeZpMjEy69CpeZ8m02eWp8qMon88xHQeuKSL02pZO+2kjseAtYkYpO2SLk9jaZBjlh5oatWtJcTJmELuGuJJh1Sduw45Ml8TOeIu5qUlvVXSnZIezf6uHFNujaQ7JD0i6WFJJ09abqM56zxPWHZmI6afvFUTi7CrJvRQqlULtL/8rkl6gCuArWa2DtiazY/iBuCLZvZO4AzgmUkLbfwGows7PlKJriFNYRdpGVLF2NchpeqCXsRm4Pps+nrgo8MFJG0ADjOzOwHM7ICZ/XrSQqPIWX9i5Q+4cd+ZTVejNaTwBJ6QNxubzmHX9YzGsjccJzHqeBn3Ky32Y2scS1+0WY65VZK2D8zPm9l8zv891sz2ZtM/B44dUeZU4BeS/hZYC9wFXGFmr45baBSyBhd2aMoKu+qWIaFpWtizMmvLkD5VCnuYVKUciGfNbG7ch5LuAo4b8dGVgzNmZpJsRLnDgA8C7waeAL4FXAx8fdw6G0+DDOIpkW4ROhptMiVS5FdC0YubPw6secxso5mdNuJ1K/C0pOMBsr+jctF7gAfM7DEzewX4DvCeSeuMStbQE7ZLOwx132wsEimG5oXTVk+Vdop5bicpFoCLsumLgFtHlLkfeIukt2Xz/xJ4eNJCo5N1Hxd289Txc7uqXG8eaceAR9et5BrgI5IeBTZm80iak/Q1gCw3/cfAVkk/BgR8ddJCo8lZj8Lz2OWp+2Zj07nrYeoUdtEbjWXy1xD/I9q6hpk9B5w14v3twKcG5u8E3pV3ufGcVWPwCLtZUo6uu4JH2d0gelmDC7ssKeSu2yLsos0Ry/4acWG3nyRkDS7sJvGf2fXgwnYmkYyswYVdBo+u66PJkQVd2O0lKVmDC7spPLquhxA3Zw88frRLu4UkJ2twYaeCR9fFCNWaxoXdLpKUNbiwi5DKiHxtEXYMeJTdHpKVNbiw66ZIKiSGXo0pErqtuks7fZKWNbiwZ8Wj6/ooe6Oxis5FsUu7X7/hl5NT1pLOkbRT0i5JbxhIW9Ll2ZMOHpS0VdJJ4as6Hhd2fXh0XS9V9QaNQYIu5dmYeiRIWgpcC5wLbAAuyAbOHuSHwJyZvQu4BfhC6IpOw4XdPjy67lFl9/26ROliLk+esUHOAHaZ2WMAkm6i9ySEQyNEmdndA+W3AReGrGRe+sL28UQmU/dY11B8zJC2PRG9KEXHD5mFcfs0768pF3C15JH1auDJgfk9wHsnlL8E+O6oDyRdClwKcPzqpTmrODs+AJQTE6GeJFOHsEfhEo6DoL+vJF0IzAFfHPW5mc2b2ZyZza18a7X3Nj0tEh9FRdOGdEgoYhrR0KmXPHv+KeDEgfkTsvcWIWkjvUfabDKzl8JUrxwu7PGUbRVSd4/G1IUdMpXjwu4mefb6/cA6SWslLQPOp/ckhENIejfwFXqinvg49bpxYcdFmZ/xqQvbccowVdbZ88EuA24HHgFuNrMdkq6WtCkr9kVgOfBtSQ9IWhizuEZwYVeDjxfSHCt2L/EIu2PkelKMmW0Btgy9d9XA9MbA9QqO33SMhzJPk0m5dUioG42DNHXT0amfTl2aPcJeTCq9GYfxdMhiPMLuBp3byy7ssBRNhZSNBlMVdlW/ClzY7aeTe9iF7bQRz2O3G9+zTmk8up6NqnPuLux20tm96tF1j1Tz1n1SFXbVuLCbQ9JbJd0p6dHs78ox5b4gaYekRyR9WZImLbfTe9SF3TwhWjK4sEfjaZHGuALYambrgK3Z/CIknQl8AHgXcBrwz4EPTVpo5/ekCzsMZdpcd1HYdTY/dGnXzmbg+mz6euCjI8oYcASwDDgceBPw9KSF5mpn3Xa8DXY7SLkNdh30hd3VdtlLXniZIx96w0gZ41glafvA/LyZzef832PNbG82/XPg2OECZnavpLuBvYCAvzazRyYt1GWd4cIuT5GhU/uU6SgziAt7OoPfc1fFnYNnzWxu3IeS7gKOG/HRlYMzZmaSbMT/vwN4J72xlgDulPRBM/s/49bpsnZaRyrCrqJH46wMXyDrlHfKqZlJvbYlPS3peDPbK+l4YNR4Sb8LbDOzA9n/fBd4P+CyzkNXo+uyDyMIRajoGtIRdmxM+/4nyTxl+QZmAbgIuCb7e+uIMk8An5b0X+ilQT4E/OWkhfq3O4TfcCxH2cGdQkZ2TUetbaR/s3LUyznENcBHJD0KbMzmkTQn6WtZmVuA3cCPgR8BPzKz/zlpoR5ZO62mL2yPsp26MLPngLNGvL8d+FQ2/Srw72ZZrl8OR+DRdTliiq77eJTtpI7Legwu7GZxYTvOYlzWTqfYt36ZS9tJEpf1BDy6Lk6Ip8hU2YzMpe2khsvaiZqq2/26tJ1UcFlPwaPr4oR6RmMdHTWakLZfJJxZcFk7SVBXz7q6pO2idmbFZZ0Dj66Lk+oT0PvSDi1vT7s4RfFOMU4yhOyOPivDgp2lk43L2QmByzonXR03JDaaFPYgLmCnbpo/6p3WEzoV4sN6Ol3EZT0DnruOBxe20zVc1k4tVHGj0YXtdAmX9Yx4dF2cqoTt0na6gMvaaQUubKftuKwL4NF1capsd+3CdtqMy9ppFZ4WcdqKy7ogHl0Xp45ejS5sp224rJ1GqEvYLm2nLXgPxhJ4r8Y06As7hp6PzutM67LvvUQX47J2GmP52v0cePzo2tbn0m6OIg8s9occL8aP2pJ47rocTYzK5+mReli58+Chl1OeXLKWdI6knZJ2SbpixOeHS/pW9vl9kk4OXlOntTQ1jKpLuxq6LmhJvy9ph6TXJM1NKDfRq8NMlbWkpcC1wLnABuACSRuGil0C7DOzdwB/AXx+2nLbhEfX5Wly3Ou+tF3c5ei6pAd4CPhXwD3jCuT06iLyRNZnALvM7DEzOwjcBGweKrMZuD6bvgU4S5JyLNtxosKlXQyX9OuY2SNmtnNKsTxeXUSeG4yrgScH5vcA7x1XxsxekbQfOAZ4drCQpEuBS7PZl04/ac9DOdafCDf3J1YxtN0toI3bBO3crjZuE8D6sgv45cvP3P6/n/qrVTmLHyFp+8D8vJnNl63DAHm8uohaW4NkGzsPIGm7mY3N56RKG7erjdsE7dyuNm4T9Lar7DLM7JwQdQGQdBdw3IiPrjSzW0OtZ5A8sn4KOHFg/oTsvVFl9kg6DDgaeC5IDR3HcSLDzDaWXEQery4iT876fmCdpLWSlgHnAwtDZRaAi7Lp3wP+3swsV5Udx3G6Rx6vLmKqrM3sFeAy4HbgEeBmM9sh6WpJm7JiXweOkbQLuByY2gyFLB3SQtq4XW3cJmjndrVxmyCh7ZL0u5L2AO8HbpN0e/b+2yVtgfFenbhcD4Adx3Hix3swOo7jJIDL2nEcJwEql3Ubu6rn2KbLJT0s6UFJWyWd1EQ9ZyVv91dJH5Nkk7rSxkKebZL08Wx/7ZD0jbrrWIQcx+AaSXdL+mF2HJ7XRD1nQdLfSHpG0sj+F+rx5WybH5T0nrrr2ChmVtkLWArsBn4TWAb8CNgwVOazwH/Pps8HvlVlnWrapn8BvDmb/oPYtynvdmXlVtDrRrsNmGu63gH21Trgh8DKbP6fNF3vQNs1D/xBNr0B+GnT9c6xXb8DvAd4aMzn5wHfBQS8D7iv6TrX+ao6sm5jV/Wp22Rmd5vZr7PZbfTaUMZO3u6vn6M39suLdVauIHm26dPAtWa2D8DMnqm5jkXIs10GHJVNHw38rMb6FcLM7gGen1BkM3CD9dgGvEXS8fXUrnmqlvWoLpWrx5WxXnOWflf1WMmzTYNcQi8aiJ2p25X97DzRzG6rs2IlyLOvTgVOlfR9SdskBevlViF5tutPgQuzJmRbgD+sp2qVMuu51yr84QMVIulCYA74UNN1KYukJcCXgIsbrkpoDqOXCvkwvV9A90j6LTP7RZOVCsAFwHVm9ueS3g/cKOk0M/NRqhKl6sh6lq7qJNJVPVc3UUkbgSuBTWb2Uk11K8O07VoBnAZ8T9JP6eUMFyK/yZhnX+0BFszsZTN7HPgJPXnHTJ7tuoRsdDEzuxc4gt4gTykzcxftNlG1rNvYVX3qNkl6N/AVeqJOIQcKU7bLzPab2SozO9nMTqaXi99kZqUH2KmQPMffd+hF1UhaRS8t8liNdSxCnu16AjgLQNI76cn6H2qtZXgWgE9mrULeB+w3s71NV6o2arjDex69aGU3vRGpAK6md6JD7yD6NrAL+L/AbzZ91zXANt0FPA08kL0Wmq5ziO0aKvs9Im8NknNfiV5652Hgx8D5Tdc50HZtAL5Pr6XIA8DZTdc5xzZ9E9gLvEzvF88lwGeAzwzsq2uzbf5xCsdfyJd3N3ccx0kA78HoOI6TAC5rx3GcBHBZO47jJIDL2nEcJwFc1o7jOAngsnYcx0kAl7XjOE4C/H/PwhBtJOfnrwAAAABJRU5ErkJggg==">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next I'll make a random field for $u$, create the action functional for the power-law Laplace equation, and create the right boundary terms for the Nitsche functional.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">inner</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">dx</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">random_fourier_series</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">std_dev</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span> <span class="n">num_modes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">J_flexion</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">p</span> <span class="o">*</span> <span class="n">inner</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span>
+<span class="n">J_force</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">u</span> <span class="o">*</span> <span class="n">dx</span>
+<span class="n">J_energy</span> <span class="o">=</span> <span class="n">J_flexion</span> <span class="o">-</span> <span class="n">J_force</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">ds</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">FacetNormal</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">CellSize</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="n">σ</span> <span class="o">=</span> <span class="o">-</span><span class="n">inner</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">))</span><span class="o">**</span><span class="p">((</span><span class="n">p</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+<span class="n">J_flux</span> <span class="o">=</span> <span class="n">inner</span><span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span> <span class="o">*</span> <span class="n">ds</span>
+<span class="n">J_boundary</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span><span class="o">**</span><span class="n">p</span> <span class="o">*</span> <span class="n">ds</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally we have to calculate a good value for $\gamma$ using the Warburton-Hesthaven bound in the inverse inequality and the calculated minimum angle of the mesh.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">data_ro</span>
+<span class="n">cells</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">cell_node_map</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">k</span><span class="p">)]</span>
+        <span class="n">ζ</span><span class="p">,</span> <span class="n">ξ</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span> <span class="o">-</span> <span class="n">x</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">ζ</span><span class="p">,</span> <span class="n">ξ</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">ζ</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">ξ</span><span class="p">)))</span>
+        <span class="n">θ</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
+        
+<span class="n">α</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">γ</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">α</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">degree</span> <span class="o">*</span> <span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">θ</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can now put everything together to make the Nitsche functional.
+Then we can compute the second derivatives of these functional around $u$ symbolically and assemble them into PETSc matrices.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">assemble</span><span class="p">,</span> <span class="n">derivative</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">derivative</span><span class="p">(</span><span class="n">J_energy</span> <span class="o">+</span> <span class="n">J_flux</span> <span class="o">+</span> <span class="n">γ</span> <span class="o">*</span> <span class="n">J_boundary</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">derivative</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+
+<span class="n">ϕ</span><span class="p">,</span> <span class="n">ψ</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">TestFunction</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">TrialFunction</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">ϕ</span> <span class="o">*</span> <span class="n">ψ</span> <span class="o">*</span> <span class="n">dx</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">M</span><span class="o">.</span><span class="n">handle</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">M</span><span class="o">.</span><span class="n">handle</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally we'll solve an eigenproblem using SLEPc.
+The options we pass to SLEPc state that we're solving a generalized Hermitian eigenvalue problem, we're looking for the smallest real eigenvalue, and that we'll shift and invert the matrix to accelerate the solver. 
+I'm using GMRES as a Krylov subspace solve rather than conjugate gradients because we're not sure that the matrix is postive definite.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">petsc4py</span> <span class="kn">import</span> <span class="n">PETSc</span>
+<span class="kn">from</span> <span class="nn">slepc4py</span> <span class="kn">import</span> <span class="n">SLEPc</span>
+
+<span class="n">opts</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">opts</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s1">'eps_gen_hermitian'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">opts</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s1">'eps_target_real'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">opts</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s1">'eps_smallest_real'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">opts</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s1">'st_type'</span><span class="p">,</span> <span class="s1">'sinvert'</span><span class="p">)</span>
+<span class="n">opts</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s1">'st_ksp_type'</span><span class="p">,</span> <span class="s1">'gmres'</span><span class="p">)</span>
+<span class="n">opts</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s1">'st_pc-type'</span><span class="p">,</span> <span class="s1">'jacobi'</span><span class="p">)</span>
+<span class="n">opts</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s1">'eps_tol'</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">)</span>
+
+<span class="n">num_values</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">eigensolver</span> <span class="o">=</span> <span class="n">SLEPc</span><span class="o">.</span><span class="n">EPS</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">comm</span><span class="o">=</span><span class="n">firedrake</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">)</span>
+<span class="n">eigensolver</span><span class="o">.</span><span class="n">setDimensions</span><span class="p">(</span><span class="n">num_values</span><span class="p">)</span>
+<span class="n">eigensolver</span><span class="o">.</span><span class="n">setOperators</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<span class="n">eigensolver</span><span class="o">.</span><span class="n">setFromOptions</span><span class="p">()</span>
+<span class="n">eigensolver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">num_converged</span> <span class="o">=</span> <span class="n">eigensolver</span><span class="o">.</span><span class="n">getConverged</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num_converged</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Vr</span><span class="p">,</span> <span class="n">Vi</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">getVecs</span><span class="p">()</span>
+<span class="n">λ</span> <span class="o">=</span> <span class="n">eigensolver</span><span class="o">.</span><span class="n">getEigenpair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Vr</span><span class="p">,</span> <span class="n">Vi</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And the moment of truth:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">λ</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(41.67461014607575+0j)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>which is well and truly positive!
+In every test I've run so far it seems as if the second derivative of the Nitsche functional is positive-definite.
+Of course these tests are run using a few random fields, which is far from exhaustive.
+I still need a proof that my proposed value of the penalty parameter is good enough, but for now it's encouraging to know that it might work.</p>
+
+</div>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../nitsches-method-stokes/" rel="prev" title="Nitsche's method for the Stokes equations">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../yau-conjecture/" rel="next" title="Yau's Conjecture">Next post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+    },
+    displayAlign: 'center', // Change this to 'left' if you want left-aligned equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script></article><!--End of body content--><footer id="footer">
+            Contents © 2022         <a href="mailto:shapero.daniel@gmail.com">Daniel Shapero</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>

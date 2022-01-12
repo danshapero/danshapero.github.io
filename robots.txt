@@ -1,4 +1,4 @@
-Sitemap: https://danshapero.github.io/sitemapindex.xml
+Sitemap: https://www.shapero.xyz/sitemapindex.xml
 
 User-Agent: *
-Host: danshapero.github.io
+Host: www.shapero.xyz
