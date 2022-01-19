@@ -1,5 +1,8 @@
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   nikola_build:
