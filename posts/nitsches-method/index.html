@@ -326,7 +326,7 @@ Then we'll use the intuition we've built up on this easy problem to attack harde
 <p>The Poisson equation with Dirichlet boundary conditions can be viewed as a constrained optimization problem.
 A really blunt way of enforcing these constraints is to modify the variational principle so that departures from the Dirichlet boundary conditions are "expensive" and thus a minimizer will be pretty close to $g$ on the boundary.
 The modified variational principle is:</p>
-$$J_\gamma(u) = \int_\Omega\left(\frac{1}{2}k|\nabla u|^2 - fu\right)dx + \int_{\partial\Omega}\frac{\gamma k}{2h}(u - g)^2dx.$$<p>The extra factor of $h$ is a length scale which we need there to make all the physical units work out right, while $\gamma$ is a dimensionless constant.
+$$J_\gamma(u) = \int_\Omega\left(\frac{1}{2}k|\nabla u|^2 - fu\right)dx + \int_{\partial\Omega}\frac{\gamma k}{2h}(u - g)^2ds.$$<p>The extra factor of $h$ is a length scale which we need there to make all the physical units work out right, while $\gamma$ is a dimensionless constant.
 The penalty method amounts to replacing the Dirichlet boundary condition with the Robin condition</p>
 $$-k\frac{\partial u}{\partial n} = \gamma\frac{k(u - g)}{h}.$$<p>In the limit as $\gamma \to \infty$, the minimizer of $J_\gamma$ will approach the solution of the problem we were originally solving.</p>
 <p>For a numerical implementation we'll just take $\gamma$ to be very large and hope for the best.
