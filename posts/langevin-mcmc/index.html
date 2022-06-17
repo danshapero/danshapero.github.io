@@ -357,7 +357,8 @@ We had to use the PETSc API to do this, since it isn't natively supported at the
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">assemble</span><span class="p">,</span> <span class="n">PETSc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">assemble</span>
+<span class="kn">from</span> <span class="nn">firedrake.petsc</span> <span class="kn">import</span> <span class="n">PETSc</span>
 <span class="n">area</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">(</span><span class="n">mesh</span><span class="p">))</span>
 
 <span class="k">class</span> <span class="nc">NoiseGenerator</span><span class="p">:</span>
@@ -698,7 +699,7 @@ If you don't clear the tape, the simulation can eat up more and more memory as i
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>Accepted, rejected: 1795, 1205 |: 100%|██████████| 3000/3000 [22:15&lt;00:00,  2.25it/s]
+<pre>Accepted, rejected: 1795, 1205 |: 100%|██████████| 3000/3000 [22:37&lt;00:00,  2.21it/s]
 </pre>
 </div>
 </div>

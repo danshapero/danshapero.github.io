@@ -35,6 +35,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
         admm [label="Alternating\ndirection\nmethod of\nmultipliers", href="/posts/admm"];
         shallow_water [label="The shallow water\nequations", href="/posts/shallow-water/"];
+        overland_flow [label="Overland\nflow", href="/posts/overland-flow/"];
         rosenbrock [label="Rosenbrock\nschemes", href="/posts/rosenbrock/"];
         langevin [label="Langevin\nMonte\nCarlo", href="/posts/langevin-mcmc/"];
         symplectic [label="Symplectic\nintegrators", href="/posts/symplectic-integrators/"];
@@ -60,6 +61,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         conservation_laws -> convection_diffusion;
         conservation_laws -> shallow_water;
         shallow_water -> rosenbrock;
+        shallow_water -> overland_flow;
         nitsche -> convection_diffusion;
         symplectic -> billiards;
     }

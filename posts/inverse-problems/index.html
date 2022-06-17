@@ -535,7 +535,7 @@ $$\int_\Omega\xi^2dx = \hat\xi^*M\hat\xi.$$<p>We'll have to do a bit of hacking 
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">PETSc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake.petsc</span> <span class="kn">import</span> <span class="n">PETSc</span>
 <span class="n">ϕ</span><span class="p">,</span> <span class="n">ψ</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">TrialFunction</span><span class="p">(</span><span class="n">V</span><span class="p">),</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">TestFunction</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">inner</span><span class="p">(</span><span class="n">ϕ</span><span class="p">,</span> <span class="n">ψ</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span>
 <span class="n">M</span> <span class="o">=</span> <span class="n">firedrake</span><span class="o">.</span><span class="n">assemble</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">mat_type</span><span class="o">=</span><span class="s1">'aij'</span><span class="p">)</span><span class="o">.</span><span class="n">M</span><span class="o">.</span><span class="n">handle</span>
