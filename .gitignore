@@ -2,6 +2,10 @@
 *.geo
 *.msh
 
+# Log or checkpoint files
+*.h5
+*.log
+
 # Rendered posts
 posts/*
 
