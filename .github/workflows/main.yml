@@ -10,7 +10,7 @@ jobs:
     name: "Deploy Nikola to GitHub Pages"
     steps:
     - name: Checkout website source
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
