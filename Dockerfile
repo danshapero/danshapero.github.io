@@ -23,5 +23,6 @@ RUN mkdir actions-runner && \
     tar xzf ./actions-runner-linux-x64-2.323.0.tar.gz && \
     ./config.sh --url https://github.com/danshapero/danshapero.github.io --token ${token} --unattended
 
+ENV PATH=/home/firedrake/firedrake/bin:$PATH
 WORKDIR /home/firedrake/actions-runner
 ENTRYPOINT bin/runsvc.sh
