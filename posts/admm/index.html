@@ -124,17 +124,6 @@ Here we'll proceed in a similar vein: what happens if we go from using a pure pe
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/firedrake/firedrake/lib/python3.12/site-packages/pytools/persistent_dict.py:52: RecommendedHashNotFoundWarning: Unable to import recommended hash 'siphash24.siphash13', falling back to 'hashlib.sha256'. Run 'python3 -m pip install siphash24' to install the recommended hash.
-  warn("Unable to import recommended hash 'siphash24.siphash13', "
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -547,14 +536,14 @@ You should use an actual stopping criterion if you care about doing this right.<
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">firedrake</span> <span class="kn">import</span> <span class="n">sqrt</span>
-<span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">trange</span>
 
 <span class="n">qs</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deepcopy</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
 <span class="n">vs</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deepcopy</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
 <span class="n">μs</span> <span class="o">=</span> <span class="p">[</span><span class="n">μ</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deepcopy</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
 
 <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">15</span>
-<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">trange</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
     <span class="c1"># Step 1: Solve the inverse problem for q.</span>
     <span class="n">J</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span>
         <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">u</span> <span class="o">-</span> <span class="n">u_obs</span><span class="p">)</span> <span class="o">/</span> <span class="n">σ</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span>
@@ -592,9 +581,12 @@ You should use an actual stopping criterion if you care about doing this right.<
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-  0%|          | 0/15 [00:00&lt;?, ?it/s]</pre>
+<div class="output_subarea output_widget_view" id="824133ec-3bc2-4868-a8be-a6bfb882f6ab">
+<script type="text/javascript">
+var element = $('#824133ec-3bc2-4868-a8be-a6bfb882f6ab');
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "f95d6b677a7c4a3b8cedd1621bd7d65b", "version_major": 2, "version_minor": 0}
+</script>
 </div>
 </div>
 <div class="output_area">
@@ -1908,12 +1900,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 <pre>  217   7.802447e-01   1.617462e-02   5.732223e-05   225       218       1         0         
 Optimization Terminated with Status: Step Tolerance Met
 </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-  7%|▋         | 1/15 [01:29&lt;20:57, 89.83s/it]</pre>
 </div>
 </div>
 <div class="output_area">
@@ -3403,12 +3389,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 13%|█▎        | 2/15 [04:34&lt;31:31, 145.54s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  247   6.316784e-01   1.402481e-02   8.142142e-05   252       248       1         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -3948,12 +3928,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 20%|██        | 3/15 [05:57&lt;23:22, 116.85s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  88    5.576263e-01   1.825534e-02   4.164730e-05   92        89        1         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -4250,12 +4224,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  47    5.652116e-01   5.176178e-02   4.101868e-04   52        48        1         0         
 </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 27%|██▋       | 4/15 [06:54&lt;17:07, 93.42s/it] </pre>
 </div>
 </div>
 <div class="output_area">
@@ -4855,12 +4823,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  97    5.674457e-01   8.058991e-02   5.551308e-04   101       98        1         0         
 </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 33%|███▎      | 5/15 [09:12&lt;18:14, 109.45s/it]</pre>
 </div>
 </div>
 <div class="output_area">
@@ -5769,12 +5731,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 40%|████      | 6/15 [13:16&lt;23:17, 155.26s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  149   5.608967e-01   1.802687e-02   7.907516e-05   154       150       1         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -5975,12 +5931,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  31    5.576729e-01   3.277648e-02   1.674143e-04   35        32        1         0         
 </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 47%|████▋     | 7/15 [14:18&lt;16:37, 124.72s/it]</pre>
 </div>
 </div>
 <div class="output_area">
@@ -6361,12 +6311,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 53%|█████▎    | 8/15 [16:29&lt;14:46, 126.68s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  61    5.575752e-01   2.567354e-02   9.159221e-05   66        62        1         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -6666,12 +6610,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 60%|██████    | 9/15 [18:23&lt;12:17, 122.86s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  48    5.576702e-01   1.765816e-02   9.325744e-05   52        49        1         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -6740,12 +6678,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  9     5.583813e-01   8.088708e-02   4.496538e-04   13        10        1         0         
 </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 67%|██████▋   | 10/15 [18:53&lt;07:50, 94.10s/it]</pre>
 </div>
 </div>
 <div class="output_area">
@@ -6952,12 +6884,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 73%|███████▎  | 11/15 [20:30&lt;06:19, 94.97s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  32    5.593209e-01   1.927724e-02   9.692426e-05   39        33        3         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -7038,12 +6964,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  11    5.602824e-01   7.350685e-02   4.003177e-04   15        12        1         0         
 </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 80%|████████  | 12/15 [21:11&lt;03:55, 78.57s/it]</pre>
 </div>
 </div>
 <div class="output_area">
@@ -7304,12 +7224,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 87%|████████▋ | 13/15 [23:29&lt;03:13, 96.61s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  41    5.611303e-01   1.515467e-02   9.401241e-05   45        42        1         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -7495,12 +7409,6 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
- 93%|█████████▎| 14/15 [25:20&lt;01:41, 101.02s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  29    5.620441e-01   1.355628e-02   4.202849e-05   36        30        1         0         
 Optimization Terminated with Status: Step Tolerance Met
@@ -7578,27 +7486,9 @@ Line Search: Cubic Interpolation satisfying Strong Wolfe Conditions
 </div>
 </div>
 <div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-100%|██████████| 15/15 [26:07&lt;00:00, 84.77s/it] </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-100%|██████████| 15/15 [26:07&lt;00:00, 104.53s/it]</pre>
-</div>
-</div>
-<div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>  11    5.630455e-01   2.563980e-02   9.400150e-05   15        12        1         0         
 Optimization Terminated with Status: Step Tolerance Met
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
 </pre>
 </div>
 </div>
@@ -7738,7 +7628,10 @@ Investigating this more will have to wait for another day.</p>
 </div>
 </div>
 </div>
-    </div>
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"0f6bb18f7eb24cff9191f6b852632d9b": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1d88e60fd7264e6583ba054bcfa3a0e4": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_917e1a81736f41229fce7db880c46a6f", "placeholder": "\u200b", "style": "IPY_MODEL_f95d6ea80deb4dd0b86e6e22f3281bb5", "tabbable": null, "tooltip": null, "value": "100%"}}, "28ef8cf932fc479fad38c410dec81eef": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_5550729e2b6b4356911a8e9b8c78a604", "max": 15.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_56fd5d5169cf496abbfac19d20de96dc", "tabbable": null, "tooltip": null, "value": 15.0}}, "5550729e2b6b4356911a8e9b8c78a604": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "56fd5d5169cf496abbfac19d20de96dc": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "58f9afc0cd63433c8a0c0c852ffb4951": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8127f3d2529d49c69d27c05596c659c3": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "917e1a81736f41229fce7db880c46a6f": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bd697d22d4b84d85b3c1af3d7303be2b": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_58f9afc0cd63433c8a0c0c852ffb4951", "placeholder": "\u200b", "style": "IPY_MODEL_8127f3d2529d49c69d27c05596c659c3", "tabbable": null, "tooltip": null, "value": "\u200715\/15\u2007[25:49&lt;00:00,\u200783.66s\/it]"}}, "f95d6b677a7c4a3b8cedd1621bd7d65b": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_1d88e60fd7264e6583ba054bcfa3a0e4", "IPY_MODEL_28ef8cf932fc479fad38c410dec81eef", "IPY_MODEL_bd697d22d4b84d85b3c1af3d7303be2b"], "layout": "IPY_MODEL_0f6bb18f7eb24cff9191f6b852632d9b", "tabbable": null, "tooltip": null}}, "f95d6ea80deb4dd0b86e6e22f3281bb5": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+</div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
                 <a href="../langevin-mcmc/" rel="prev" title="Langevin Monte Carlo">Previous post</a>
