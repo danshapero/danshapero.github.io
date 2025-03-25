@@ -1,4 +1,4 @@
-FROM firedrakeproject/firedrake-vanilla:2025-01
+FROM firedrakeproject/firedrake:2025-01
 
 LABEL org.opencontainers.image.authors="shapero.daniel@gmail.com"
 
