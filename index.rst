@@ -22,6 +22,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
 
         calc [label="Variational\ncalculus", href="/posts/variational-calculus/"];
         stokes [label="Stokes\nflow", href="/posts/stokes/"];
+        karman [label="Navier-Stokes", href="/posts/karman-vortices/"];
         weyl [label="Weyl's law", href="/posts/weyls-law/"];
         yau [label="Yau's conjecture", href="/posts/yau-conjecture/"];
         kac [label="Kac's conjecture", href="/posts/kac-conjecture/"];
@@ -48,6 +49,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         calc -> nitsche;
         calc -> obstacle;
         stokes -> nitsche_stokes;
+        stokes -> karman;
         stokes -> inverse_problems;
         inverse_problems -> total_variation;
         nitsche -> admm;
