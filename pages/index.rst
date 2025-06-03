@@ -33,6 +33,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         conservation_laws [label="Conservation\nlaws", href="/posts/conservation-laws/"];
         convection_diffusion [label="Convection-\ndiffusion", href="/posts/convection-diffusion/"];
         mantle_convection [label="Mantle\nconvection", href="/posts/mantle-convection/"];
+        plate_theory [label="Plate\ntheory", href="/posts/plate-theory/"];
         inverse_problems [label="Inverse\nproblems", href="/posts/inverse-problems"];
         feldman_hajek [label="The Feldman-\nHájek theorem", href="/posts/feldman-hajek"];
         total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
@@ -69,5 +70,8 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         nitsche -> convection_diffusion;
         convection_diffusion -> mantle_convection;
         stokes -> mantle_convection;
+        weyl -> plate_theory;
+        stokes -> plate_theory;
+        convection_diffusion -> plate_theory;
         symplectic -> billiards;
     }
