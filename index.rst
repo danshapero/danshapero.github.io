@@ -33,6 +33,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         conservation_laws [label="Conservation\nlaws", href="/posts/conservation-laws/"];
         convection_diffusion [label="Convection-\ndiffusion", href="/posts/convection-diffusion/"];
         inverse_problems [label="Inverse\nproblems", href="/posts/inverse-problems"];
+        feldman_hajek [label="The Feldman-\nHájek theorem", href="/posts/feldman-hajek"];
         total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
         admm [label="Alternating\ndirection\nmethod of\nmultipliers", href="/posts/admm"];
         shallow_water [label="The shallow water\nequations", href="/posts/shallow-water/"];
