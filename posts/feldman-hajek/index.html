@@ -12,7 +12,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="canonical" href="https://www.shapero.xyz/posts/feldman-hajek/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Daniel Shapero">
-<link rel="prev" href="../mantle-convection/" title="Mantle convection" type="text/html">
+<link rel="prev" href="../plate-theory/" title="Plate theory" type="text/html">
 <meta property="og:site_name" content="shapero.xyz">
 <meta property="og:title" content="The Feldman-Hájek theorem">
 <meta property="og:url" content="https://www.shapero.xyz/posts/feldman-hajek/">
@@ -326,7 +326,7 @@ $$\mathbb P[W \in H^1(\Omega)] = 0, \quad \mathbb P[Z \in H^1(\Omega)] = 1$$
 where $H^1(\Omega)$ is the space of functions with square-integrable derivatives.
 The two random variables are not mutually absolutely continuous.
 That might not be too surprising.
-We picked the eigenvalues distributions of each process to have different decay rates:
+We picked the eigenvalue distributions of each process to have different decay rates:
 $$\sigma_n^2(W) \sim n^{-2}, \quad \sigma_n^2(Z) \sim n^{-2\gamma}.$$
 Just to really hammer this point home, let's evaluate an approximation to the mean-square derivative of each group of samples.</p>
 </div>
@@ -457,7 +457,7 @@ So the two distributions are mutually singular.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>What this example shows is that it's not enough that $\sigma_n(W)$ and $\sigma_n(Z)$ have the same decay rate.
 They both decay like some constant $\times$ $n^{-\gamma}$ for the same value of $\gamma$.
-The two distributions are mutually singular even if the rates are the same but the constants are different.</p>
+<strong>The two distributions are mutually singular even if the rates are the same but the constants are different.</strong></p>
 <p>At this point you might wonder if it's enough to have
 $$\sigma_n(W)/\sigma_n(Z) \to 1.$$
 Even this much tighter condition is not enough!</p>
@@ -485,7 +485,7 @@ In light of that, it's not surprising that MCMC sampling in function spaces is s
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
-                <a href="../mantle-convection/" rel="prev" title="Mantle convection">Previous post</a>
+                <a href="../plate-theory/" rel="prev" title="Plate theory">Previous post</a>
             </li>
         </ul></nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
 MathJax.Hub.Config({
