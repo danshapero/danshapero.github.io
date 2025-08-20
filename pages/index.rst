@@ -41,7 +41,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         shallow_water [label="The shallow water\nequations", href="/posts/shallow-water/"];
         overland_flow [label="Overland\nflow", href="/posts/overland-flow/"];
         rosenbrock [label="Rosenbrock\nschemes", href="/posts/rosenbrock/"];
-        langevin [label="Langevin\nMonte\nCarlo", href="/posts/langevin-mcmc/"];
+        // langevin [label="Langevin\nMonte\nCarlo", href="/posts/langevin-mcmc/"];
         symplectic [label="Symplectic\nintegrators", href="/posts/symplectic-integrators/"];
         billiards [label="Billiards\non surfaces", href="/posts/surface-billiards/"];
 
@@ -57,7 +57,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         inverse_problems -> total_variation;
         nitsche -> admm;
         total_variation -> admm;
-        inverse_problems -> langevin;
+        // inverse_problems -> langevin;
         obstacle -> total_variation;
         weyl -> yau;
         yau -> kac;
