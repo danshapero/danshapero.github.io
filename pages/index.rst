@@ -36,14 +36,14 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         plate_theory [label="Plate\ntheory", href="/posts/plate-theory/"];
         inverse_problems [label="Inverse\nproblems", href="/posts/inverse-problems"];
         feldman_hajek [label="The Feldman-\nHájek theorem", href="/posts/feldman-hajek"];
-        total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
-        admm [label="Alternating\ndirection\nmethod of\nmultipliers", href="/posts/admm"];
+        // total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
+        // admm [label="Alternating\ndirection\nmethod of\nmultipliers", href="/posts/admm"];
         shallow_water [label="The shallow water\nequations", href="/posts/shallow-water/"];
         overland_flow [label="Overland\nflow", href="/posts/overland-flow/"];
         rosenbrock [label="Rosenbrock\nschemes", href="/posts/rosenbrock/"];
         // langevin [label="Langevin\nMonte\nCarlo", href="/posts/langevin-mcmc/"];
         symplectic [label="Symplectic\nintegrators", href="/posts/symplectic-integrators/"];
-        billiards [label="Billiards\non surfaces", href="/posts/surface-billiards/"];
+        // billiards [label="Billiards\non surfaces", href="/posts/surface-billiards/"];
 
         {rank=same; calc, conservation_laws};
 
@@ -54,9 +54,9 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         stokes -> nitsche_stokes;
         stokes -> karman;
         stokes -> inverse_problems;
-        inverse_problems -> total_variation;
-        nitsche -> admm;
-        total_variation -> admm;
+        // inverse_problems -> total_variation;
+        // nitsche -> admm;
+        // total_variation -> admm;
         // inverse_problems -> langevin;
         obstacle -> total_variation;
         weyl -> yau;
@@ -73,5 +73,5 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         weyl -> plate_theory;
         stokes -> plate_theory;
         convection_diffusion -> plate_theory;
-        symplectic -> billiards;
+        // symplectic -> billiards;
     }
