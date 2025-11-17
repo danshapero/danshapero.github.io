@@ -183,8 +183,7 @@ zs = np.stack([generate_sample(x, σs_2, rng) for k in range(num_samples)])
 # %%
 fig, axes = plt.subplots(nrows=2, ncols=1, sharex=True, sharey=True)
 for ax in axes:
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    ax.set_axis_off()
 
 for w, z in zip(ws, zs):
     axes[0].plot(x, w, color="tab:blue", alpha=0.25)
@@ -277,8 +276,7 @@ zs = np.stack([generate_sample(x, 2 * σs, rng) for k in range(num_samples)])
 # %%
 fig, axes = plt.subplots(nrows=2, ncols=1, sharex=True, sharey=True)
 for ax in axes:
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    ax.set_axis_off()
 
 for w, z in zip(ws, zs):
     axes[0].plot(x, w, color="tab:blue", alpha=0.25)

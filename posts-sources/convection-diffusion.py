@@ -358,7 +358,7 @@ flow_solver = firedrake.LinearVariationalSolver(flow_problem, **parameters_bjac)
 # Now we can try the alternating scheme.
 
 # %%
-from tqdm.notebook import trange
+from tqdm.notebook import tqdm, trange
 
 output_freq = 4
 ϕs = []
@@ -369,7 +369,7 @@ for step in trange(num_steps, unit='timesteps'):
 
     ϕ_0.assign(ϕ)
     heat_solver.solve()
-    
+
     if step % output_freq == 0:
         ϕs.append(ϕ.copy(deepcopy=True))
 
@@ -377,21 +377,18 @@ for step in trange(num_steps, unit='timesteps'):
 # %%capture
 fig, axes = plt.subplots()
 axes.set_aspect('equal')
-axes.get_xaxis().set_visible(False)
-axes.get_yaxis().set_visible(False)
+axes.set_axis_off()
 colors = firedrake.tripcolor(ϕ, num_sample_points=1, vmin=0., vmax=1., axes=axes)
 
 # %%
 from firedrake.plot import FunctionPlotter
+from matplotlib.animation import FuncAnimation
 fn_plotter = FunctionPlotter(mesh, num_sample_points=1)
+animate = lambda φ: colors.set_array(fn_plotter(ϕ))
+interval = 1e3 * output_freq * float(dt)
 
 # %%
-from matplotlib.animation import FuncAnimation
-def animate(ϕ):
-    colors.set_array(fn_plotter(ϕ))
-
-interval = 1e3 * output_freq * float(dt)
-animation = FuncAnimation(fig, animate, frames=ϕs, interval=interval)
+animation = FuncAnimation(fig, animate, frames=tqdm(ϕs), interval=interval)
 
 # %%
 from IPython.display import HTML

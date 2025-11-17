@@ -142,8 +142,7 @@ T = T_0.copy(deepcopy=True)
 def subplots():
     fig, axes = plt.subplots()
     axes.set_aspect("equal")
-    axes.get_xaxis().set_visible(False)
-    axes.get_yaxis().set_visible(False)
+    axes.set_axis_off()
     axes.set_xlim(0, float(Lx))
     axes.set_ylim(0, float(Ly))
     return fig, axes

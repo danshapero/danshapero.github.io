@@ -58,7 +58,7 @@
 # %%
 import firedrake
 from firedrake import inner, Constant, as_vector
-mesh = firedrake.UnitSquareMesh(64, 64, diagonal='crossed')
+mesh = firedrake.UnitSquareMesh(64, 64, diagonal="crossed")
 x = firedrake.SpatialCoordinate(mesh)
 y = Constant((.5, .5))
 r = x - y
@@ -71,16 +71,16 @@ u = as_vector((-r[1], r[0]))
 
 # %%
 import numpy as np
-Q = firedrake.FunctionSpace(mesh, family='CG', degree=2)
+Q = firedrake.FunctionSpace(mesh, family="CG", degree=2)
 speed = firedrake.Function(Q).interpolate(inner(u, u))
 max_speed = np.sqrt(speed.dat.data_ro.max())
 
-Q0 = firedrake.FunctionSpace(mesh, family='DG', degree=0)
+Q0 = firedrake.FunctionSpace(mesh, family="DG", degree=0)
 diameters = firedrake.project(firedrake.CellDiameter(mesh), Q0)
 min_diameter = diameters.dat.data_ro.min()
 
 cfl_timestep = min_diameter / max_speed
-print('Upper bound for CFL-stable timestep: {}'.format(cfl_timestep))
+print("Upper bound for CFL-stable timestep: {}".format(cfl_timestep))
 
 # %% [markdown]
 # The initial data we'll use will be the classic bell and cone:
@@ -193,7 +193,7 @@ cell_flux = -inner(grad(ϕ), q * u) * dx
 
 n = firedrake.FacetNormal(mesh)
 f = q * inner(u, n)
-face_flux = (f('+') - f('-')) * (ϕ('+') - ϕ('-')) * dS
+face_flux = (f("+") - f("-")) * (ϕ("+") - ϕ("-")) * dS
 
 q_in = Constant(0)
 influx = q_in * min_value(0, inner(u, n)) * ϕ * ds
@@ -219,7 +219,7 @@ dq_dt = -(cell_flux + face_flux + influx + outflux)
 
 δq = firedrake.Function(Q0)
 problem = LinearVariationalProblem(m, dt * dq_dt, δq)
-parameters = {'ksp_type': 'preonly', 'pc_type': 'bjacobi', 'sub_pc_type': 'ilu'}
+parameters = {"ksp_type": "preonly", "pc_type": "bjacobi", "sub_pc_type": "ilu"}
 solver = LinearVariationalSolver(problem, solver_parameters=parameters)
 
 # %%
@@ -227,7 +227,7 @@ import numpy as np
 qrange = np.zeros((num_steps, 2))
 
 from tqdm.notebook import trange
-for step in trange(num_steps, unit='timesteps'):
+for step in trange(num_steps, unit="timesteps"):
     solver.solve()
     q += δq
     qrange[step, :] = q.dat.data_ro.min(), q.dat.data_ro.max()
@@ -238,10 +238,10 @@ for step in trange(num_steps, unit='timesteps'):
 
 # %%
 fig, axes = plt.subplots()
-axes.set_yscale('log')
+axes.set_yscale("log")
 axes.plot(qrange[:250, 1])
-axes.set_xlabel('timestep')
-axes.set_ylabel('solution maximum');
+axes.set_xlabel("timestep")
+axes.set_ylabel("solution maximum");
 
 # %% [markdown]
 # Instead, we'll try the *upwind* numerical flux.
@@ -264,7 +264,7 @@ cell_flux = -inner(grad(ϕ), q * u) * dx
 n = firedrake.FacetNormal(mesh)
 u_n = max_value(inner(u, n), 0)
 f = q * u_n
-face_flux = (f('+') - f('-')) * (ϕ('+') - ϕ('-')) * dS
+face_flux = (f("+") - f("-")) * (ϕ("+") - ϕ("-")) * dS
 
 q_in = Constant(0)
 influx = q_in * min_value(0, inner(u, n)) * ϕ * ds
@@ -274,13 +274,13 @@ dq_dt = -(cell_flux + face_flux + influx + outflux)
 
 δq = firedrake.Function(Q0)
 problem = LinearVariationalProblem(m, dt * dq_dt, δq)
-parameters = {'ksp_type': 'preonly', 'pc_type': 'bjacobi', 'sub_pc_type': 'ilu'}
+parameters = {"ksp_type": "preonly", "pc_type": "bjacobi", "sub_pc_type": "ilu"}
 solver = LinearVariationalSolver(problem, solver_parameters=parameters)
 
 qs = []
 output_freq = 5
 
-for step in trange(num_steps, unit='timesteps'):
+for step in trange(num_steps, unit="timesteps"):
     solver.solve()
     q += δq
     if step % output_freq == 0:
@@ -291,23 +291,16 @@ for step in trange(num_steps, unit='timesteps'):
 # Keeping in mind that the original data capped out at a value of 1, the peaks have shrunk considerably, and we can also see that the sharp cone is much more rounded than before.
 
 # %%
-from firedrake.plot import FunctionPlotter
-fn_plotter = FunctionPlotter(mesh, num_sample_points=1)
-
-# %%
 # %%capture
 fig, axes = plt.subplots()
-axes.set_aspect('equal')
-axes.get_xaxis().set_visible(False)
-axes.get_yaxis().set_visible(False)
-colors = firedrake.tripcolor(
-    q, num_sample_points=1, vmin=0., vmax=1., shading="gouraud", axes=axes
-)
+axes.set_aspect("equal")
+axes.set_axis_off()
+kw = {"num_sample_points": 1, "vmin": 0, "vmax": 1, "shading": "gouraud"}
+colors = firedrake.tripcolor(q, **kw, axes=axes)
 
 from matplotlib.animation import FuncAnimation
-def animate(q):
-    colors.set_array(fn_plotter(q))
-
+fn_plotter = firedrake.FunctionPlotter(mesh, num_sample_points=1)
+animate = lambda q: colors.set_array(fn_plotter(q))
 interval = 1e3 * output_freq * float(dt)
 animation = FuncAnimation(fig, animate, frames=qs, interval=interval)
 
@@ -359,7 +352,7 @@ dt = Constant(final_time / num_steps)
 # In this case, the positivity of the solution is vital and so instead I'm interpolating the expression for the initial data, but doing so is a little dangerous.
 
 # %%
-Q1 = firedrake.FunctionSpace(mesh, family='DG', degree=1)
+Q1 = firedrake.FunctionSpace(mesh, family="DG", degree=1)
 q0 = firedrake.Function(Q1).interpolate(q_expr)
 q0.dat.data_ro.min(), q0.dat.data_ro.max()
 
@@ -376,7 +369,7 @@ cell_flux = -inner(grad(ϕ), q * u) * dx
 n = firedrake.FacetNormal(mesh)
 u_n = max_value(inner(u, n), 0)
 f = q * u_n
-face_flux = (f('+') - f('-')) * (ϕ('+') - ϕ('-')) * dS
+face_flux = (f("+") - f("-")) * (ϕ("+") - ϕ("-")) * dS
 
 q_in = Constant(0)
 influx = q_in * min_value(0, inner(u, n)) * ϕ * ds
@@ -386,10 +379,10 @@ dq_dt = -(cell_flux + face_flux + influx + outflux)
 
 δq = firedrake.Function(Q1)
 problem = LinearVariationalProblem(m, dt * dq_dt, δq)
-parameters = {'ksp_type': 'preonly', 'pc_type': 'bjacobi', 'sub_pc_type': 'ilu'}
+parameters = {"ksp_type": "preonly", "pc_type": "bjacobi", "sub_pc_type": "ilu"}
 solver = LinearVariationalSolver(problem, solver_parameters=parameters)
 
-for step in trange(num_steps, unit='timesteps'):
+for step in trange(num_steps, unit="timesteps"):
     solver.solve()
     q += δq
 
@@ -405,7 +398,7 @@ firedrake.assemble(abs(q - q0) * dx) / firedrake.assemble(q0 * dx)
 
 # %%
 fig, axes = plt.subplots()
-axes.set_aspect('equal')
+axes.set_aspect("equal")
 colors = firedrake.tripcolor(q, axes=axes)
 fig.colorbar(colors);
 
@@ -436,7 +429,7 @@ cell_flux = -inner(grad(ϕ), q * u) * dx
 n = firedrake.FacetNormal(mesh)
 u_n = max_value(inner(u, n), 0)
 f = q * u_n
-face_flux = (f('+') - f('-')) * (ϕ('+') - ϕ('-')) * dS
+face_flux = (f("+") - f("-")) * (ϕ("+") - ϕ("-")) * dS
 
 q_in = Constant(0)
 influx = q_in * min_value(0, inner(u, n)) * ϕ * ds
@@ -469,13 +462,13 @@ solvers = [
 # The timestepping loop is more involved; we have to separately evaluate the Runge-Kutta stages and then form the solution as an appropriate weighted sum.
 
 # %%
-for step in trange(num_steps, unit='timesteps'):
+for step in trange(num_steps, unit="timesteps"):
     solvers[0].solve()
     q1.assign(q + δq)
-    
+
     solvers[1].solve()
     q2.assign(3 * q / 4 + (q1 + δq) / 4)
-    
+
     solvers[2].solve()
     q.assign(q / 3 + 2 * (q2 + δq) / 3)
 
@@ -490,7 +483,7 @@ firedrake.assemble(abs(q - q0) * dx) / firedrake.assemble(q0 * dx)
 
 # %%
 fig, axes = plt.subplots()
-axes.set_aspect('equal')
+axes.set_aspect("equal")
 colors = firedrake.tripcolor(q, axes=axes)
 fig.colorbar(colors);
 

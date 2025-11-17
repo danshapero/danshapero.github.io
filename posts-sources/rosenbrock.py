@@ -211,7 +211,7 @@ def run_simulation(solver, final_time, num_steps, output_freq):
             qs.append(q.copy(deepcopy=True))
 
         solver.step(timestep)
-    
+
     return hs, qs
 
 
@@ -225,20 +225,19 @@ def make_animation(hs, b, timestep, output_freq, **kwargs):
     axes.set_aspect('equal')
     axes.set_xlim((0.0, Lx))
     axes.set_ylim((0.0, Ly))
-    axes.get_xaxis().set_visible(False)
-    axes.get_yaxis().set_visible(False)
+    axes.set_axis_off()
     η = firedrake.project(hs[0] + b, hs[0].function_space())
     colors = firedrake.tripcolor(
         hs[0], num_sample_points=1, axes=axes, **kwargs
     )
-    
+
     def animate(h):
         η.project(h + b)
         colors.set_array(η.dat.data_ro[:])
 
     interval = 1e3 * output_freq * timestep
     animation = FuncAnimation(fig, animate, frames=hs, interval=interval)
-    
+
     plt.close(fig)
     return HTML(animation.to_html5_video())
 

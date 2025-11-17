@@ -328,17 +328,11 @@ from matplotlib.animation import FuncAnimation
 
 fig, axes = plt.subplots()
 axes.set_aspect("equal")
-axes.get_xaxis().set_visible(False)
-axes.get_yaxis().set_visible(False)
-
-colors = firedrake.tripcolor(
-    hs[0], axes=axes, vmin=0, vmax=1.0, cmap="Blues", num_sample_points=4
-)
+axes.set_axis_off()
+kw = {"vmin": 0, "vmax": 1, "cmap": "Blues", "num_sample_points": 4}
+colors = firedrake.tripcolor(hs[0], **kw, axes=axes)
 fn_plotter = firedrake.FunctionPlotter(mesh, num_sample_points=4)
-
-def animate(h):
-    colors.set_array(fn_plotter(h))
-
+animate = lambda h: colors.set_array(fn_plotter(h))
 interval = 1e3 / 60
 animation = FuncAnimation(fig, animate, frames=hs, interval=interval)
 
