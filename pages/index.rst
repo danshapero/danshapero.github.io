@@ -17,6 +17,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
 .. graphviz::
 
     digraph posts {
+        rankdir="LR";
         node [shape="plaintext", fontcolor="#007bff", fontsize="11"];
         edge [arrowsize=0.25];
 
@@ -47,6 +48,38 @@ If you want to contact me you can find an email address on my `GitHub <https://w
 
         {rank=same; calc, conservation_laws};
 
+        subgraph cluster_nitsche {
+            label="Nitsche's\nmethod";
+            penwidth=0.1;
+            nitsche -> nitsche_stokes;
+            nitsche_stokes -> nitsche_nonlinear;
+        }
+
+        subgraph cluster_eigen {
+            label="Eigenfunctions";
+            penwidth=0.1;
+            weyl -> yau;
+            yau -> kac;
+        }
+
+        subgraph cluster_viscous {
+            label="Viscous\nfluid flow";
+            penwidth=0.1;
+            stokes -> karman;
+            stokes -> mantle_convection;
+        }
+
+        subgraph cluster_shallow_water {
+            label="Shallow\nwater";
+            penwidth=0.1;
+            shallow_water -> rosenbrock;
+            shallow_water -> overland_flow;
+        }
+
+        conservation_laws -> convection_diffusion;
+        conservation_laws -> shallow_water;
+        stokes -> nitsche_stokes;
+
         calc -> weyl;
         calc -> stokes;
         calc -> nitsche;
@@ -58,20 +91,9 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         // nitsche -> admm;
         // total_variation -> admm;
         // inverse_problems -> langevin;
-        obstacle -> total_variation;
-        weyl -> yau;
-        yau -> kac;
-        nitsche -> nitsche_stokes;
-        nitsche_stokes -> nitsche_nonlinear;
-        conservation_laws -> convection_diffusion;
-        conservation_laws -> shallow_water;
-        shallow_water -> rosenbrock;
-        shallow_water -> overland_flow;
+        // obstacle -> total_variation;
         nitsche -> convection_diffusion;
-        convection_diffusion -> mantle_convection;
-        stokes -> mantle_convection;
         weyl -> plate_theory;
         stokes -> plate_theory;
-        convection_diffusion -> plate_theory;
         // symplectic -> billiards;
     }
