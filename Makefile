@@ -4,16 +4,11 @@
 all: executed-posts plugins/graphviz/graphviz.plugin
 	nikola build
 
-POSTS=$(shell find posts-sources -not -path '*/\.*' -type f -name '*\.ipynb')
-executed-posts: $(patsubst posts-sources/%.ipynb,posts/%.ipynb,$(POSTS))
+POSTS=$(shell find posts-sources -not -path '*/\.*' -type f -name '*\.py')
+executed-posts: $(patsubst posts-sources/%.py,posts/%.ipynb,$(POSTS))
 
-posts/%.ipynb: posts-sources/%.ipynb
-	jupyter nbconvert \
-	    --to ipynb \
-	    --execute \
-	    --ExecutePreprocessor.timeout=24000 \
-	    --output-dir=./posts \
-	    --output=`basename $@` $<
+posts/%.ipynb: posts-sources/%.py
+	jupytext --to ipynb --execute --output $@ $<
 
 plugins/graphviz/graphviz.plugin:
 	nikola plugin --install graphviz
