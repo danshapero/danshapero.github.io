@@ -6,25 +6,26 @@ on:
 
 jobs:
   nikola_build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/firedrakeproject/firedrake-vanilla-default:2025.10.2
+      options: --user root
     name: "Deploy Nikola to GitHub Pages"
     steps:
     - name: Checkout website source
       uses: actions/checkout@v4
-    - name: Activate Firedrake virtual environment
-      run: |
-        . /home/firedrake/firedrake/bin/activate
-        echo PATH=$PATH >> $GITHUB_ENV
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install jupyter nbconvert tqdm networkx gmsh siphash24 pyroltrilinos
-        python -m pip install "Nikola[extras]"
-        python -m ipykernel install --user --name=firedrake
+        apt update && apt install -yq ffmpeg graphviz libglu1-mesa-dev libxft2-dev
+        python3 -m pip install --upgrade pip
+        python3 -m pip install jupyter jupytext tqdm networkx gmsh siphash24 pyroltrilinos
+        python3 -m pip install git+https://github.com/firedrakeproject/Irksome.git
+        python3 -m pip install "Nikola[extras]"
+        python3 -m ipykernel install --user --name=firedrake
     - name: Preparing
       run: |
-        src_branch=$(python -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')
-        dest_branch=$(python -c 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')
+        src_branch=$(python3 -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')
+        dest_branch=$(python3 -c 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')
         git remote add ghpages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" || true
         git fetch ghpages $dest_branch || true
         git checkout -b $dest_branch --track ghpages/$dest_branch || true
