@@ -23,6 +23,7 @@ jobs:
         python3 -m ipykernel install --user --name=firedrake
     - name: Preparing
       run: |
+        git config --global --add safe.directory '*'
         src_branch=$(python3 -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')
         dest_branch=$(python3 -c 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')
         git remote add ghpages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" || true
