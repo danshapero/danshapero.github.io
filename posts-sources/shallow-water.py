@@ -324,13 +324,13 @@ def make_animation(hs, b, timestep, output_freq, **kwargs):
     axes.set_ylim((0.0, Ly))
     axes.set_axis_off()
     η = firedrake.project(hs[0] + b, hs[0].function_space())
-    colors = firedrake.tripcolor(
-        hs[0], num_sample_points=1, axes=axes, **kwargs
-    )
+    kw = {"num_sample_points": 4, "shading": "gouraud"}
+    colors = firedrake.tripcolor(hs[0], **kw, **kwargs, axes=axes)
 
+    fn_plotter = firedrake.FunctionPlotter(mesh, num_sample_points=4)
     def animate(h):
         η.project(h + b)
-        colors.set_array(η.dat.data_ro[:])
+        colors.set_array(fn_plotter(η))
 
     interval = 1e3 * output_freq * timestep
     animation = FuncAnimation(fig, animate, frames=hs, interval=interval)
@@ -453,10 +453,7 @@ hs, qs = run_simulation(solver, final_time, num_steps, output_freq)
 # With the DG(1) basis, the results are much less diffusive than with DG(0), but we're still getting weird artifacts near the bed bump.
 
 # %%
-make_animation(
-    hs, b, timestep, output_freq,
-    shading='gouraud', vmin=0.96, vmax=1.04
-)
+make_animation(hs, b, timestep, output_freq, vmin=0.96, vmax=1.04)
 
 # %% [markdown]
 # While the DG(1) basis gives substantially better results in the eyeball norm than the DG(0) basis, the energy drift has gotten much worse.
