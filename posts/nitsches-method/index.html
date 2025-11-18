@@ -92,7 +92,7 @@ We'll start out with a simple model pro">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=65890c88">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=ba105b76">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="or:-robbing-Peter-to-pay-Paul">or: robbing Peter to pay Paul<a class="anchor-link" href="#or:-robbing-Peter-to-pay-Paul">¶</a>
@@ -122,7 +122,7 @@ For a curved boundary, we can't impose the normal condition directly and that's 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=7e976cbc">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f8a34d64">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-old-fashioned-way">The old-fashioned way<a class="anchor-link" href="#The-old-fashioned-way">¶</a>
@@ -132,7 +132,7 @@ First, we'll use the unit square as our domain, and we'll use basis functions of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f14929b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6fd93bde">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -146,7 +146,7 @@ First, we'll use the unit square as our domain, and we'll use basis functions of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5a2d8e1a">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0edf3e07">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We need to come up with some reasonable right-hand side $f$ and boundary data $g$.
@@ -156,7 +156,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b3140008">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0d1b401d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -182,7 +182,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=26512185">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0b587e05">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -193,7 +193,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=38f5867b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f68f8bbb">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -216,7 +216,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9e3bf454">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f7145dde">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we'll form the action functional $J$ and solve for the minimizer.
@@ -229,7 +229,7 @@ Using direct methods eliminates that possibility.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0ff64dbd">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=19c009a0">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -253,7 +253,7 @@ Using direct methods eliminates that possibility.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=964efab9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=49ddfbb0">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -274,7 +274,7 @@ Using direct methods eliminates that possibility.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ee8e7d30">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ad3420a2">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The function <code>firedrake.solve</code> takes the Dirichlet boundary conditions as an extra argument and makes all the necessary changes to the linear system for us.
@@ -285,7 +285,7 @@ Then we'll use the intuition we've built up on this easy problem to attack harde
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=be5e9a9a">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9526fe32">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-penalty-method">The penalty method<a class="anchor-link" href="#The-penalty-method">¶</a>
@@ -305,7 +305,7 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=cfe20c66">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=74d2a909">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -323,7 +323,7 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=18d00dd5">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5f7a7eb8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -344,14 +344,14 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2ee11468">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ba882bcf">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The errors are largest around the boundary of the domain and the magnitudes are appreciably smaller than the spread of the solution itself.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=bed9e356">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=69f038f8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -374,14 +374,14 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=16606e14">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=994531fa">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For comparison later, we'll calculate the relative difference between the exact solution and the solution obtained from the penalty method:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=5149a169">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b99dec8e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -402,7 +402,7 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0419485f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8eebc427">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>All told this involved very little extra work compared to adding the boundary conditions the traditional way.
@@ -417,7 +417,7 @@ The poor conditioning of the penalized problem makes iterative methods take much
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=4b6c0b7b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=452d07ff">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-Lagrange-multiplier-method">The Lagrange multiplier method<a class="anchor-link" href="#The-Lagrange-multiplier-method">¶</a>
@@ -450,7 +450,7 @@ This is going to be lead us, by of the augmented Lagrangian method, to Nitsche's
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d79423be">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=366e5bb9">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-augmented-Lagrangian-method">The augmented Lagrangian method<a class="anchor-link" href="#The-augmented-Lagrangian-method">¶</a>
@@ -475,7 +475,7 @@ Instead, we'll use the fact that $\lambda$ is equal to the boundary flux in equi
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2701070c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=01b99717">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Nitsche's-method">Nitsche's method<a class="anchor-link" href="#Nitsche's-method">¶</a>
@@ -496,7 +496,7 @@ From there we can prove the norm-equivalence properties that make finite element
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5052c6c3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f1fa788b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="A-first-(failing)-attempt">A first (failing) attempt<a class="anchor-link" href="#A-first-(failing)-attempt">¶</a>
@@ -514,7 +514,7 @@ You could also guess that the last expression is a load of bunk because the phys
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a5dae17f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=bd8ac23a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Inverse-inequalities">Inverse inequalities<a class="anchor-link" href="#Inverse-inequalities">¶</a>
@@ -555,7 +555,7 @@ The important point to note is that $C(d, p, \theta)$ increses to infinity as $\
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=df5e9cd9">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=38d04320">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="The-Peter-Paul-inequality">The Peter-Paul inequality<a class="anchor-link" href="#The-Peter-Paul-inequality">¶</a>
@@ -609,7 +609,7 @@ After that a judicious choice of the penalty parameter $\gamma$ ensures that eve
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=53a203ba">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=37e4dde0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Demonstration">Demonstration<a class="anchor-link" href="#Demonstration">¶</a>
@@ -619,7 +619,7 @@ The only extra factor is determining the shape regularity of each triangle.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3e2c35b8">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a77b7c48">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -652,7 +652,7 @@ The only extra factor is determining the shape regularity of each triangle.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=94f50310">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=04492954">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From here we can easily define the modified variational principle for Nitsche's method.
@@ -660,7 +660,7 @@ We've chosen $\alpha = 1/2$ in this case, in which case the boundary penalty get
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d88aeb81">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=03d0b0ec">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -685,7 +685,7 @@ We've chosen $\alpha = 1/2$ in this case, in which case the boundary penalty get
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=993cdd7d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e51680e8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -706,7 +706,7 @@ We've chosen $\alpha = 1/2$ in this case, in which case the boundary penalty get
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ca37268b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=88986381">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The error is smaller than that of the pure penalty method by a factor of 1000!
@@ -716,7 +716,7 @@ Nitsche's method, by contrast, has the same asymptotic condition number growth a
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0e2a4a25">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bdcf74e4">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -737,7 +737,7 @@ Nitsche's method, by contrast, has the same asymptotic condition number growth a
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a42e198f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a2c781bb">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Having a sharp estimate for the constant in the inverse inequality enabled us to set the penalty parameter without any guesswork or hand-tuning.

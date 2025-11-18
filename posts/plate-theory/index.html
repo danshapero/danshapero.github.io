@@ -93,7 +93,7 @@ Here we'll get around that by usi">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=7fd12fd9">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=6077e4a0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this post we'll look at a fourth-order equation describing the vibrations of clamped plates.
@@ -128,7 +128,7 @@ Get it together folks.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=7f6524bf">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fe02b18d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Plate theory is what you get when you assume the medium is thin along the vertical dimension and that this restricts the form that the displacements can take.
@@ -167,7 +167,7 @@ in a moment.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=23e25788">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=93cc70af">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can't discretize this problem right away using a conventional finite element basis.
@@ -213,7 +213,7 @@ What is especially nice about the HHJ element is that this correction is all we 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=6cb1a230">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=852d712f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Experiments">Experiments<a class="anchor-link" href="#Experiments">¶</a>
@@ -223,7 +223,7 @@ We'll set all the physical constants equal to 1 but you can look these up for th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0cabe4a0">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f4defa37">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -235,7 +235,7 @@ We'll set all the physical constants equal to 1 but you can look these up for th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=9f8a6387">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c8b555e8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -248,7 +248,7 @@ We'll set all the physical constants equal to 1 but you can look these up for th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=04f19d58">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1953a2e9">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The code below creates the dual form of the problem using the formula I wrote down above for the explicit form of the compliance tensor.
@@ -256,7 +256,7 @@ Lord Jesus I hope I did all that algebra correct.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=8b3815c7">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=58d3ddaf">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -277,14 +277,14 @@ Lord Jesus I hope I did all that algebra correct.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0eaf3f75">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=346c4d54">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The right degrees are $p + 1$ for the displacements and $p$ for the moments.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ff131d7e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3b20bec5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -296,7 +296,7 @@ Lord Jesus I hope I did all that algebra correct.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=33b4e82a">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e007dd3f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we'll work on the unit square.
@@ -305,7 +305,7 @@ The eigenfunctions of the biharmonic operator (we'll get to them below) are easi
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6ba1a544">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1a75d207">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -319,7 +319,7 @@ The eigenfunctions of the biharmonic operator (we'll get to them below) are easi
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3109c5c7">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=97eeca67">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -331,7 +331,7 @@ The eigenfunctions of the biharmonic operator (we'll get to them below) are easi
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=e9626e9c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2713f414">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For plate problems, we almost always have some Dirichlet boundary condition
@@ -348,7 +348,7 @@ First, let's see what happens if we only enforce zero displacement at the bounda
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2efade0b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9a563264">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -359,7 +359,7 @@ First, let's see what happens if we only enforce zero displacement at the bounda
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d8badd76">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=395d6699">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -388,7 +388,7 @@ Integrated boundary moment: 0.004669439781744687
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c2cea729">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1ef21085">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So it looks like the clamped boundary condition is natural with HHJ elements.
@@ -396,7 +396,7 @@ We can confirm that by looking at a 3D plot.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=fa9f7b63">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c6f25333">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -418,14 +418,14 @@ We can confirm that by looking at a 3D plot.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=acf667bd">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8b78d571">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's see what happens if we apply a Dirichlet boundary condition to the moment part of the solution.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=bb527fcb">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=df901f15">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -436,7 +436,7 @@ We can confirm that by looking at a 3D plot.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=c744a8c9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e35ecfc2">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -465,14 +465,14 @@ Integrated boundary moment: 0.0
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=aba83a51">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=bc572993">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now the boundary stresses are zero and so the boundary slopes are unconstrained.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=920a5e3a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bb6bc587">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -492,7 +492,7 @@ Integrated boundary moment: 0.0
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=924dd821">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9463f749">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The reason why this works is that the boundary degrees of freedom for the HHJ element are the normal-normal stress components.
@@ -508,7 +508,7 @@ The fact that both types are relatively easy with HHJ is a definite advantage, a
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ce5b4da7">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=77f3afab">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Eigenfunctions">Eigenfunctions<a class="anchor-link" href="#Eigenfunctions">¶</a>
@@ -519,7 +519,7 @@ Here I'll show the first few eigenfunctions in a square with simply-supported bo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=13492203">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8de1f442">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -536,7 +536,7 @@ Here I'll show the first few eigenfunctions in a square with simply-supported bo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5527ec83">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f4f60de1">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Note the $M$ matrix that we supplied above.
@@ -552,7 +552,7 @@ where $M$ is the mass matrix for the displacement block.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=f6cae6d7">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a856c30e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -588,7 +588,7 @@ where $M$ is the mass matrix for the displacement block.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d9e8acd5">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ef575d7b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The plot below shows the nodal lines of the eigenfunctions.
@@ -597,7 +597,7 @@ These are the patterns that so fascinated Chladni and others.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=328797b0">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2136a557">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">

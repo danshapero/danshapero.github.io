@@ -78,7 +78,7 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=103a6b81">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=d78631d8">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the last post, we looked at variational principles by studying the minimal surface equation.
@@ -118,7 +118,7 @@ While the second derivative of the objective is still symmetric, it is no longer
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=107e41c4">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=16291d24">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Demonstration">Demonstration<a class="anchor-link" href="../posts/stokes/#Demonstration">¶</a>
@@ -130,7 +130,7 @@ As we'll see, getting a linear solver to converge for this problem is much more 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=87dca9db">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fcd2fdb6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -198,10 +198,10 @@ Info    : [ 70%] Meshing curve 9 (Circle)
 Info    : [ 80%] Meshing curve 10 (Circle)
 Info    : [ 90%] Meshing curve 11 (Circle)
 Info    : [100%] Meshing curve 12 (Circle)
-Info    : Done meshing 1D (Wall 0.00158253s, CPU 0.001881s)
+Info    : Done meshing 1D (Wall 0.00216965s, CPU 0.001341s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.107142s, CPU 0.103173s)
+Info    : Done meshing 2D (Wall 0.159905s, CPU 0.149469s)
 Info    : 4273 nodes 8557 elements
 Info    : Writing 'mixer.msh'...
 Info    : Done writing 'mixer.msh'
@@ -211,7 +211,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b22674db">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5e7a0fae">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -222,7 +222,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=bcd92e7e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f4d9f8e5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -245,7 +245,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=063b5de3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e277a9ed">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For this problem we'll use the <em>Taylor-Hood</em> element: piecewise linear basis functions for the pressure and piecewise quadratic basis functions for the velocity.
@@ -256,7 +256,7 @@ Firedrake includes a handy algebraic notation for defining the direct product of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=68f9a4dc">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6050874c">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -268,14 +268,14 @@ Firedrake includes a handy algebraic notation for defining the direct product of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=78fc7d09">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=11679697">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can access the components of a function that lives in this product space using the usual Python indexing operators, but it's more convenient to use the function <code>firedrake.split</code> to give us handles for the two components.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=51b43f97">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ecf5a71e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -286,7 +286,7 @@ Firedrake includes a handy algebraic notation for defining the direct product of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9e1a6fee">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=527d9781">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This way our code to define the objective functional looks as much like the math as possible, rather than have to constantly reference the components.</p>
@@ -295,7 +295,7 @@ Since the diameter of the domain and the fluid velocity are both on the order of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=910767da">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8099d32f">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -310,7 +310,7 @@ Since the diameter of the domain and the fluid velocity are both on the order of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=54f5d765">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a27e39ba">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One of the extra challenging factors about the Stokes equations is that they have a non-trivial null space.
@@ -327,7 +327,7 @@ If we add a constant factor $p_0$ to the pressure, then the value of the objecti
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=4b3d9f55">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=710f8752">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -339,7 +339,7 @@ If we add a constant factor $p_0$ to the pressure, then the value of the objecti
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=74a6a606">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e4aff4da">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next we have to create the boundary conditions.
@@ -347,7 +347,7 @@ The only extra work we have to do here is to get the right component of the mixe
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6655c7a4">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=401c9449">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -374,14 +374,14 @@ The only extra work we have to do here is to get the right component of the mixe
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0db4668d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fe3f1a61">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's see what happens if we invoke the default linear solver.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=219cb8b5">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a43dcffd">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -400,7 +400,7 @@ The only extra work we have to do here is to get the right component of the mixe
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ae1a98bd">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=13e10f4e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We'll take the easy way out and use the sparse direct solver <a href="http://mumps-solver.org/">MUMPS</a> to make sure we get an answer.
@@ -415,7 +415,7 @@ The option <code>'pc_factor_mat_solver_type': 'mumps'</code> will use the MUMPS 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0079e991">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fced57a2">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -435,14 +435,14 @@ The option <code>'pc_factor_mat_solver_type': 'mumps'</code> will use the MUMPS 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2129d620">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d8541462">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Some cool features you can observe in the stream plot are the saddle point at the center of the domain and the two counter-rotating vortices that form on either side of it.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ccc32a6e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0bf6461d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -467,7 +467,7 @@ The option <code>'pc_factor_mat_solver_type': 'mumps'</code> will use the MUMPS 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=511c5d4d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2d2958fa">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The velocity field should be close to divergence-free; if we project the divergence into a DG(2) we can see what the exact value is.
@@ -476,7 +476,7 @@ Part of the problem is that the boundary conditions we've specified are exactly 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=4c79e061">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9c85a330">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -487,7 +487,7 @@ Part of the problem is that the boundary conditions we've specified are exactly 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b374e6cf">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8f3d3bf8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -511,7 +511,7 @@ Part of the problem is that the boundary conditions we've specified are exactly 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=b69f7f42">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=26959289">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For now we'll calculate and store the norm of the velocity diverence.
@@ -519,7 +519,7 @@ When we try to improve on this we'll use this value as a baseline.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ac1d75a6">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3277963d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -540,7 +540,7 @@ When we try to improve on this we'll use this value as a baseline.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2cf7d98c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=cfec2b1f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Higher-order-geometries">Higher-order geometries<a class="anchor-link" href="../posts/stokes/#Higher-order-geometries">¶</a>
@@ -561,7 +561,7 @@ We need to know the numbering of the various boundary segments in order to do th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=514cabb1">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7a30011a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -583,7 +583,7 @@ We need to know the numbering of the various boundary segments in order to do th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c66f952a">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=cb2dc31e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The outer curve is boundary 1, the upper mixer head is boundary 2, and the lower head is boundary 3.
@@ -591,7 +591,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=408b267f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=da2ee43a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -601,7 +601,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=f53852d9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d0f9d1ba">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -624,14 +624,14 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=817a7d4e">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4f6c9b3c">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Just as a sanity check, we'll calculate the average deviation of the new from the old coordinate field to see how different they are.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=5f3afd24">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2130edb6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -652,14 +652,14 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a34bf978">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e5a279ae">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we can solve the Stokes equations again on this new mesh using the exact same procedures as before.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=9c9b1f93">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8af0e3f4">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -709,7 +709,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6c75b6f2">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3839eee6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -720,7 +720,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d9f53e60">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7482a2ea">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The ring of spurious divergences around the outer edge of the domain is substantially reduced with curved elements.
@@ -728,7 +728,7 @@ Nonetheless, the boundary doesn't perfectly fit the circle and this imperfection
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d9377e49">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=420851ec">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -750,14 +750,14 @@ Nonetheless, the boundary doesn't perfectly fit the circle and this imperfection
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=aa505bb2">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=27fbdeff">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Using a higher-order geometry reduced the norm of the velocity divergence almost by a factor of 4, which is a big improvement.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=59f7c980">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=aa8fc4d3">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -778,7 +778,7 @@ Nonetheless, the boundary doesn't perfectly fit the circle and this imperfection
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a6381d8b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=53d9566a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Conclusion">Conclusion<a class="anchor-link" href="../posts/stokes/#Conclusion">¶</a>
@@ -807,7 +807,7 @@ The logical endpoint of this line of thinking is <a href="https://en.wikipedia.o
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=d957b6d0">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=93215247">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this post, we'll look at the <em>obstacle problem</em>.
@@ -856,7 +856,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0ef83808">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=62457b7e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Demonstration">Demonstration<a class="anchor-link" href="../posts/obstacle-problem/#Demonstration">¶</a>
@@ -865,7 +865,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=94cd49e0">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=74f43714">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -878,7 +878,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=11978dc5">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e91bb12d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -896,7 +896,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7669f76d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=82203cd7">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -919,14 +919,14 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d82c1c9e">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1965c5bf">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next we'll make a few utility procedures to create the Moreau envelope of the objective functional and to calculate a search direction from a given starting guess.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ee6ce8e8">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=31af4c94">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -941,7 +941,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=012d5e8b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=68a1f44b">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -958,14 +958,14 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=db356f1b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ccfa1b75">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's start from a zero initial guess and see what the first search direction will be.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7aa0b212">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f5cb4c26">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -980,7 +980,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=24620c85">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=66c77b10">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1001,14 +1001,14 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=1c139541">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=78ffb3d9">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To make sure that a Newton-type method will converge, we'll need a routine to perform a 1D minimization along the search direction.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=4287a1b0">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2f5a67af">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1029,7 +1029,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=dae66f56">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bc288ac3">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1050,14 +1050,14 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=e5ffe7bd">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4d86ed6d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>With these steps out of the way we can define a Newton search procedure and calculate a solution for our initial, rough guess of $\gamma$.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=db18c289">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=54622680">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1080,7 +1080,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d460a29d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ccd789e2">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1090,7 +1090,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3c1400a8">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bd08ff07">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1111,14 +1111,14 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=166c86e8">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=62232b2d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The solution we obtain doesn't do a good job of staying above the obstacle because we haven't used a sufficiently small value of $\gamma$.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b8364f33">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=eeb1462f">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1139,7 +1139,7 @@ In those cases, another approach like the logarithmic barrier method might be mo
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=44fe2915">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0f72a7f2">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Instead, we can use the solution obtained for one value of $\gamma$ to initialize a search for the solution with $\gamma / 2$ and iterate.
@@ -1148,7 +1148,7 @@ The numerical continuation approach can still give a reasonable answer even for 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=738e2f90">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4ba65813">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1167,14 +1167,14 @@ The numerical continuation approach can still give a reasonable answer even for 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=bbe3af29">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0ace3595">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We'll choose a number of steps so that the final value of $\gamma$ is roughly proportional to the mesh spacing.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3cfff44b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b4457875">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1198,14 +1198,14 @@ The numerical continuation approach can still give a reasonable answer even for 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=904fec06">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7716e49e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally, I'll plot a cross section of the solution and the constraint $g$ so that you can see where the two coincide.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7a73e52b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=492f2176">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1244,7 +1244,7 @@ The numerical continuation approach can still give a reasonable answer even for 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=aec0eecf">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=99024ff0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Refinement">Refinement<a class="anchor-link" href="../posts/obstacle-problem/#Refinement">¶</a>
@@ -1257,7 +1257,7 @@ We can do this easily using the <code>MeshHierarchy</code> function in Firedrake
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=4767872e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=73d45af0">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1304,7 +1304,7 @@ We can do this easily using the <code>MeshHierarchy</code> function in Firedrake
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=364b73c7">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e2f4b16e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If we plot the volume of the region where $u$ is less than $g$, it decreases roughly by a factor of four on every mesh refinement.
@@ -1313,7 +1313,7 @@ Doing a more thorough convergence study would require more computational power, 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=aa0f8105">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=965087a8">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Discussion">Discussion<a class="anchor-link" href="../posts/obstacle-problem/#Discussion">¶</a>
@@ -1338,7 +1338,7 @@ In order to implement other approaches, like the active set method, we would hav
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=bf79ff9e">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=c025af1f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this post I'll look at a classic example of a convex variational problem: computing <a href="https://en.wikipedia.org/wiki/Minimal_surface"><em>minimal surfaces</em></a>.
@@ -1371,7 +1371,7 @@ Having done all this by hand for several years I can tell you this is a big impr
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ea05f030">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1e657dd5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1381,14 +1381,14 @@ Having done all this by hand for several years I can tell you this is a big impr
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=f4dfe807">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1ac4027f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To keep things simple, we'll use the unit square as our spatial domain, and we'll use piecewise quadratic finite elements.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=8f5214c2">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cb44bdff">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1399,7 +1399,7 @@ Having done all this by hand for several years I can tell you this is a big impr
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=90af5d61">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d9fcdeb0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I'll use a test case from some <a href="http://www-users.math.umn.edu/~arnold/8445-8446.17-18/">course notes</a> from a class that Douglas Arnold teaches on finite element methods.
@@ -1411,7 +1411,7 @@ I want to instead look at the more nonlinear case of $a &gt; 1$, which will stre
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2ff251cf">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=90c53487">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1426,14 +1426,14 @@ I want to instead look at the more nonlinear case of $a &gt; 1$, which will stre
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a6e3afe6">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=63df9fde">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A picture is worth a thousand words of course.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=cc22a51e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=005583ed">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1456,7 +1456,7 @@ I want to instead look at the more nonlinear case of $a &gt; 1$, which will stre
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0ed22895">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7ac08935">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we'll create the proposed solution $u$, define the objective functional, and try to find the minimizer naively using Firedrake's built-in solver.
@@ -1464,7 +1464,7 @@ With the value for $a$ that I chose, the solver won't converge using its default
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=c5442a56">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=42d3994e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1500,14 +1500,14 @@ With the value for $a$ that I chose, the solver won't converge using its default
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2865b76e">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9feb1795">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We could tweak these settings to make the solver converge, but instead let's try and dive deeper into what does and doesn't make for a good nonlinear solver.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=f4bded7c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6f84c476">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Picard's-method">Picard's method<a class="anchor-link" href="../posts/variational-calculus/#Picard's-method">¶</a>
@@ -1523,7 +1523,7 @@ Let's see how fast this decreases the area.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f46904f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7a274ce7">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1546,14 +1546,14 @@ Let's see how fast this decreases the area.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=70f52774">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d3745787">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The method converges in the eyeball norm in about 6 iterations.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=51092b79">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=be1d1832">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1582,7 +1582,7 @@ Let's see how fast this decreases the area.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8d170eb7">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d243a993">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This looks pretty good -- the iterates converge very rapidly to the minimizer.
@@ -1591,7 +1591,7 @@ Picard's method relies on the problem having special structure, which is true of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=bbc08714">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=53f9c946">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Newton's-method-(take-1)">Newton's method (take 1)<a class="anchor-link" href="../posts/variational-calculus/#Newton's-method-(take-1)">¶</a>
@@ -1610,7 +1610,7 @@ It isn't quite so clear how to select the right linear operator for Picard's met
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=5696ea45">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9d9abb02">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1655,7 +1655,7 @@ It isn't quite so clear how to select the right linear operator for Picard's met
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=f5793a99">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=416728f4">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Doesn't bode very well does it?
@@ -1663,7 +1663,7 @@ Let's see what the objective functional did before exploding:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b59858c2">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1a524641">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1683,7 +1683,7 @@ Let's see what the objective functional did before exploding:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=63dd4d11">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f0eaa6e9">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Not a lot to save from the wreckage here -- the objective functional was increasing, which is just the opposite of what we want.
@@ -1694,7 +1694,7 @@ The example from Doug Arnold's course notes used a much smaller amplitude $a$ in
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9188c8a2">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4c0ff3df">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Newton's-method-(take-2)">Newton's method (take 2)<a class="anchor-link" href="../posts/variational-calculus/#Newton's-method-(take-2)">¶</a>
@@ -1720,7 +1720,7 @@ We can use standard packages like scipy to do the 1D minimization, as I'll show 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=389347f7">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b5a70a62">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1763,14 +1763,14 @@ We can use standard packages like scipy to do the 1D minimization, as I'll show 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=bd998466">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=040d1fd4">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The same convergence plot as above for Newton's method paints a very different picture.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6e1898a6">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4e65795d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1799,7 +1799,7 @@ We can use standard packages like scipy to do the 1D minimization, as I'll show 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=7ceba553">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c5b4accd">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The algorithm starts converges linearly just like the Picard method does.
@@ -1808,7 +1808,7 @@ By this point, the algorithm has entered the quadratic convergence basin and the
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=20eecf42">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8f571f29">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1830,7 +1830,7 @@ By this point, the algorithm has entered the quadratic convergence basin and the
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=4a49ae61">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a8adc8b0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Another revealing way to look at this is to examine the <em>Newton decrement</em>.
@@ -1848,7 +1848,7 @@ An informal way of describing the Newton decrement is that it gives an upper bou
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=78d1d73c">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a838decb">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1870,7 +1870,7 @@ An informal way of describing the Newton decrement is that it gives an upper bou
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=06b149c8">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b15d4528">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>During the first few iterations while the method is iterating towards the quadratic convergence basin, the Newton decrement is less than half of the actual decrease.
@@ -1883,7 +1883,7 @@ Here we'll plot the ratio of the Newton decrement to the value of the objective 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=f83f9350">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b3a8dc1a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1907,7 +1907,7 @@ Here we'll plot the ratio of the Newton decrement to the value of the objective 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=be7ee2d5">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=43ba60a7">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A sensible stopping criterion is that $\Delta_k &lt; \epsilon \cdot J(u_k)$ where the tolerance $\epsilon$ is about $10^{-6}$.
@@ -1919,7 +1919,7 @@ For more general problems it would then be incumbent on you as the modeler to kn
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0df775c8">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bdaf127a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -1952,7 +1952,7 @@ For more general problems it would then be incumbent on you as the modeler to kn
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=c82a15e5">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=3879a00b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In a previous post, we gave a numerical demonstration of the <em>Weyl asymptotic law</em>, which relates the eigenvalues of the Laplace operator on a domain to its area and perimeter.
@@ -1966,7 +1966,7 @@ Here we'll study this problem numerically.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=dec612da">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=934473a9">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Geometry">Geometry<a class="anchor-link" href="../posts/kac-conjecture/#Geometry">¶</a>
@@ -1976,7 +1976,7 @@ I got the coordinates for the polygon vertices by looking at <a href="https://en
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7fb07752">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=63903ead">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2003,14 +2003,14 @@ I got the coordinates for the polygon vertices by looking at <a href="https://en
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c57e8162">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9119981a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To solve PDEs on these shapes, we'll first generate outlines using the package <a href="../posts/kac-conjecture/">pygmsh</a> and save it to a .geo file.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a8497054">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fe6bdfd8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2038,7 +2038,7 @@ I got the coordinates for the polygon vertices by looking at <a href="https://en
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=8677a02d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a3c45671">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2061,10 +2061,10 @@ Info    : [ 60%] Meshing curve 5 (Line)
 Info    : [ 70%] Meshing curve 6 (Line)
 Info    : [ 80%] Meshing curve 7 (Line)
 Info    : [ 90%] Meshing curve 8 (Line)
-Info    : Done meshing 1D (Wall 0.000594626s, CPU 0.000564s)
+Info    : Done meshing 1D (Wall 0.000577645s, CPU 0.000474s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.00281492s, CPU 0.00326s)
+Info    : Done meshing 2D (Wall 0.00293616s, CPU 0.003103s)
 Info    : 96 nodes 198 elements
 Info    : Writing 'drum1.msh'...
 Info    : Done writing 'drum1.msh'
@@ -2077,10 +2077,10 @@ Info    : [ 60%] Meshing curve 5 (Line)
 Info    : [ 70%] Meshing curve 6 (Line)
 Info    : [ 80%] Meshing curve 7 (Line)
 Info    : [ 90%] Meshing curve 8 (Line)
-Info    : Done meshing 1D (Wall 0.000708278s, CPU 0.00063s)
+Info    : Done meshing 1D (Wall 0.00111541s, CPU 0s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.0028348s, CPU 0.002694s)
+Info    : Done meshing 2D (Wall 0.00251371s, CPU 0.002505s)
 Info    : 100 nodes 206 elements
 Info    : Writing 'drum2.msh'...
 Info    : Done writing 'drum2.msh'
@@ -2090,14 +2090,14 @@ Info    : Done writing 'drum2.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=4c671dd6">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b634ae77">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally we'll read in the meshes using Firedrake and refine them.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=833d8480">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f320d6f3">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2114,7 +2114,7 @@ Info    : Done writing 'drum2.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=757d21dc">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=942b2b9f">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2140,7 +2140,7 @@ Info    : Done writing 'drum2.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=81c05593">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=52dfd7a2">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Solving-the-eigenproblem">Solving the eigenproblem<a class="anchor-link" href="../posts/kac-conjecture/#Solving-the-eigenproblem">¶</a>
@@ -2151,7 +2151,7 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=678eaafb">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c2b4462a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2192,14 +2192,14 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=1cea32a3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=06d92098">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As we expect, the eigenvaue distribution of the two domains is practically the same in the eyeball norm.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=68101b10">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4c8c5dac">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2223,14 +2223,14 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2eeddd65">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=92280356">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To be more precise, the relative difference in the first 200 eigenvalues is below a 0.1%.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=194ab50d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ea4a3274">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2250,7 +2250,7 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ad2be1c7">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=66854b51">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Discussion">Discussion<a class="anchor-link" href="../posts/kac-conjecture/#Discussion">¶</a>
@@ -2277,7 +2277,7 @@ But if it's possible to infer things about potentials from energy levels -- esse
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=afb134c2">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=8928d727">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the last post we looked at the distribution of eigenvalues of the Laplace operator; this time we'll look at eigenfunctions.
@@ -2298,7 +2298,7 @@ For smooth manifolds, Logunov announced a <a href="https://arxiv.org/abs/1605.02
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1c3e4306">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c410dc85">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2378,10 +2378,10 @@ Info    : [ 80%] Meshing curve 13 (Circle)
 Info    : [ 90%] Meshing curve 14 (Circle)
 Info    : [ 90%] Meshing curve 15 (Circle)
 Info    : [100%] Meshing curve 16 (Circle)
-Info    : Done meshing 1D (Wall 0.0159375s, CPU 0.012522s)
+Info    : Done meshing 1D (Wall 0.0138744s, CPU 0.013049s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.0813127s, CPU 0.067868s)
+Info    : Done meshing 2D (Wall 0.0728915s, CPU 0.070396s)
 Info    : 2171 nodes 4358 elements
 Info    : Writing 'ellipse.msh'...
 Info    : Done writing 'ellipse.msh'
@@ -2391,7 +2391,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a9978e91">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fdb9c703">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2402,7 +2402,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1242acaf">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8b343ea6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2425,7 +2425,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a8f8817a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e4e17081">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2446,14 +2446,14 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=b9d928ab">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=eec7ed07">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Setting up the eigensolver is the same as before.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=430d82f0">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9e594658">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2489,7 +2489,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c37983eb">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=005bd58d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we need to use a bit of trickery to calculate the area of the zero contours:</p>
@@ -2507,7 +2507,7 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2663d501">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cf97751d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2527,7 +2527,7 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=de73dc3d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9754d771">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2538,14 +2538,14 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=daf697d2">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=bf221be2">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The plot of the wavenumber against the lengths of the nodal sets looks pretty close to linear in the eyeball norm!</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=91348d87">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=dbb54436">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2570,9 +2570,9 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 &lt;&gt;:9: SyntaxWarning: invalid escape sequence '\{'
 &lt;&gt;:8: SyntaxWarning: invalid escape sequence '\l'
 &lt;&gt;:9: SyntaxWarning: invalid escape sequence '\{'
-/tmp/ipykernel_3791/398678759.py:8: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_3794/398678759.py:8: SyntaxWarning: invalid escape sequence '\l'
   axes.set_xlabel('$\lambda$')
-/tmp/ipykernel_3791/398678759.py:9: SyntaxWarning: invalid escape sequence '\{'
+/tmp/ipykernel_3794/398678759.py:9: SyntaxWarning: invalid escape sequence '\{'
   axes.set_ylabel('area($\{\phi_\lambda = 0\}$)');
 </pre>
 </div>
@@ -2585,7 +2585,7 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0d6d1d05">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=da26533b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I made a bit of a wild guess here for what the lower bound $c$ is.
@@ -2608,7 +2608,7 @@ It would be a fun experiment to see how well this holds up for other domains or 
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=f6b40f19">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=b54bcdfc">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the past two posts, we showed how to use Nitsche's method for the Poisson equation and for the Stokes equations.
@@ -2628,7 +2628,7 @@ For other values of $p$ the Euler-Lagrange equations are nonlinear.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=aafaab19">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f47f4c85">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-Lagrange-multiplier">The Lagrange multiplier<a class="anchor-link" href="../posts/nitsches-method-nonlinear/#The-Lagrange-multiplier">¶</a>
@@ -2642,7 +2642,7 @@ The Lagrangian is</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=b9d289f7">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d168b013">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-Nitsche-functional">The Nitsche functional<a class="anchor-link" href="../posts/nitsches-method-nonlinear/#The-Nitsche-functional">¶</a>
@@ -2673,7 +2673,7 @@ You can also view this penalty as an approximation to the <a href="https://en.wi
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=1aea2dc4">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=45156df1">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-inverse-inequality">The inverse inequality<a class="anchor-link" href="../posts/nitsches-method-nonlinear/#The-inverse-inequality">¶</a>
@@ -2697,7 +2697,7 @@ There might be some elegant way to work out the sub-critical case too.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=1cd53754">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4948176e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Convexity">Convexity<a class="anchor-link" href="../posts/nitsches-method-nonlinear/#Convexity">¶</a>
@@ -2718,7 +2718,7 @@ If we wanted to instead calculate the second derivative and show that it's posit
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=6e400d5b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6f3f21a8">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Experiment">Experiment<a class="anchor-link" href="../posts/nitsches-method-nonlinear/#Experiment">¶</a>
@@ -2734,7 +2734,7 @@ I've chosen the number of modes and coefficient decay rate to give interesting-l
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0eacb444">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=768729bf">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2764,7 +2764,7 @@ I've chosen the number of modes and coefficient decay rate to give interesting-l
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=282e9e40">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=10ca81ba">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2775,7 +2775,7 @@ I've chosen the number of modes and coefficient decay rate to give interesting-l
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1684ac99">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fe05f07f">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2791,20 +2791,20 @@ I've chosen the number of modes and coefficient decay rate to give interesting-l
 <div class="output">
 <div class="output_area">
 <div class="output_png output_subarea">
-<img alt="No description has been provided for this image" src="data:image/png;base64,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">
+<img alt="No description has been provided for this image" src="data:image/png;base64,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">
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=16f5ebbf">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fe0c0947">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next I'll make a random field for $u$, create the action functional for the power-law Laplace equation, and create the right boundary terms for the Nitsche functional.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e1ff90e2">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=eb3907db">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2821,7 +2821,7 @@ I've chosen the number of modes and coefficient decay rate to give interesting-l
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=327a6f2e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6ad4e5db">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2837,14 +2837,14 @@ I've chosen the number of modes and coefficient decay rate to give interesting-l
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9f24aa4b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=23314e3b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally we have to calculate a good value for $\gamma$ using the Warburton-Hesthaven bound in the inverse inequality and the calculated minimum angle of the mesh.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a949f776">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=32acd922">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2867,7 +2867,7 @@ I've chosen the number of modes and coefficient decay rate to give interesting-l
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2160d879">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=eb20fdda">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can now put everything together to make the Nitsche functional.
@@ -2875,7 +2875,7 @@ Then we can compute the second derivatives of these functional around $u$ symbol
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=98de95f3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4e2b99dc">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2893,7 +2893,7 @@ Then we can compute the second derivatives of these functional around $u$ symbol
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9ebe7ba3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d647caca">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally we'll solve an eigenproblem using SLEPc.
@@ -2902,7 +2902,7 @@ I'm using GMRES as a Krylov subspace solve rather than conjugate gradients becau
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=22ebddfa">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e0afd1c6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2929,7 +2929,7 @@ I'm using GMRES as a Krylov subspace solve rather than conjugate gradients becau
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=61f433a4">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4f3c1be8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2950,7 +2950,7 @@ I'm using GMRES as a Krylov subspace solve rather than conjugate gradients becau
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7e80f9c9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b6372b4f">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2961,14 +2961,14 @@ I'm using GMRES as a Krylov subspace solve rather than conjugate gradients becau
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d3b54aef">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=506e0a33">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And the moment of truth:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=da5427b9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7713373a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -2981,14 +2981,14 @@ I'm using GMRES as a Krylov subspace solve rather than conjugate gradients becau
 <div class="output">
 <div class="output_area">
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>43.016594278823234
+<pre>57.839573569337304
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8e968050">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=284b875c">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>which is well and truly positive!
@@ -3010,7 +3010,7 @@ I still need a proof that my proposed value of the penalty parameter is good eno
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=003a4694">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=8b11fd78">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In a previous post, we saw how to enforce Dirichlet boundary conditions for the Poisson equation using Nitsche's method instead of the usual elimination-based approach.
@@ -3036,7 +3036,7 @@ Here we'll use all of this knowledge to see how we can solve the Stokes equation
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=83de8417">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=393ce7d8">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Friction-boundary-conditions">Friction boundary conditions<a class="anchor-link" href="../posts/nitsches-method-stokes/#Friction-boundary-conditions">¶</a>
@@ -3073,7 +3073,7 @@ For the following, we'll choose the friction coefficient so that this ratio is a
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2384827e">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=52d2d649">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-Lagrange-multiplier">The Lagrange multiplier<a class="anchor-link" href="../posts/nitsches-method-stokes/#The-Lagrange-multiplier">¶</a>
@@ -3109,7 +3109,7 @@ As expected, we recover the friction boundary condition</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=58345560">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4ae44510">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Nitsche's-method">Nitsche's method<a class="anchor-link" href="../posts/nitsches-method-stokes/#Nitsche's-method">¶</a>
@@ -3127,7 +3127,7 @@ This argument gives</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8cb4f9c0">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c4dbf269">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Geometry">Geometry<a class="anchor-link" href="../posts/nitsches-method-stokes/#Geometry">¶</a>
@@ -3136,7 +3136,7 @@ This argument gives</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=879d7347">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a0dc7408">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3204,10 +3204,10 @@ Info    : [ 70%] Meshing curve 9 (Circle)
 Info    : [ 80%] Meshing curve 10 (Circle)
 Info    : [ 90%] Meshing curve 11 (Circle)
 Info    : [100%] Meshing curve 12 (Circle)
-Info    : Done meshing 1D (Wall 0.00132179s, CPU 0.001266s)
+Info    : Done meshing 1D (Wall 0.00191537s, CPU 0.001898s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.158263s, CPU 0.146173s)
+Info    : Done meshing 2D (Wall 0.177388s, CPU 0.155062s)
 Info    : 4273 nodes 8557 elements
 Info    : Writing 'mixer.msh'...
 Info    : Done writing 'mixer.msh'
@@ -3217,7 +3217,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=f41d031d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=290c3587">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3228,14 +3228,14 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=bf7a4b90">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=89b1842e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We have to do a bit of extra work to calculate the minimum angle of a mesh cell.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e2fe67fa">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f508af20">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3265,14 +3265,14 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=93450096">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a3b92e64">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Just like in the previous example, we'll set the velocity on the outer boundary to be 0, while the inner two circles are rotating with a fixed speed of 1.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=30099f44">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=233e9639">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3297,7 +3297,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8bf8cc6d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e7da9abf">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Solution">Solution<a class="anchor-link" href="../posts/nitsches-method-stokes/#Solution">¶</a>
@@ -3307,7 +3307,7 @@ We'll use the same function spaces, viscosity, and solver parameters.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0418df9f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=99a78ab1">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3319,14 +3319,14 @@ We'll use the same function spaces, viscosity, and solver parameters.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ddfa4c1f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9042a2e3">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Knowing the minimum angle of the mesh, the spatial dimension, and the polynomial degree for the velocity space, we can calculate the penalty parameter for Nitsche's method with no manual tuning at all.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=28a8700c">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3f4d603e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3337,7 +3337,7 @@ We'll use the same function spaces, viscosity, and solver parameters.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=68d782d6">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3fb4ecec">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And here we'll set the physical parameters for the problem.
@@ -3346,7 +3346,7 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=65dabbf3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=19657d9a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3369,14 +3369,14 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8d32a3f0">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=54ee55fc">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The objective functional has more parts than before, so to make the algebra more tractable we'll make separate variables for each summand.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3fbaadb3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=534160ce">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3402,14 +3402,14 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0036af76">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ff0e41e7">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The solver parameters specify a direct factorization with MUMPS, which works well for 2D problems but less so for large 3D ones.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6483e0ac">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7aa9038b">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3435,7 +3435,7 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d7953e0c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b962fbea">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally we can plot the results.
@@ -3445,7 +3445,7 @@ It would be a fun exercise in bifurcation theory to see at what exact value of $
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=dc4ae696">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cf9cdff5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3470,14 +3470,14 @@ It would be a fun exercise in bifurcation theory to see at what exact value of $
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=92e9ed37">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5cb2352c">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As another experiment, you can re-run this notebook but reverse the direction of one of the mixer heads, which will remove the fixed point at the origin but will create two more on either side of it.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8792adbd">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7015fc4d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Conclusion">Conclusion<a class="anchor-link" href="../posts/nitsches-method-stokes/#Conclusion">¶</a>
@@ -3501,7 +3501,7 @@ In the next post, I'll try to apply Nitsche's method to nonlinear elliptic PDE, 
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=65890c88">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=ba105b76">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="or:-robbing-Peter-to-pay-Paul">or: robbing Peter to pay Paul<a class="anchor-link" href="../posts/nitsches-method/#or:-robbing-Peter-to-pay-Paul">¶</a>
@@ -3531,7 +3531,7 @@ For a curved boundary, we can't impose the normal condition directly and that's 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=7e976cbc">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f8a34d64">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-old-fashioned-way">The old-fashioned way<a class="anchor-link" href="../posts/nitsches-method/#The-old-fashioned-way">¶</a>
@@ -3541,7 +3541,7 @@ First, we'll use the unit square as our domain, and we'll use basis functions of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f14929b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6fd93bde">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3555,7 +3555,7 @@ First, we'll use the unit square as our domain, and we'll use basis functions of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5a2d8e1a">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0edf3e07">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We need to come up with some reasonable right-hand side $f$ and boundary data $g$.
@@ -3565,7 +3565,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b3140008">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0d1b401d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3591,7 +3591,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=26512185">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0b587e05">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3602,7 +3602,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=38f5867b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f68f8bbb">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3625,7 +3625,7 @@ In order to guarantee that we can reproduce the results later if need be, we'll 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9e3bf454">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f7145dde">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we'll form the action functional $J$ and solve for the minimizer.
@@ -3638,7 +3638,7 @@ Using direct methods eliminates that possibility.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0ff64dbd">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=19c009a0">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3662,7 +3662,7 @@ Using direct methods eliminates that possibility.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=964efab9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=49ddfbb0">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3683,7 +3683,7 @@ Using direct methods eliminates that possibility.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ee8e7d30">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ad3420a2">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The function <code>firedrake.solve</code> takes the Dirichlet boundary conditions as an extra argument and makes all the necessary changes to the linear system for us.
@@ -3694,7 +3694,7 @@ Then we'll use the intuition we've built up on this easy problem to attack harde
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=be5e9a9a">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9526fe32">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-penalty-method">The penalty method<a class="anchor-link" href="../posts/nitsches-method/#The-penalty-method">¶</a>
@@ -3714,7 +3714,7 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=cfe20c66">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=74d2a909">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3732,7 +3732,7 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=18d00dd5">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5f7a7eb8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3753,14 +3753,14 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2ee11468">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ba882bcf">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The errors are largest around the boundary of the domain and the magnitudes are appreciably smaller than the spread of the solution itself.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=bed9e356">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=69f038f8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3783,14 +3783,14 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=16606e14">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=994531fa">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For comparison later, we'll calculate the relative difference between the exact solution and the solution obtained from the penalty method:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=5149a169">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b99dec8e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -3811,7 +3811,7 @@ In our case we'll use</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0419485f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8eebc427">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>All told this involved very little extra work compared to adding the boundary conditions the traditional way.
@@ -3826,7 +3826,7 @@ The poor conditioning of the penalized problem makes iterative methods take much
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=4b6c0b7b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=452d07ff">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-Lagrange-multiplier-method">The Lagrange multiplier method<a class="anchor-link" href="../posts/nitsches-method/#The-Lagrange-multiplier-method">¶</a>
@@ -3859,7 +3859,7 @@ This is going to be lead us, by of the augmented Lagrangian method, to Nitsche's
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d79423be">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=366e5bb9">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-augmented-Lagrangian-method">The augmented Lagrangian method<a class="anchor-link" href="../posts/nitsches-method/#The-augmented-Lagrangian-method">¶</a>
@@ -3884,7 +3884,7 @@ Instead, we'll use the fact that $\lambda$ is equal to the boundary flux in equi
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2701070c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=01b99717">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Nitsche's-method">Nitsche's method<a class="anchor-link" href="../posts/nitsches-method/#Nitsche's-method">¶</a>
@@ -3905,7 +3905,7 @@ From there we can prove the norm-equivalence properties that make finite element
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5052c6c3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f1fa788b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="A-first-(failing)-attempt">A first (failing) attempt<a class="anchor-link" href="../posts/nitsches-method/#A-first-(failing)-attempt">¶</a>
@@ -3923,7 +3923,7 @@ You could also guess that the last expression is a load of bunk because the phys
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a5dae17f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=bd8ac23a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Inverse-inequalities">Inverse inequalities<a class="anchor-link" href="../posts/nitsches-method/#Inverse-inequalities">¶</a>
@@ -3964,7 +3964,7 @@ The important point to note is that $C(d, p, \theta)$ increses to infinity as $\
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=df5e9cd9">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=38d04320">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="The-Peter-Paul-inequality">The Peter-Paul inequality<a class="anchor-link" href="../posts/nitsches-method/#The-Peter-Paul-inequality">¶</a>
@@ -4018,7 +4018,7 @@ After that a judicious choice of the penalty parameter $\gamma$ ensures that eve
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=53a203ba">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=37e4dde0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Demonstration">Demonstration<a class="anchor-link" href="../posts/nitsches-method/#Demonstration">¶</a>
@@ -4028,7 +4028,7 @@ The only extra factor is determining the shape regularity of each triangle.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3e2c35b8">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a77b7c48">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4061,7 +4061,7 @@ The only extra factor is determining the shape regularity of each triangle.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=94f50310">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=04492954">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From here we can easily define the modified variational principle for Nitsche's method.
@@ -4069,7 +4069,7 @@ We've chosen $\alpha = 1/2$ in this case, in which case the boundary penalty get
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d88aeb81">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=03d0b0ec">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4094,7 +4094,7 @@ We've chosen $\alpha = 1/2$ in this case, in which case the boundary penalty get
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=993cdd7d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e51680e8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4115,7 +4115,7 @@ We've chosen $\alpha = 1/2$ in this case, in which case the boundary penalty get
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ca37268b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=88986381">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The error is smaller than that of the pure penalty method by a factor of 1000!
@@ -4125,7 +4125,7 @@ Nitsche's method, by contrast, has the same asymptotic condition number growth a
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0e2a4a25">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bdcf74e4">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4146,7 +4146,7 @@ Nitsche's method, by contrast, has the same asymptotic condition number growth a
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a42e198f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a2c781bb">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Having a sharp estimate for the constant in the inverse inequality enabled us to set the penalty parameter without any guesswork or hand-tuning.
@@ -4167,7 +4167,7 @@ Say you're developing a package for modeling groundwater flow; you should not go
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=5bb1fcc5">
+                    <div class="cell border-box-sizing text_cell rendered" id="cell-id=33d1f255">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this post we'll look at eigenfunctions and eigenvalues of the Laplace operator $\Delta$ on a domain $\Omega$ in $\mathbb{R}^d$.
@@ -4190,7 +4190,7 @@ Here we'll come up with a simple domain and show how you might verify this law n
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=098b09c1">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=192ca5b0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Making-a-mesh">Making a mesh<a class="anchor-link" href="../posts/weyls-law/#Making-a-mesh">¶</a>
@@ -4200,7 +4200,7 @@ The calls to add a plane surface and a physical plane surface are easy to forget
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=50cfa35a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=82503948">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4280,10 +4280,10 @@ Info    : [ 80%] Meshing curve 13 (Circle)
 Info    : [ 90%] Meshing curve 14 (Circle)
 Info    : [ 90%] Meshing curve 15 (Circle)
 Info    : [100%] Meshing curve 16 (Circle)
-Info    : Done meshing 1D (Wall 0.0153602s, CPU 0.014124s)
+Info    : Done meshing 1D (Wall 0.0175303s, CPU 0.013446s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.079508s, CPU 0.072973s)
+Info    : Done meshing 2D (Wall 0.07685s, CPU 0.076228s)
 Info    : 2171 nodes 4358 elements
 Info    : Writing 'ellipse.msh'...
 Info    : Done writing 'ellipse.msh'
@@ -4293,14 +4293,14 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8a2c27b4">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=060a6635">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To make sure everything worked right, we'll visualize the mesh after loading it in.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0afc0b5c">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=69ea8c84">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4326,7 +4326,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=52dc4105">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c941fbac">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Using-SLEPc">Using SLEPc<a class="anchor-link" href="../posts/weyls-law/#Using-SLEPc">¶</a>
@@ -4338,7 +4338,7 @@ We can specify the problem we want to solve by creating a <code>LinearEigenprobl
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0d33ac74">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=aeb7f6ff">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4359,7 +4359,7 @@ We can specify the problem we want to solve by creating a <code>LinearEigenprobl
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=967e4d54">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=059e8fec">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To solve the right problem and to help SLEPc get the right answer we'll pass it several options.
@@ -4381,7 +4381,7 @@ Since $A$ is symmetric and positive-definite, we can use the conjugate gradient 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2610f9d2">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=87c6aecd">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4405,14 +4405,14 @@ Since $A$ is symmetric and positive-definite, we can use the conjugate gradient 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c62ba061">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b4f33d3a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To check that everything worked right, we can see how many eigenvalues converged:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=87177bde">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9408d898">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4433,7 +4433,7 @@ Since $A$ is symmetric and positive-definite, we can use the conjugate gradient 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=62590b4f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c6768d6d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Just for fun, we can plot one of the eigenfunctions.
@@ -4441,7 +4441,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a6ab821e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1a2d77e6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4453,7 +4453,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=440a4751">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0fa9284b">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4478,14 +4478,14 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ac374f41">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4dda1e0f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The following plot shows exact eigenvalue counting function and the order-1 and order-2 approximations from Weyl's law.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=842b8ad9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d6bd9b1e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4496,7 +4496,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ef3d9ded">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f6fd253">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4534,11 +4534,11 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 &lt;&gt;:4: SyntaxWarning: invalid escape sequence '\l'
 &lt;&gt;:19: SyntaxWarning: invalid escape sequence '\l'
 &lt;&gt;:20: SyntaxWarning: invalid escape sequence '\l'
-/tmp/ipykernel_2513/2562760453.py:4: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_2536/2562760453.py:4: SyntaxWarning: invalid escape sequence '\l'
   axes.plot(λs, Ns, color='k', label='Exact $N(\lambda)$')
-/tmp/ipykernel_2513/2562760453.py:19: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_2536/2562760453.py:19: SyntaxWarning: invalid escape sequence '\l'
   axes.set_xlabel('Eigenvalue $\lambda$')
-/tmp/ipykernel_2513/2562760453.py:20: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_2536/2562760453.py:20: SyntaxWarning: invalid escape sequence '\l'
   axes.set_ylabel('Counting function $N(\lambda)$');
 </pre>
 </div>
@@ -4551,14 +4551,14 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=800892f8">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4ba26dda">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The accuracy difference is even more stark if we look at the relative error in the eigenvalue counting function.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a97b3846">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0761b023">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -4582,7 +4582,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=fcd42f31">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2fe84f78">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The order-1 approximation is pretty good, but the order-2 approximation is startlingly accurate.
@@ -4592,7 +4592,7 @@ The mesh is too coarse at that point to resolve the highly oscillatory eigenfunc
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5eb25447">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a898ca3d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Conclusions">Conclusions<a class="anchor-link" href="../posts/weyls-law/#Conclusions">¶</a>

@@ -92,7 +92,7 @@ For other problems, elimination">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=003a4694">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=8b11fd78">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In a previous post, we saw how to enforce Dirichlet boundary conditions for the Poisson equation using Nitsche's method instead of the usual elimination-based approach.
@@ -118,7 +118,7 @@ Here we'll use all of this knowledge to see how we can solve the Stokes equation
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=83de8417">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=393ce7d8">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Friction-boundary-conditions">Friction boundary conditions<a class="anchor-link" href="#Friction-boundary-conditions">¶</a>
@@ -155,7 +155,7 @@ For the following, we'll choose the friction coefficient so that this ratio is a
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2384827e">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=52d2d649">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-Lagrange-multiplier">The Lagrange multiplier<a class="anchor-link" href="#The-Lagrange-multiplier">¶</a>
@@ -191,7 +191,7 @@ As expected, we recover the friction boundary condition</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=58345560">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4ae44510">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Nitsche's-method">Nitsche's method<a class="anchor-link" href="#Nitsche's-method">¶</a>
@@ -209,7 +209,7 @@ This argument gives</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8cb4f9c0">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c4dbf269">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Geometry">Geometry<a class="anchor-link" href="#Geometry">¶</a>
@@ -218,7 +218,7 @@ This argument gives</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=879d7347">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a0dc7408">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -286,10 +286,10 @@ Info    : [ 70%] Meshing curve 9 (Circle)
 Info    : [ 80%] Meshing curve 10 (Circle)
 Info    : [ 90%] Meshing curve 11 (Circle)
 Info    : [100%] Meshing curve 12 (Circle)
-Info    : Done meshing 1D (Wall 0.00132179s, CPU 0.001266s)
+Info    : Done meshing 1D (Wall 0.00191537s, CPU 0.001898s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.158263s, CPU 0.146173s)
+Info    : Done meshing 2D (Wall 0.177388s, CPU 0.155062s)
 Info    : 4273 nodes 8557 elements
 Info    : Writing 'mixer.msh'...
 Info    : Done writing 'mixer.msh'
@@ -299,7 +299,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=f41d031d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=290c3587">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -310,14 +310,14 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=bf7a4b90">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=89b1842e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We have to do a bit of extra work to calculate the minimum angle of a mesh cell.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e2fe67fa">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f508af20">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -347,14 +347,14 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=93450096">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a3b92e64">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Just like in the previous example, we'll set the velocity on the outer boundary to be 0, while the inner two circles are rotating with a fixed speed of 1.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=30099f44">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=233e9639">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -379,7 +379,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8bf8cc6d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e7da9abf">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Solution">Solution<a class="anchor-link" href="#Solution">¶</a>
@@ -389,7 +389,7 @@ We'll use the same function spaces, viscosity, and solver parameters.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0418df9f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=99a78ab1">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -401,14 +401,14 @@ We'll use the same function spaces, viscosity, and solver parameters.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ddfa4c1f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9042a2e3">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Knowing the minimum angle of the mesh, the spatial dimension, and the polynomial degree for the velocity space, we can calculate the penalty parameter for Nitsche's method with no manual tuning at all.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=28a8700c">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3f4d603e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -419,7 +419,7 @@ We'll use the same function spaces, viscosity, and solver parameters.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=68d782d6">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3fb4ecec">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And here we'll set the physical parameters for the problem.
@@ -428,7 +428,7 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=65dabbf3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=19657d9a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -451,14 +451,14 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8d32a3f0">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=54ee55fc">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The objective functional has more parts than before, so to make the algebra more tractable we'll make separate variables for each summand.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3fbaadb3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=534160ce">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -484,14 +484,14 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0036af76">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ff0e41e7">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The solver parameters specify a direct factorization with MUMPS, which works well for 2D problems but less so for large 3D ones.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6483e0ac">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7aa9038b">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -517,7 +517,7 @@ We've also chosen a value of the friction coefficient $\kappa$ so that the ratio
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d7953e0c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b962fbea">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally we can plot the results.
@@ -527,7 +527,7 @@ It would be a fun exercise in bifurcation theory to see at what exact value of $
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=dc4ae696">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cf9cdff5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -552,14 +552,14 @@ It would be a fun exercise in bifurcation theory to see at what exact value of $
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=92e9ed37">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5cb2352c">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As another experiment, you can re-run this notebook but reverse the direction of one of the mixer heads, which will remove the fixed point at the origin but will create two more on either side of it.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8792adbd">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7015fc4d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a>

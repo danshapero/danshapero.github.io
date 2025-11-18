@@ -92,7 +92,7 @@ Much of what you learn in multivariable calculus carries over equally well to in
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=103a6b81">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=d78631d8">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the last post, we looked at variational principles by studying the minimal surface equation.
@@ -132,7 +132,7 @@ While the second derivative of the objective is still symmetric, it is no longer
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=107e41c4">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=16291d24">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Demonstration">Demonstration<a class="anchor-link" href="#Demonstration">¶</a>
@@ -144,7 +144,7 @@ As we'll see, getting a linear solver to converge for this problem is much more 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=87dca9db">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fcd2fdb6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -212,10 +212,10 @@ Info    : [ 70%] Meshing curve 9 (Circle)
 Info    : [ 80%] Meshing curve 10 (Circle)
 Info    : [ 90%] Meshing curve 11 (Circle)
 Info    : [100%] Meshing curve 12 (Circle)
-Info    : Done meshing 1D (Wall 0.00158253s, CPU 0.001881s)
+Info    : Done meshing 1D (Wall 0.00216965s, CPU 0.001341s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.107142s, CPU 0.103173s)
+Info    : Done meshing 2D (Wall 0.159905s, CPU 0.149469s)
 Info    : 4273 nodes 8557 elements
 Info    : Writing 'mixer.msh'...
 Info    : Done writing 'mixer.msh'
@@ -225,7 +225,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b22674db">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5e7a0fae">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -236,7 +236,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=bcd92e7e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f4d9f8e5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -259,7 +259,7 @@ Info    : Done writing 'mixer.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=063b5de3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e277a9ed">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For this problem we'll use the <em>Taylor-Hood</em> element: piecewise linear basis functions for the pressure and piecewise quadratic basis functions for the velocity.
@@ -270,7 +270,7 @@ Firedrake includes a handy algebraic notation for defining the direct product of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=68f9a4dc">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6050874c">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -282,14 +282,14 @@ Firedrake includes a handy algebraic notation for defining the direct product of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=78fc7d09">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=11679697">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can access the components of a function that lives in this product space using the usual Python indexing operators, but it's more convenient to use the function <code>firedrake.split</code> to give us handles for the two components.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=51b43f97">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ecf5a71e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -300,7 +300,7 @@ Firedrake includes a handy algebraic notation for defining the direct product of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9e1a6fee">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=527d9781">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This way our code to define the objective functional looks as much like the math as possible, rather than have to constantly reference the components.</p>
@@ -309,7 +309,7 @@ Since the diameter of the domain and the fluid velocity are both on the order of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=910767da">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8099d32f">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -324,7 +324,7 @@ Since the diameter of the domain and the fluid velocity are both on the order of
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=54f5d765">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a27e39ba">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One of the extra challenging factors about the Stokes equations is that they have a non-trivial null space.
@@ -341,7 +341,7 @@ If we add a constant factor $p_0$ to the pressure, then the value of the objecti
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=4b3d9f55">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=710f8752">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -353,7 +353,7 @@ If we add a constant factor $p_0$ to the pressure, then the value of the objecti
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=74a6a606">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e4aff4da">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next we have to create the boundary conditions.
@@ -361,7 +361,7 @@ The only extra work we have to do here is to get the right component of the mixe
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6655c7a4">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=401c9449">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -388,14 +388,14 @@ The only extra work we have to do here is to get the right component of the mixe
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=0db4668d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fe3f1a61">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's see what happens if we invoke the default linear solver.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=219cb8b5">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a43dcffd">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -414,7 +414,7 @@ The only extra work we have to do here is to get the right component of the mixe
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ae1a98bd">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=13e10f4e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We'll take the easy way out and use the sparse direct solver <a href="http://mumps-solver.org/">MUMPS</a> to make sure we get an answer.
@@ -429,7 +429,7 @@ The option <code>'pc_factor_mat_solver_type': 'mumps'</code> will use the MUMPS 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0079e991">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fced57a2">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -449,14 +449,14 @@ The option <code>'pc_factor_mat_solver_type': 'mumps'</code> will use the MUMPS 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2129d620">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d8541462">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Some cool features you can observe in the stream plot are the saddle point at the center of the domain and the two counter-rotating vortices that form on either side of it.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ccc32a6e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0bf6461d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -481,7 +481,7 @@ The option <code>'pc_factor_mat_solver_type': 'mumps'</code> will use the MUMPS 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=511c5d4d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2d2958fa">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The velocity field should be close to divergence-free; if we project the divergence into a DG(2) we can see what the exact value is.
@@ -490,7 +490,7 @@ Part of the problem is that the boundary conditions we've specified are exactly 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=4c79e061">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9c85a330">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -501,7 +501,7 @@ Part of the problem is that the boundary conditions we've specified are exactly 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b374e6cf">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8f3d3bf8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -525,7 +525,7 @@ Part of the problem is that the boundary conditions we've specified are exactly 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=b69f7f42">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=26959289">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For now we'll calculate and store the norm of the velocity diverence.
@@ -533,7 +533,7 @@ When we try to improve on this we'll use this value as a baseline.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ac1d75a6">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3277963d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -554,7 +554,7 @@ When we try to improve on this we'll use this value as a baseline.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2cf7d98c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=cfec2b1f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Higher-order-geometries">Higher-order geometries<a class="anchor-link" href="#Higher-order-geometries">¶</a>
@@ -575,7 +575,7 @@ We need to know the numbering of the various boundary segments in order to do th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=514cabb1">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7a30011a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -597,7 +597,7 @@ We need to know the numbering of the various boundary segments in order to do th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c66f952a">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=cb2dc31e">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The outer curve is boundary 1, the upper mixer head is boundary 2, and the lower head is boundary 3.
@@ -605,7 +605,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=408b267f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=da2ee43a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -615,7 +615,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=f53852d9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d0f9d1ba">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -638,14 +638,14 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=817a7d4e">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4f6c9b3c">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Just as a sanity check, we'll calculate the average deviation of the new from the old coordinate field to see how different they are.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=5f3afd24">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2130edb6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -666,14 +666,14 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a34bf978">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e5a279ae">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we can solve the Stokes equations again on this new mesh using the exact same procedures as before.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=9c9b1f93">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8af0e3f4">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -723,7 +723,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6c75b6f2">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3839eee6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -734,7 +734,7 @@ With that in mind we can create the new coordinate field.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d9f53e60">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7482a2ea">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The ring of spurious divergences around the outer edge of the domain is substantially reduced with curved elements.
@@ -742,7 +742,7 @@ Nonetheless, the boundary doesn't perfectly fit the circle and this imperfection
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d9377e49">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=420851ec">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -764,14 +764,14 @@ Nonetheless, the boundary doesn't perfectly fit the circle and this imperfection
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=aa505bb2">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=27fbdeff">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Using a higher-order geometry reduced the norm of the velocity divergence almost by a factor of 4, which is a big improvement.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=59f7c980">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=aa8fc4d3">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -792,7 +792,7 @@ Nonetheless, the boundary doesn't perfectly fit the circle and this imperfection
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a6381d8b">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=53d9566a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a>

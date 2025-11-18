@@ -91,7 +91,7 @@ A function $\phi$ on $\Omega$ and a number $\lambda$ are an eigenfunc">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=5bb1fcc5">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=33d1f255">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this post we'll look at eigenfunctions and eigenvalues of the Laplace operator $\Delta$ on a domain $\Omega$ in $\mathbb{R}^d$.
@@ -114,7 +114,7 @@ Here we'll come up with a simple domain and show how you might verify this law n
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=098b09c1">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=192ca5b0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Making-a-mesh">Making a mesh<a class="anchor-link" href="#Making-a-mesh">¶</a>
@@ -124,7 +124,7 @@ The calls to add a plane surface and a physical plane surface are easy to forget
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=50cfa35a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=82503948">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -204,10 +204,10 @@ Info    : [ 80%] Meshing curve 13 (Circle)
 Info    : [ 90%] Meshing curve 14 (Circle)
 Info    : [ 90%] Meshing curve 15 (Circle)
 Info    : [100%] Meshing curve 16 (Circle)
-Info    : Done meshing 1D (Wall 0.0153602s, CPU 0.014124s)
+Info    : Done meshing 1D (Wall 0.0175303s, CPU 0.013446s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.079508s, CPU 0.072973s)
+Info    : Done meshing 2D (Wall 0.07685s, CPU 0.076228s)
 Info    : 2171 nodes 4358 elements
 Info    : Writing 'ellipse.msh'...
 Info    : Done writing 'ellipse.msh'
@@ -217,14 +217,14 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=8a2c27b4">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=060a6635">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To make sure everything worked right, we'll visualize the mesh after loading it in.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0afc0b5c">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=69ea8c84">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -250,7 +250,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=52dc4105">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c941fbac">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Using-SLEPc">Using SLEPc<a class="anchor-link" href="#Using-SLEPc">¶</a>
@@ -262,7 +262,7 @@ We can specify the problem we want to solve by creating a <code>LinearEigenprobl
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0d33ac74">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=aeb7f6ff">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -283,7 +283,7 @@ We can specify the problem we want to solve by creating a <code>LinearEigenprobl
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=967e4d54">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=059e8fec">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To solve the right problem and to help SLEPc get the right answer we'll pass it several options.
@@ -305,7 +305,7 @@ Since $A$ is symmetric and positive-definite, we can use the conjugate gradient 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2610f9d2">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=87c6aecd">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -329,14 +329,14 @@ Since $A$ is symmetric and positive-definite, we can use the conjugate gradient 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c62ba061">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b4f33d3a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To check that everything worked right, we can see how many eigenvalues converged:</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=87177bde">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9408d898">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -357,7 +357,7 @@ Since $A$ is symmetric and positive-definite, we can use the conjugate gradient 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=62590b4f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c6768d6d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Just for fun, we can plot one of the eigenfunctions.
@@ -365,7 +365,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a6ab821e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1a2d77e6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -377,7 +377,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=440a4751">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0fa9284b">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -402,14 +402,14 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ac374f41">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4dda1e0f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The following plot shows exact eigenvalue counting function and the order-1 and order-2 approximations from Weyl's law.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=842b8ad9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d6bd9b1e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -420,7 +420,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ef3d9ded">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f6fd253">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -458,11 +458,11 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 &lt;&gt;:4: SyntaxWarning: invalid escape sequence '\l'
 &lt;&gt;:19: SyntaxWarning: invalid escape sequence '\l'
 &lt;&gt;:20: SyntaxWarning: invalid escape sequence '\l'
-/tmp/ipykernel_2513/2562760453.py:4: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_2536/2562760453.py:4: SyntaxWarning: invalid escape sequence '\l'
   axes.plot(λs, Ns, color='k', label='Exact $N(\lambda)$')
-/tmp/ipykernel_2513/2562760453.py:19: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_2536/2562760453.py:19: SyntaxWarning: invalid escape sequence '\l'
   axes.set_xlabel('Eigenvalue $\lambda$')
-/tmp/ipykernel_2513/2562760453.py:20: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_2536/2562760453.py:20: SyntaxWarning: invalid escape sequence '\l'
   axes.set_ylabel('Counting function $N(\lambda)$');
 </pre>
 </div>
@@ -475,14 +475,14 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=800892f8">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4ba26dda">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The accuracy difference is even more stark if we look at the relative error in the eigenvalue counting function.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a97b3846">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0761b023">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -506,7 +506,7 @@ The zero contours of eigenfunctions are a fascinating subject -- the Courant nod
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=fcd42f31">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2fe84f78">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The order-1 approximation is pretty good, but the order-2 approximation is startlingly accurate.
@@ -516,7 +516,7 @@ The mesh is too coarse at that point to resolve the highly oscillatory eigenfunc
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5eb25447">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a898ca3d">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">¶</a>

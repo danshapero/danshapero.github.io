@@ -92,7 +92,7 @@ If this domain were a dru">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=c82a15e5">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=3879a00b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In a previous post, we gave a numerical demonstration of the <em>Weyl asymptotic law</em>, which relates the eigenvalues of the Laplace operator on a domain to its area and perimeter.
@@ -106,7 +106,7 @@ Here we'll study this problem numerically.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=dec612da">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=934473a9">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Geometry">Geometry<a class="anchor-link" href="#Geometry">¶</a>
@@ -116,7 +116,7 @@ I got the coordinates for the polygon vertices by looking at <a href="https://en
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7fb07752">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=63903ead">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -143,14 +143,14 @@ I got the coordinates for the polygon vertices by looking at <a href="https://en
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=c57e8162">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9119981a">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To solve PDEs on these shapes, we'll first generate outlines using the package <a href=".">pygmsh</a> and save it to a .geo file.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a8497054">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fe6bdfd8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -178,7 +178,7 @@ I got the coordinates for the polygon vertices by looking at <a href="https://en
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=8677a02d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a3c45671">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -201,10 +201,10 @@ Info    : [ 60%] Meshing curve 5 (Line)
 Info    : [ 70%] Meshing curve 6 (Line)
 Info    : [ 80%] Meshing curve 7 (Line)
 Info    : [ 90%] Meshing curve 8 (Line)
-Info    : Done meshing 1D (Wall 0.000594626s, CPU 0.000564s)
+Info    : Done meshing 1D (Wall 0.000577645s, CPU 0.000474s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.00281492s, CPU 0.00326s)
+Info    : Done meshing 2D (Wall 0.00293616s, CPU 0.003103s)
 Info    : 96 nodes 198 elements
 Info    : Writing 'drum1.msh'...
 Info    : Done writing 'drum1.msh'
@@ -217,10 +217,10 @@ Info    : [ 60%] Meshing curve 5 (Line)
 Info    : [ 70%] Meshing curve 6 (Line)
 Info    : [ 80%] Meshing curve 7 (Line)
 Info    : [ 90%] Meshing curve 8 (Line)
-Info    : Done meshing 1D (Wall 0.000708278s, CPU 0.00063s)
+Info    : Done meshing 1D (Wall 0.00111541s, CPU 0s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.0028348s, CPU 0.002694s)
+Info    : Done meshing 2D (Wall 0.00251371s, CPU 0.002505s)
 Info    : 100 nodes 206 elements
 Info    : Writing 'drum2.msh'...
 Info    : Done writing 'drum2.msh'
@@ -230,14 +230,14 @@ Info    : Done writing 'drum2.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=4c671dd6">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b634ae77">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally we'll read in the meshes using Firedrake and refine them.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=833d8480">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f320d6f3">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -254,7 +254,7 @@ Info    : Done writing 'drum2.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=757d21dc">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=942b2b9f">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -280,7 +280,7 @@ Info    : Done writing 'drum2.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=81c05593">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=52dfd7a2">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Solving-the-eigenproblem">Solving the eigenproblem<a class="anchor-link" href="#Solving-the-eigenproblem">¶</a>
@@ -291,7 +291,7 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=678eaafb">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c2b4462a">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -332,14 +332,14 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=1cea32a3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=06d92098">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As we expect, the eigenvaue distribution of the two domains is practically the same in the eyeball norm.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=68101b10">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4c8c5dac">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -363,14 +363,14 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2eeddd65">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=92280356">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To be more precise, the relative difference in the first 200 eigenvalues is below a 0.1%.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=194ab50d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ea4a3274">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -390,7 +390,7 @@ Setting up the eigenproblem is just a matter of pulling out the underlying matri
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ad2be1c7">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=66854b51">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">¶</a>
