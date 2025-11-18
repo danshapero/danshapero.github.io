@@ -23,8 +23,6 @@
 # ---
 
 # %% [markdown]
-# # Mantle convection
-#
 # This code is taken from a chapter in [The FEniCS Book](https://fenicsproject.org/book/), which is available for free online.
 # That chapter is in turn an implementation of a model setup from [van Keken et al (1997)](https://doi.org/10.1029/97JB01353).
 # I took the thermomechanical parts and removed the chemistry.
