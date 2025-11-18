@@ -17,6 +17,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
 .. graphviz::
 
     digraph posts {
+        rankdir="LR";
         node [shape="plaintext", fontcolor="#007bff", fontsize="11"];
         edge [arrowsize=0.25];
 
@@ -34,18 +35,50 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         convection_diffusion [label="Convection-\ndiffusion", href="/posts/convection-diffusion/"];
         mantle_convection [label="Mantle\nconvection", href="/posts/mantle-convection/"];
         plate_theory [label="Plate\ntheory", href="/posts/plate-theory/"];
-        inverse_problems [label="Inverse\nproblems", href="/posts/inverse-problems"];
+        // inverse_problems [label="Inverse\nproblems", href="/posts/inverse-problems"];
         feldman_hajek [label="The Feldman-\nHájek theorem", href="/posts/feldman-hajek"];
-        total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
-        admm [label="Alternating\ndirection\nmethod of\nmultipliers", href="/posts/admm"];
+        // total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
+        // admm [label="Alternating\ndirection\nmethod of\nmultipliers", href="/posts/admm"];
         shallow_water [label="The shallow water\nequations", href="/posts/shallow-water/"];
         overland_flow [label="Overland\nflow", href="/posts/overland-flow/"];
         rosenbrock [label="Rosenbrock\nschemes", href="/posts/rosenbrock/"];
         // langevin [label="Langevin\nMonte\nCarlo", href="/posts/langevin-mcmc/"];
         symplectic [label="Symplectic\nintegrators", href="/posts/symplectic-integrators/"];
-        billiards [label="Billiards\non surfaces", href="/posts/surface-billiards/"];
+        // billiards [label="Billiards\non surfaces", href="/posts/surface-billiards/"];
 
         {rank=same; calc, conservation_laws};
+
+        subgraph cluster_nitsche {
+            label="Nitsche's\nmethod";
+            penwidth=0.1;
+            nitsche -> nitsche_stokes;
+            nitsche_stokes -> nitsche_nonlinear;
+        }
+
+        subgraph cluster_eigen {
+            label="Eigenfunctions";
+            penwidth=0.1;
+            weyl -> yau;
+            yau -> kac;
+        }
+
+        subgraph cluster_viscous {
+            label="Viscous\nfluid flow";
+            penwidth=0.1;
+            stokes -> karman;
+            stokes -> mantle_convection;
+        }
+
+        subgraph cluster_shallow_water {
+            label="Shallow\nwater";
+            penwidth=0.1;
+            shallow_water -> rosenbrock;
+            shallow_water -> overland_flow;
+        }
+
+        conservation_laws -> convection_diffusion;
+        conservation_laws -> shallow_water;
+        stokes -> nitsche_stokes;
 
         calc -> weyl;
         calc -> stokes;
@@ -53,25 +86,14 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         calc -> obstacle;
         stokes -> nitsche_stokes;
         stokes -> karman;
-        stokes -> inverse_problems;
-        inverse_problems -> total_variation;
-        nitsche -> admm;
-        total_variation -> admm;
+        // stokes -> inverse_problems;
+        // inverse_problems -> total_variation;
+        // nitsche -> admm;
+        // total_variation -> admm;
         // inverse_problems -> langevin;
-        obstacle -> total_variation;
-        weyl -> yau;
-        yau -> kac;
-        nitsche -> nitsche_stokes;
-        nitsche_stokes -> nitsche_nonlinear;
-        conservation_laws -> convection_diffusion;
-        conservation_laws -> shallow_water;
-        shallow_water -> rosenbrock;
-        shallow_water -> overland_flow;
+        // obstacle -> total_variation;
         nitsche -> convection_diffusion;
-        convection_diffusion -> mantle_convection;
-        stokes -> mantle_convection;
         weyl -> plate_theory;
         stokes -> plate_theory;
-        convection_diffusion -> plate_theory;
-        symplectic -> billiards;
+        // symplectic -> billiards;
     }
