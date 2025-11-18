@@ -34,6 +34,7 @@ jobs:
         printf '\n\nGITHUB_REMOTE_NAME = "ghpages"\nGITHUB_COMMIT_SOURCE = False\n' >> conf.py
     - name: Execute notebooks
       run: |
+        mkdir posts
         make all --jobs $(nproc --all)
     - name: Publish
       run: |
