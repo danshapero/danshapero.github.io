@@ -408,7 +408,8 @@ dĴ_dq = Ĵ.derivative()
 # The reduced functional $\hat J$ is a differentiable mapping of the function space $Q$ into the real numbers.
 # The derivative $d\hat J/dq$ at a particular value of the control variable is an element of the dual space $Q^*$.
 # As mathematicians, we grow accustomed to thinking of Hilbert spaces as being isometric to their duals.
-# It's easy to forget that isometric does not mean identical; the mapping between primal and dual can be non-trivial.
+# It's easy to forget that isometric does not mean identical.
+# The mapping between the primal and dual spaces can be non-trivial.
 # For example, suppose $Q$ is the Sobolev space $H^1(\Omega)$.
 # The dual space $H^{-1}(\Omega)$ is isometric to the primal, *but* to evaluate the mapping between them, we have to solve an elliptic PDE.
 #
@@ -429,21 +430,20 @@ dĴ_dq = Ĵ.derivative()
 # We need some way of mapping the dual space $Q^*$ back to the primal.
 # This mapping is referred to in the literature as the **Riesz map** after the Riesz representation theorem.
 # The laziest way we could possibly do so is to multiply $d\hat J/dq$ by the inverse of the finite element mass matrix.
-# Maybe we should instead use a 2nd-order elliptic operator; we assumed that the controls live in an $H^1$-conforming space.
+# Maybe we should instead use a 2nd-order elliptic operator.
+# After all, we assumed that the controls live in an $H^1$-conforming space.
 # But for illustrative purposes the mass matrix will do fine.
 #
-# Under the hood, Firedrake automatically applies the mass matrix inverse for you.
-# Let's try and peel back a layer of abstraction here.
-# What if I want access to the raw value of the derivative, which really does live in the dual space?
-# To access that, you can pass another option when you calculate derivatives.
+# By default, Firedrake gives you the raw value of the derivative, which lives in the dual space.
+# We can specify that we want to apply the Riesz map by adding another argument.
 # We can see the difference in the return types.
 
 # %%
 print(type(dĴ_dq))
-print(type(Ĵ.derivative(options={"riesz_representation": None})))
+print(type(Ĵ.derivative(apply_riesz=True)))
 
 # %% [markdown]
-# The second object is not a `Function` but rather a `Cofunction`, an element of the dual space.
+# The first object is not a `Function` but rather a `Cofunction`, an element of the dual space.
 #
 # Keeping track of which quantities live in the primal space and which live in the dual space is one of the challenging parts of solving PDE-constrained optimization problems.
 # Most publications on numerical optimization assume the problem is posed over Euclidean space.
@@ -462,31 +462,11 @@ print(type(Ĵ.derivative(options={"riesz_representation": None})))
 # Ok, screed over.
 # Let's do something useful now.
 # The firedrake-adjoint package contains several routines to minimize the reduced objective functional.
-# Here we'll use the [Rapid Optimization Library](https://rol.sandia.gov/), a sub-package of Trilinos.
+# Here we'll call out to scipy.
 # Let's see how well we can recover the log-conductivity field.
 
 # %%
-rol_options = {
-    "Step": {
-        "Type": "Line Search",
-        "Line Search": {"Descent Method": {"Type": "Quasi-Newton Step"}},
-    },
-    "Status Test": {
-        "Gradient Tolerance": 1e-4,
-        "Step Tolerance": 1e-4,
-        "Iteration Limit": 500,
-    },
-    "General": {
-        "Print Verbosity": 0,
-        "Secant": {"Type": "Limited-Memory BFGS", "Maximum Storage": 10},
-    },
-}
-
-inverse_problem = firedrake.adjoint.MinimizationProblem(Ĵ)
-inverse_solver = firedrake.adjoint.ROLSolver(
-    inverse_problem, rol_options, inner_product="L2"
-)
-q_opt = inverse_solver.solve()
+q_opt = firedrake.adjoint.minimize(Ĵ, method="Newton-CG")
 
 # %%
 firedrake.trisurf(q_opt);
