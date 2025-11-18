@@ -84,8 +84,6 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         calc -> stokes;
         calc -> nitsche;
         calc -> obstacle;
-        stokes -> nitsche_stokes;
-        stokes -> karman;
         // stokes -> inverse_problems;
         // inverse_problems -> total_variation;
         // nitsche -> admm;
