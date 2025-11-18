@@ -34,7 +34,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         convection_diffusion [label="Convection-\ndiffusion", href="/posts/convection-diffusion/"];
         mantle_convection [label="Mantle\nconvection", href="/posts/mantle-convection/"];
         plate_theory [label="Plate\ntheory", href="/posts/plate-theory/"];
-        inverse_problems [label="Inverse\nproblems", href="/posts/inverse-problems"];
+        // inverse_problems [label="Inverse\nproblems", href="/posts/inverse-problems"];
         feldman_hajek [label="The Feldman-\nHájek theorem", href="/posts/feldman-hajek"];
         // total_variation [label="Total\nvariation\nregularization", href="/posts/total-variation"];
         // admm [label="Alternating\ndirection\nmethod of\nmultipliers", href="/posts/admm"];
@@ -53,7 +53,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         calc -> obstacle;
         stokes -> nitsche_stokes;
         stokes -> karman;
-        stokes -> inverse_problems;
+        // stokes -> inverse_problems;
         // inverse_problems -> total_variation;
         // nitsche -> admm;
         // total_variation -> admm;
