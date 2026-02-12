@@ -24,6 +24,8 @@
 # ---
 
 # %% [markdown]
+# In which we discover what a convex conjugate truly is and where everything gets fixed by flipping a sign.
+#
 # The equations of plate theory are to minimize the following functional for the displacement $w$:
 # $$J(w) = \int_\Phi\left\{\frac{h^3}{24}\left(2\mu|\nabla ^2 w|^2 + \lambda|\Delta w|^2\right) + hfw\right\}\mathrm dx.$$
 # I'll write this as
@@ -154,6 +156,9 @@ ax.set_axis_off()
 colors = firedrake.tripcolor(z.sub(0), axes=ax)
 fig.colorbar(colors);
 
+# %%
+z_init = z.copy(deepcopy=True)
+
 # %% [markdown]
 # Now we'll create the obstacle function.
 # We want to make sure that a zero initial guess for the displacement is strictly feasible.
@@ -197,237 +202,50 @@ z_upper.sub(1).dat.data[:] = +np.inf
 # %% [markdown]
 # Here we'll set up the problem.
 
-# %%
-problem = firedrake.NonlinearVariationalProblem(F, z, bcs)
-
 # %% [markdown]
 # If we try and solve it using standard options, the solver diverges.
 
 # %%
+problem = firedrake.NonlinearVariationalProblem(F, z, bcs)
 params = {
     "solver_parameters": {
+        "snes_monitor": ":plate-obstacle.log",
         "snes_type": "vinewtonrsls",
-        "snes_linesearch_type": "secant",
-        "snes_linesearch_max_it": 10,
+        "snes_linesearch_type": "bt",
+        "snes_linesearch_max_it": 40,
         #"snes_vi_monitor": None,
     },
 }
 solver = firedrake.NonlinearVariationalSolver(problem, **params)
 try:
     solver.solve(bounds=(z_lower, z_upper))
-except firedrake.ConvergenceError:
-    print("It broke :(")
+except firedrake.ConvergenceError as error:
+    print(error)
 
 # %% [markdown]
-# Reset the solution to zero.
-# We'll then change the solver options to take a single SNES step and skip the convergence test.
-# That way we can call `solver.solve` to do a single Newton step and then see what's happening.
+# Every day the Lord tests me, with this bullshit.
 
 # %%
-z.sub(0).assign(0)
-z.sub(1).assign(0);
-
-# %%
-params = {
-    "solver_parameters": {
-        "snes_max_it": 1,
-        "snes_convergence_test": "skip",
-        "snes_type": "vinewtonrsls",
-        "snes_linesearch_type": "secant",
-        "snes_linesearch_max_it": 10,
-        #"snes_vi_monitor": None,
-    },
-}
+z.assign(z_init)
+problem = firedrake.NonlinearVariationalProblem(-F, z, bcs)
 solver = firedrake.NonlinearVariationalSolver(problem, **params)
-
-# %% [markdown]
-# Try the solver 50 times and save it to a list so we can plot it.
+solver.solve(bounds=(z_lower, z_upper))
 
 # %%
-zs = [z.copy(deepcopy=True)]
-
-num_steps = 50
-for step in range(num_steps):
-    solver.solve(bounds=(z_lower, z_upper))
-    zs.append(z.copy(deepcopy=True))
-
-# %% [markdown]
-# Make a movie.
+with open("plate-obstacle.log", "r") as log_file:
+    lines = log_file.readlines()
+    errors = np.array([float(line.split()[-1]) for line in lines])
 
 # %%
-zmin = np.array([z.sub(0).dat.data_ro.min() for z in zs]).min()
-zmax = np.array([z.sub(0).dat.data_ro.min() for z in zs]).max()
-
-zm = max(zmax, -zmin)
-
-# %%
-# %%capture
-
 fig, ax = plt.subplots()
-ax.set_aspect("equal")
-ax.set_axis_off()
-
-kw = {"vmin": -zm, "vmax": +zm, "cmap": "managua_r", "num_sample_points": 4}
-colors = firedrake.tripcolor(zs[0].sub(0), axes=ax, **kw)
-fn_plotter = firedrake.FunctionPlotter(mesh, num_sample_points=4)
-animate = lambda z: colors.set_array(fn_plotter(z.sub(0)))
-animation = FuncAnimation(fig, animate, zs, interval=1e3 / 4)
-
-# %% [markdown]
-# Looks like it's thrashing on computing the coincidence set somehow.
-
-# %%
-HTML(animation.to_html5_video())
-
-# %% [markdown]
-# #### Experiment \#2: an interior point method
-#
-# Now let's try another scheme where we introduce a slack variable explicitly.
-# We're going to use a new approach called the *latent variable proximal point* method.
-# This method is an amalgam of interior point methods and the method of mirror descent.
-# Suppose that we have a convex optimization problem
-# $$w = \text{argmin}_z J(z), \quad Bz \in K$$
-# where $K$ is some closed convex set and $B$ is a linear operator.
-# A blunt approach is to use a barrier method.
-# We first pick a convex functional $R$ that is finite in the interior of $K$ and grows approaching the boundary.
-# (I'll get more specific about what $R$ has to look like in a moment.)
-# We then look for a sequence of minimizers of
-# $$J_\alpha(w) = \alpha\,J(w) + R(Bw)$$
-# as the parameter $\alpha$ goes to zero.
-# Barrier methods are easy to understand, but become ill-conditioned as $\alpha \to 0$.
-#
-# You can think of interior point methods as a hack that helps us work around the ill-conditioning of barrier methods.
-# Interior point methods don't modify the optimization problem you solve.
-# Instead, they modify the optimality conditions.
-# I find that distasteful but I don't have a good reason why.
-#
-# The idea behind LVPP is to work with the convex conjugate of $R$:
-# $$R(w) = \max_z\,\langle B^*z, w\rangle - R^*(z).$$
-# Of course we need that $R$ has an easily computable convex conjugate.
-# But we can then replace the barrier subproblem with the saddle point problem
-# $$L_\alpha(w, z) = \alpha\, J(w) + \langle Bw, z\rangle - R^*(z).$$
-#
-# The conventional approach is to use a penalty functional $R$ that goes to infinity as $z$ approaches the boundary of $K$.
-# For example, when $B$ is the identity and $K = \{z : z \ge 0\}$, we could take
-# $$R(z) = -\int_\Omega\ln z\,\mathrm dx.$$
-# That works but it's blunt and we can be subtler.
-# For example, again for non-negativity constraints, we can take $R$ to be the "entropy" functional:
-# $$R(z) = \int_\Omega z\,(\ln z - 1)\,\mathrm dx.$$
-# The entropy functional is convex, and takes negative values for $z > 0$.
-# But in contrast to the logarithm function, it approaches 0 as $z$ approaches the boundary of the feasible set.
-# Now granted the cost does increase as $z$ approaches the boundary of the feasible set, but by itself, that doesn't seem like strong enough growth to guarantee strict feasibility.
-# How is the entropy an effective barrier then?
-# The answer lies not in how $R$ behaves but its derivative:
-# $$\nabla R(z), \delta z\rangle = \int_\Omega \ln z\cdot \delta z\,\mathrm dx.$$
-# So the derivative of $R$ grows to infinity as $z$ approaches the boundary of the feasible set, even though $R$ itself stays finite.
-# We can see why a functional like this is an effective barrier by writing down the optimality conditions:
-# $$\alpha\,\mathrm dJ(z) + \mathrm dR(Bz) = 0.$$
-# The asymptotic behavior of $\mathrm dR$ is enough to push a candidate solution towards strict feasibility.
-#
-# Now we come to duality.
-# The optimality condition for the dual problem are
-# $$\begin{align}
-# \alpha\,\mathrm dJ(z) + B^*z & = 0 \\
-# Bw - \mathrm dR^*(z) & = 0.
-# \end{align}$$
-# The next part is galaxy brain thinking.
-# The mapping $\mathrm dR$ maps the interior of $K$ into the whole space -- $\mathbb R^d$ if we're in finite dimensions, or a whole function space otherwise.
-# Now we can rely on what the convex conjugate means.
-# If $\mathrm dR$ is a bijective map, then $\mathrm dR^*$ is its inverse.
-# It maps all of space *back* into the interior of $K$.
-# Now focus on the second optimality condition.
-# If $Bw = \mathrm dR^*(z)$ for some $z$, then $Bw$ has to be in the interior of $K$.
-
-# %%
-S = Q * Σ * Q
-
-s = firedrake.Function(S)
-s_n = firedrake.Function(S)
-w, σ, z = firedrake.split(s)
-δw, δσ, δz = firedrake.TestFunctions(S)
-w_n, σ_n, z_n = firedrake.split(s_n)
-
-# %% [markdown]
-# First, we form the Lagrangian as we normally would for an unconstrained plate problem.
-
-# %%
-L_w = -form_hhj_lagrangian(s, f, h, μ, λ)
-
-# %% [markdown]
-# I alluded above to the fact that we'll be using the entropy as our penalty functional:
-# $$R(w) = \int_\Omega (w - \psi)\{\ln(w - \psi) - 1\}\,\mathrm dx.$$
-# I'll leave it as an exercise to the reader to calculate the convex conjugate:
-# $$R^*(z) = \int_\Omega\left(\psi\cdot z + e^z\right)\,\mathrm dx.$$
-
-# %%
-R = (z * ψ + exp(z)) * dx
-L_z = w * z * dx - R
-
-# %% [markdown]
-# The combined Lagrangian is
-# $$L_\alpha = \alpha L(w, \sigma) + \langle z, w\rangle - R^*(z).$$
-
-# %%
-α = Constant(10.0)
-L = α * L_w + L_z
-
-# %% [markdown]
-# Commence prayer.
-
-# %%
-F = firedrake.derivative(L, s) - z_n * δw * dx
-
-# %%
-bc_w = firedrake.DirichletBC(S.sub(0), 0, "on_boundary")
-bc_σ = firedrake.DirichletBC(S.sub(1), 0, "on_boundary")
-bcs = [bc_w, bc_σ]
-
-# %%
-params = {
-    "solver_parameters": {
-        "snes_type": "newtonls",
-        "snes_max_it": 200,
-        "snes_linesearch_type": "bt",
-        "snes_linesearch_max_it": 40,
-        "snes_monitor": None,
-    },
-}
-
-problem = firedrake.NonlinearVariationalProblem(F, s, bcs)
-solver = firedrake.NonlinearVariationalSolver(problem, **params)
-solver.solve()
-
-# %%
-s_n.assign(s)
-solver.solve()
-
-# %%
-w, σ, z = s.subfunctions
-
-fig, ax = plt.subplots()
-ax.set_aspect("equal")
-ax.set_axis_off()
-colors = firedrake.tripcolor(w, axes=ax)
-fig.colorbar(colors);
-
-# %%
-fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-ax.view_init(elev=60)
-firedrake.trisurf(w, axes=ax);
+ax.set_yscale("log")
+ax.set_xlabel("iteration")
+ax.set_ylabel("error norm")
+ax.scatter(list(range(len(errors))), errors);
 
 # %%
 fig, ax = plt.subplots()
 ax.set_aspect("equal")
 ax.set_axis_off()
-colors = firedrake.tripcolor(z, axes=ax)
-fig.colorbar(colors);
-
-# %%
-δw = firedrake.Function(Q).interpolate(w - ψ)
-
-# %%
-fig, ax = plt.subplots()
-ax.set_aspect("equal")
-ax.set_axis_off()
-colors = firedrake.tripcolor(δw, vmax=1e-3, axes=ax)
+colors = firedrake.tripcolor(z.sub(0), axes=ax)
 fig.colorbar(colors);
