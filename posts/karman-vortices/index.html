@@ -92,7 +92,7 @@ The Stokes equations are a good approximation when the fluid speed is small enou
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=1b6f0de2">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=9563a83b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In previous posts, I looked at how to discretize the incompressible Stokes equations.
@@ -111,7 +111,7 @@ The inertial terms are nonlinear, which makes this problem more difficult yet th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d9725dfb">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=117f3065">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Making-the-initial-geometry">Making the initial geometry<a class="anchor-link" href="#Making-the-initial-geometry">¶</a>
@@ -121,7 +121,7 @@ The fluid flow in the wake of the circle will produce vortices.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1ecb350f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=32389555">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -132,7 +132,7 @@ The fluid flow in the wake of the circle will produce vortices.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=69a3cd52">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1ad884a8">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -179,7 +179,7 @@ The fluid flow in the wake of the circle will produce vortices.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=38e89555">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b6b2f263">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -214,10 +214,10 @@ Info    : [ 90%] Meshing curve 17 (Circle)
 Info    : [ 90%] Meshing curve 18 (Circle)
 Info    : [100%] Meshing curve 19 (Circle)
 Info    : [100%] Meshing curve 20 (Circle)
-Info    : Done meshing 1D (Wall 0.00711856s, CPU 0.003696s)
+Info    : Done meshing 1D (Wall 0.00434786s, CPU 0.002021s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.139491s, CPU 0.135442s)
+Info    : Done meshing 2D (Wall 0.147826s, CPU 0.141555s)
 Info    : 4047 nodes 8113 elements
 Info    : Writing 'chamber.msh'...
 Info    : Done writing 'chamber.msh'
@@ -227,7 +227,7 @@ Info    : Done writing 'chamber.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=99e70855">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0f76d6c5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -238,7 +238,7 @@ Info    : Done writing 'chamber.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e2a0dd1b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5fa9e0fe">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -261,7 +261,7 @@ Info    : Done writing 'chamber.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=02504e87">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=01205917">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Initial-velocity">Initial velocity<a class="anchor-link" href="#Initial-velocity">¶</a>
@@ -273,7 +273,7 @@ In order to see the effect we want, we'll need a Reynolds number that's on the o
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b7ffc595">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b0ca5283">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -292,7 +292,7 @@ In order to see the effect we want, we'll need a Reynolds number that's on the o
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ca57028f">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c70b9fad">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I've used Taylor-Hood elements for this demonstration.
@@ -300,7 +300,7 @@ It would be a good exercise to repeat this using, say, Crouzeix-Raviart or other
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=14570009">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7b531a29">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -315,7 +315,7 @@ It would be a good exercise to repeat this using, say, Crouzeix-Raviart or other
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=119e5fc3">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7d1098e0">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we can use the fact that the Stokes problem has a minimization form.
@@ -323,7 +323,7 @@ The Navier-Stokes equations do not because of the convective term.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=00917eec">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d0beb2f6">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -346,7 +346,7 @@ The Navier-Stokes equations do not because of the convective term.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=7e00c6c2">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8bc9dc60">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A bit of a philosophical point is in order here.
@@ -359,7 +359,7 @@ But it's a mistake -- and one I've made -- to lull yourself into a false sense o
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=22c18de4">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5ee90515">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -384,13 +384,13 @@ But it's a mistake -- and one I've made -- to lull yourself into a false sense o
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=33ee00bf">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8307e2e3">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Solution-method">Solution method<a class="anchor-link" href="#Solution-method">¶</a>
 </h4>
 <p>There are a host of methods for solving the Navier-Stokes equations by breaking them up into two simpler problems.
-These are known as <a href="https://en.wikipedia.org/wiki/Projection_method_(fluid_dynamics">projection methods</a>).
+These are known as <a href="https://en.wikipedia.org/wiki/Projection_method_(fluid_dynamics)">projection methods</a>.
 I started out trying those but it required effort, which I find disgusting.
 So I threw backward Euler at it and it worked.</p>
 <p>There are some non-trivial decisions to make about both the variational form and the boundary conditions.
@@ -430,7 +430,7 @@ for all test functions $v$ and $q$.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=b718bdaf">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5151547e">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -456,7 +456,7 @@ for all test functions $v$ and $q$.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=e67be14d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=37542b58">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We'll need to make some choice about the timestep.
@@ -468,7 +468,7 @@ A principled solution would be to use an adaptive scheme.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2156d084">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=10dc8efc">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -503,7 +503,7 @@ Timestep:               0.0055
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=828ed6ff">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=368b9b83">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -528,7 +528,7 @@ Timestep:               0.0055
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=ecae5360">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=58f8dd63">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I've added a bit of code to show some diagnostic information in the progress bar.
@@ -539,7 +539,7 @@ Both of these were useful when I was debugging this code.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7cd5d0bd">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=34e3ee3d">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -563,25 +563,25 @@ Both of these were useful when I was debugging this code.</p>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="output_subarea output_widget_view" id="3d632f00-4f26-4474-afc7-6beb33b89c11">
+<div class="output_subarea output_widget_view" id="95d89fee-314a-4b49-9af4-15bf055017e8">
 <script type="text/javascript">
-var element = $('#3d632f00-4f26-4474-afc7-6beb33b89c11');
+var element = $('#95d89fee-314a-4b49-9af4-15bf055017e8');
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "c43273dd98314f91bb602c4b5d4f70a4", "version_major": 2, "version_minor": 0}
+{"model_id": "44ef0fbdccad473f8b4a72cc4689a2ea", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=f3ce59a0">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=007cd857">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally, we'll make an animated quiver plot because it looks pretty.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=82fd5326">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0bb0e4ed">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -612,7 +612,7 @@ var element = $('#3d632f00-4f26-4474-afc7-6beb33b89c11');
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a2eef3aa">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=49de9712">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -624,18 +624,18 @@ var element = $('#3d632f00-4f26-4474-afc7-6beb33b89c11');
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="output_subarea output_widget_view" id="45d5a7a2-458c-4713-9cef-88ce14c14acb">
+<div class="output_subarea output_widget_view" id="42ab3f07-e056-460b-8a99-4adc766c7b19">
 <script type="text/javascript">
-var element = $('#45d5a7a2-458c-4713-9cef-88ce14c14acb');
+var element = $('#42ab3f07-e056-460b-8a99-4adc766c7b19');
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a25d6a72b83a458f8dfd2802226f5f6f", "version_major": 2, "version_minor": 0}
+{"model_id": "c5621dbbebe441ce94639a0c6b7f4739", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=72fdaea9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ed03a481">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -655,7 +655,7 @@ var element = $('#45d5a7a2-458c-4713-9cef-88ce14c14acb');
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=04f2f8d5">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=de472c8f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There's an <a href="https://en.wikipedia.org/wiki/K%C3%A1rm%C3%A1n_vortex_street#Formula">empirical formula</a> for the frequency of vortex shedding.
@@ -665,7 +665,7 @@ Next on the docket is comparing the results using different spatial finite eleme
 </div>
 </div>
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"0afd191815b64591b85f423ede59d9ca": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_6843eb4b1ce64ccab3c74d78b71bb51a", "placeholder": "\u200b", "style": "IPY_MODEL_5095aa527e2f47d6ac31f01ce6e1d6ff", "tabbable": null, "tooltip": null, "value": "\u20073654\/3654\u2007[23:05&lt;00:00,\u2007\u20073.02it\/s]"}}, "0d9f89868d5f44ccb1b3c16be5b3868e": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_196f3a36598d45ebb81098140591c9ef", "max": 3654.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_8b52a7ea1be142a19451d3737541036c", "tabbable": null, "tooltip": null, "value": 3654.0}}, "196f3a36598d45ebb81098140591c9ef": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "26d454fcbb5c463fbd9a0fdb0f750267": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2dd4526d233d48d1a6718079c08dceab": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2f04b30fcd2a462ab8d1c0bbb317679e": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2f222b1a7f1f45d38ba568204cf48d4a": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_2f04b30fcd2a462ab8d1c0bbb317679e", "placeholder": "\u200b", "style": "IPY_MODEL_344bbf1bb2f748c8ad7b7e30b222101d", "tabbable": null, "tooltip": null, "value": "2,\u200717.8047\u2007|\u2007:\u2007100%"}}, "344bbf1bb2f748c8ad7b7e30b222101d": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "5095aa527e2f47d6ac31f01ce6e1d6ff": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "54fa9c97698d461dbe0e02c76819e4a8": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_95469f8db9644d5181217f7274994acd", "placeholder": "\u200b", "style": "IPY_MODEL_679257afaac5475a8007d3e5550d94c5", "tabbable": null, "tooltip": null, "value": "100%"}}, "6215393f8f884681b0125fec42014a10": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "65bc10a824ed4adca8af767cbe9bd9a7": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "679257afaac5475a8007d3e5550d94c5": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "6843eb4b1ce64ccab3c74d78b71bb51a": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8b52a7ea1be142a19451d3737541036c": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "95469f8db9644d5181217f7274994acd": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a25d6a72b83a458f8dfd2802226f5f6f": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_54fa9c97698d461dbe0e02c76819e4a8", "IPY_MODEL_e42a03517bb94696945239ac2ed681fc", "IPY_MODEL_eaea2e0e7b5d4190bf272e0d6b2d50f5"], "layout": "IPY_MODEL_b026e3e3149e407195008fa94d52583d", "tabbable": null, "tooltip": null}}, "b026e3e3149e407195008fa94d52583d": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c43273dd98314f91bb602c4b5d4f70a4": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_2f222b1a7f1f45d38ba568204cf48d4a", "IPY_MODEL_0d9f89868d5f44ccb1b3c16be5b3868e", "IPY_MODEL_0afd191815b64591b85f423ede59d9ca"], "layout": "IPY_MODEL_6215393f8f884681b0125fec42014a10", "tabbable": null, "tooltip": null}}, "d1ee908cef09421e91f732d5aee97b2d": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "e42a03517bb94696945239ac2ed681fc": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_26d454fcbb5c463fbd9a0fdb0f750267", "max": 3655.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_d1ee908cef09421e91f732d5aee97b2d", "tabbable": null, "tooltip": null, "value": 3654.0}}, "eaea2e0e7b5d4190bf272e0d6b2d50f5": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_2dd4526d233d48d1a6718079c08dceab", "placeholder": "\u200b", "style": "IPY_MODEL_65bc10a824ed4adca8af767cbe9bd9a7", "tabbable": null, "tooltip": null, "value": "\u20073654\/3655\u2007[03:36&lt;00:00,\u200718.59it\/s]"}}}, "version_major": 2, "version_minor": 0}
+{"state": {"248c5a38621941d88c86fddaddf055ed": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "26a0ad0e8fe04876a7bfb4cdbef03809": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_f690a38073cc4d448ae2b29ccdd41f77", "placeholder": "\u200b", "style": "IPY_MODEL_bd02689029a74027991117045dce308e", "tabbable": null, "tooltip": null, "value": "2,\u200717.8047\u2007|\u2007:\u2007100%"}}, "39bc9cf35f4841148e34925fe8f6dcde": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3cc06381ce4344fb95a15b384cbe9ed0": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3e4550aebae449828907c36042235c73": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "44ef0fbdccad473f8b4a72cc4689a2ea": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_26a0ad0e8fe04876a7bfb4cdbef03809", "IPY_MODEL_bab9a686f58f44ad8e1052d4789cf04d", "IPY_MODEL_720dc5eaad6f4f198052bb02531f07a5"], "layout": "IPY_MODEL_3e4550aebae449828907c36042235c73", "tabbable": null, "tooltip": null}}, "4c5ddd236d8344a38e946e4044ef7319": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "4f3ff017a9a744278fadcd60544b6554": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4f9bf7bac1784c8bb00a1544a7e90a5b": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "720dc5eaad6f4f198052bb02531f07a5": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_3cc06381ce4344fb95a15b384cbe9ed0", "placeholder": "\u200b", "style": "IPY_MODEL_4c5ddd236d8344a38e946e4044ef7319", "tabbable": null, "tooltip": null, "value": "\u20073654\/3654\u2007[21:35&lt;00:00,\u2007\u20073.07it\/s]"}}, "89e84a814ee3414cbf50d759f3fb1d63": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "b9f820b7885a49a69c4c343525c489dc": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "bab9a686f58f44ad8e1052d4789cf04d": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_39bc9cf35f4841148e34925fe8f6dcde", "max": 3654.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_fbfb3ae3b7a340f8b7a196c9625973f2", "tabbable": null, "tooltip": null, "value": 3654.0}}, "bd02689029a74027991117045dce308e": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "bf8f018b36134c38af8ce5807a83079a": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "c3143440f4b34247966e720fffee2f00": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_248c5a38621941d88c86fddaddf055ed", "max": 3655.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_b9f820b7885a49a69c4c343525c489dc", "tabbable": null, "tooltip": null, "value": 3652.0}}, "c5621dbbebe441ce94639a0c6b7f4739": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_ddfb67f693a14cf6bfc066cd4159c686", "IPY_MODEL_c3143440f4b34247966e720fffee2f00", "IPY_MODEL_e04a88ede83f4f5ca3e450780a9901d2"], "layout": "IPY_MODEL_4f9bf7bac1784c8bb00a1544a7e90a5b", "tabbable": null, "tooltip": null}}, "dac5a7133e8a42dbb2072ae8e5300fbd": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ddfb67f693a14cf6bfc066cd4159c686": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_dac5a7133e8a42dbb2072ae8e5300fbd", "placeholder": "\u200b", "style": "IPY_MODEL_bf8f018b36134c38af8ce5807a83079a", "tabbable": null, "tooltip": null, "value": "100%"}}, "e04a88ede83f4f5ca3e450780a9901d2": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_4f3ff017a9a744278fadcd60544b6554", "placeholder": "\u200b", "style": "IPY_MODEL_89e84a814ee3414cbf50d759f3fb1d63", "tabbable": null, "tooltip": null, "value": "\u20073652\/3655\u2007[03:29&lt;00:00,\u200719.08it\/s]"}}, "f690a38073cc4d448ae2b29ccdd41f77": {"model_module": "@jupyter-widgets\/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "fbfb3ae3b7a340f8b7a196c9625973f2": {"model_module": "@jupyter-widgets\/controls", "model_module_version": "2.0.0", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}}, "version_major": 2, "version_minor": 0}
 </script>
 </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
@@ -688,7 +688,7 @@ MathJax.Hub.Config({
     }
 });
 </script></article><!--End of body content--><footer id="footer">
-            Contents © 2025         <a href="mailto:shapero.daniel@gmail.com">Daniel Shapero</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2026         <a href="mailto:shapero.daniel@gmail.com">Daniel Shapero</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

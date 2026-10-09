@@ -45,6 +45,7 @@ If you want to contact me you can find an email address on my `GitHub <https://w
         // langevin [label="Langevin\nMonte\nCarlo", href="/posts/langevin-mcmc/"];
         symplectic [label="Symplectic\nintegrators", href="/posts/symplectic-integrators/"];
         // billiards [label="Billiards\non surfaces", href="/posts/surface-billiards/"];
+        jumpprocess [label="Jump\nprocesses", href="/posts/jump-processes/"];
 
         {rank=same; calc, conservation_laws};
 
