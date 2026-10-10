@@ -92,7 +92,7 @@ As a reminder, a function $\phi$ and a real number $\lambda$ are an eigen">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div class="cell border-box-sizing text_cell rendered" id="cell-id=c4b96468">
+    <div class="cell border-box-sizing text_cell rendered" id="cell-id=187cd48b">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the last post we looked at the distribution of eigenvalues of the Laplace operator; this time we'll look at eigenfunctions.
@@ -113,7 +113,7 @@ For smooth manifolds, Logunov announced a <a href="https://arxiv.org/abs/1605.02
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=579fce44">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=95e9a4b5">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -193,10 +193,10 @@ Info    : [ 80%] Meshing curve 13 (Circle)
 Info    : [ 90%] Meshing curve 14 (Circle)
 Info    : [ 90%] Meshing curve 15 (Circle)
 Info    : [100%] Meshing curve 16 (Circle)
-Info    : Done meshing 1D (Wall 0.0173717s, CPU 0.01514s)
+Info    : Done meshing 1D (Wall 0.0172713s, CPU 0.009109s)
 Info    : Meshing 2D...
 Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
-Info    : Done meshing 2D (Wall 0.0712472s, CPU 0.071134s)
+Info    : Done meshing 2D (Wall 0.052929s, CPU 0.050108s)
 Info    : 2171 nodes 4358 elements
 Info    : Writing 'ellipse.msh'...
 Info    : Done writing 'ellipse.msh'
@@ -206,7 +206,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=aff403c4">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=65908f11">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -217,7 +217,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=5ec4af2a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1b41b7ed">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -240,7 +240,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d82e1b28">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=198a1bde">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -261,14 +261,14 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9a900b8d">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f025500f">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Setting up the eigensolver is the same as before.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1fb9601e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fbd47aa0">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -304,7 +304,7 @@ Info    : Done writing 'ellipse.msh'
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=96c69a94">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5eb5e054">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we need to use a bit of trickery to calculate the area of the zero contours:</p>
@@ -322,7 +322,7 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=a4609af4">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e530bc67">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -342,7 +342,7 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e106ae31">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=26fe92ba">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -353,14 +353,14 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=5edfb7d8">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4f6ac700">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The plot of the wavenumber against the lengths of the nodal sets looks pretty close to linear in the eyeball norm!</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f8360bc">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=df6bb962">
 <div class="input">
 <div class="inner_cell">
 <div class="input_area">
@@ -385,9 +385,9 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 &lt;&gt;:9: SyntaxWarning: invalid escape sequence '\{'
 &lt;&gt;:8: SyntaxWarning: invalid escape sequence '\l'
 &lt;&gt;:9: SyntaxWarning: invalid escape sequence '\{'
-/tmp/ipykernel_5749/398678759.py:8: SyntaxWarning: invalid escape sequence '\l'
+/tmp/ipykernel_5750/398678759.py:8: SyntaxWarning: invalid escape sequence '\l'
   axes.set_xlabel('$\lambda$')
-/tmp/ipykernel_5749/398678759.py:9: SyntaxWarning: invalid escape sequence '\{'
+/tmp/ipykernel_5750/398678759.py:9: SyntaxWarning: invalid escape sequence '\{'
   axes.set_ylabel('area($\{\phi_\lambda = 0\}$)');
 </pre>
 </div>
@@ -400,7 +400,7 @@ If we wanted to be extra careful we could include a fudge factor somewhere in th
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=1240fe3c">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1730d664">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I made a bit of a wild guess here for what the lower bound $c$ is.
