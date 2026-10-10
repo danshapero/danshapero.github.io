@@ -13,7 +13,7 @@
 #     name: firedrake
 #   nikola:
 #     category: ''
-#     date: 2026-10-18 14:04:19 UTC-07:00
+#     date: 2026-10-08 14:04:19 UTC-07:00
 #     description: ''
 #     link: ''
 #     slug: jump-processes
