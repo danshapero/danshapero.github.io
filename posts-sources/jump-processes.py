@@ -2,6 +2,7 @@
 # jupyter:
 #   jupytext:
 #     formats: ipynb,py:percent
+#     notebook_metadata_filter: nikola
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -222,14 +223,9 @@ for color in matplotlib.colors.TABLEAU_COLORS:
 # Removable singularities are exactly what floating-point arithmetic is bad at.
 
 # %% [markdown]
-# #### Visualization
+# #### Sanity checking through visualization
 #
-# The character of the log-likelihood function is going to be important for us when we go to do inference.
-# The nicest outcome possible is that the log-likelihood function is concave.
-# Concavity guarantees that the log-likelihood has a unique maximizer and that Newton-type methods can locate this maximizer.
-#
-# The easiest way to get a feel for the character of the log-likelihood is to make a contour plot of its continuous part for a single observation as a function of $x/\lambda$ and $t/\tau$.
-# We can then imagine that the full log-likelihood as a sum of many single-observations, but with the $x$- and $t$-axes scaled differently for each summand.
+# Finally, we can generate a giant mess of sample paths and see how well our theoretical likelihood function matches the empirical one.
 # Here I'm making a symbolic representation of the likelihood using sympy.
 # We can then use the `lambdify` function to turn this into something we can call on numpy arrays.
 
@@ -262,45 +258,7 @@ args = ((x_, t_), λ_, τ_)
 L = sympy.lambdify(args, ℓ, "scipy")
 
 # %% [markdown]
-# The contour plot below shows the log-likelihood for a single observation.
-
-# %%
-xs = np.logspace(-3, +5, 101, base=2)
-ts = np.logspace(-3, +5, 101, base=2)
-Xs, Ts = np.meshgrid(xs, ts)
-Ls = L((Xs, Ts), 1, 1)
-
-fig, ax = plt.subplots()
-ax.set_aspect("equal")
-ax.set_xscale("log", base=2)
-ax.set_yscale("log", base=2)
-ax.set_xlabel("$x\\;/\\; \\lambda$")
-ax.set_ylabel("$t\\;/\\; \\tau$")
-ax.contourf(Xs, Ts, np.log(Ls), 50);
-
-# %% [markdown]
-# **This plot is bad news.**
-# The log-likelihood is not concave.
-# It doesn't even have concave super-level sets.
-# That means that there is no hope of transforming it into something that is concave by composing with some monotonic function.
-# We can't rule out the chance that the full log-likelihood is going to have multiple local extrema.
-#
-# That's going to have important implications for what kind of optimization algorithms we should use.
-# For a concave function, we could evaluate whether a candidate solution is close enough by examining the magnitude of the gradient and the eigenvalues of the curvature operator.
-# That same analysis on an objective that isn't convex or concave only tells us how close we are to the nearest local extremum.
-# A global method that explores the entire search space can give better assurances.
-# There are only two parameters to infer, so the cost isn't too extreme.
-#
-# The character of the likelihood function should make us wonder if there are scenarios where the jump time and size aren't identifiable.
-# For example, suppose the inter-arrival time is much smaller than our sampling interval.
-# We might have no sampling intervals where there were no events.
-# We can't meaningfully distinguish between an event timing and size of $\tau$, $\lambda$ and $\tau/2$, $\lambda/2$.
-# The only quantity we can infer is the flux $\lambda/\tau$.
-
-# %% [markdown]
-# #### Sanity checking through visualization
-#
-# Finally, we can generate a giant mess of sample paths and see how well our theoretical likelihood function matches the empirical one.
+# Now to generate a few thousand sample paths so we get a good sample size.
 
 # %%
 num_trials = 10000
